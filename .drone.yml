@@ -1,0 +1,69 @@
+kind: pipeline
+name: lint
+
+steps:
+- name: lint
+  image: tictactoeteam/linter:latest
+  commands:
+  - make lint
+
+---
+kind: pipeline
+name: build
+
+steps:
+- name: build-gateway
+  image: plugins/docker
+  settings:
+    repo: tictactoeteam/gateway
+    context: ./services/gateway/
+    dockerfile: ./services/gateway/Dockerfile
+    username: dronetictactoe
+    password:
+      from_secret: docker_hub_password
+
+depends_on:
+- lint
+
+---
+kind: pipeline
+name: deploy
+
+steps:
+- name: deploy
+  image: quay.io/ipedrazas/drone-helm
+  environment:
+    API_SERVER:
+      from_secret: deploy_api_server
+    KUBERNETES_TOKEN:
+      from_secret: deploy_kubernetes_token
+  settings:
+    chart: ./chart
+    update_dependencies: true
+    skip_tls_verify: true
+    tiller_ns: kube-system
+    release: ${DRONE_BRANCH}
+    namespace: ${DRONE_BRANCH}
+  when:
+    branch:
+      exclude: master
+
+- name: deploy-master
+  image: quay.io/ipedrazas/drone-helm
+  environment:
+    API_SERVER:
+      from_secret: deploy_api_server
+    KUBERNETES_TOKEN:
+      from_secret: deploy_kubernetes_token
+  settings:
+    chart: ./chart
+    update_dependencies: true
+    skip_tls_verify: true
+    tiller_ns: kube-system
+    release: master
+    namespace: default
+  when:
+    branch: master
+
+depends_on:
+- build

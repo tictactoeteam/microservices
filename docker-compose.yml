@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  gateway:
+    image: tictactoeteam/gateway
+    build:
+      context: ./services/gateway/
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"

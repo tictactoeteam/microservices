@@ -1,0 +1,14 @@
+rabbitmq:
+  enabled: true
+
+postgresql:
+  enabled: true
+  replication:
+    enabled: true
+    slaveReplicas: 3
+
+redis:
+  enabled: true
+
+gateway:
+  enabled: true
