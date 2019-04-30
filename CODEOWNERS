@@ -1,0 +1,11 @@
+# Libraries
+
+# Services
+/services/gateway/ @dacruz21
+
+# Helm Charts
+/chart/ @dacruz21
+**/chart/ @dacruz21
+
+.drone.yml @dacruz21
+docker-compose.yml @dacruz21

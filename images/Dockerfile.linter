@@ -1,0 +1,7 @@
+FROM alpine:latest
+
+RUN apk update
+
+# Add dependencies needed to lint or perform other tasks outside of Docker here
+RUN apk add --no-cache \
+    make
