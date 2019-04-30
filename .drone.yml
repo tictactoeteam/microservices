@@ -42,7 +42,7 @@ steps:
     update_dependencies: true
     skip_tls_verify: true
     tiller_ns: kube-system
-    release: ${DRONE_BRANCH}
+    release: ms
     namespace: ${DRONE_BRANCH}
   when:
     branch:
@@ -60,7 +60,7 @@ steps:
     update_dependencies: true
     skip_tls_verify: true
     tiller_ns: kube-system
-    release: master
+    release: ms
     namespace: default
   when:
     branch: master
