@@ -15,3 +15,7 @@ dependencies:
     version: 1.0.0
     repository: "file://../services/gateway/chart"
     condition: gateway.enabled
+  - name: auth-service
+    version: 1.0.0
+    repository: "file://../services/auth-service/chart"
+    condition: auth-service.enabled
