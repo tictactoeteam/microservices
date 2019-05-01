@@ -1,7 +1,11 @@
 # Libraries
 
+# Frontend App
+/frontend/ @kdcptkai31
+
 # Services
 /services/gateway/ @dacruz21
+/services/auth-service/ @dacruz21
 
 # Helm Charts
 /chart/ @dacruz21
