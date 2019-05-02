@@ -5,6 +5,9 @@ LINTABLE=(
     ./frontend
     ./services/auth-service
     ./services/product-service
+    ./services/cart-service
+    ./services/deposit-service
+    ./services/order-service
 )
 
 for svc in "${LINTABLE[@]}"; do

@@ -7,6 +7,8 @@
 /services/gateway/ @dacruz21
 /services/auth-service/ @dacruz21
 /services/product-service/ @datowlcs
+/services/deposit-service/ @dacruz21
+/services/order-service/ @gruszkat98
 
 # Helm Charts
 /chart/ @dacruz21

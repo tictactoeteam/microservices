@@ -44,6 +44,32 @@ steps:
       username: dronetictactoe
       password:
         from_secret: docker_hub_password
+  - name: build-cart-service
+    image: plugins/docker
+    settings:
+      repo: tictactoeteam/cart-service
+      context: ./services/cart-service
+      dockerfile: ./services/cart-service/Dockerfile
+      username: dronetictactoe
+      password:
+        from_secret: docker_hub_password
+  - name: build-deposit-service
+    image: plugins/docker
+    settings:
+      repo: tictactoeteam/deposit-service
+      context: ./services/deposit-service
+      dockerfile: ./services/deposit-service/Dockerfile
+      username: dronetictactoe
+      password:
+        from_secret: docker_hub_password
+  - name: build-order-service
+    image: plugins/docker
+    settings:
+      repo: tictactoeteam/order-service
+      context: ./services/order-service
+      dockerfile: ./services/order-service/Dockerfile
+      password:
+        from_secret: docker_hub_password
 
 depends_on:
   - lint

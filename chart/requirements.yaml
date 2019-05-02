@@ -22,3 +22,16 @@ dependencies:
   - name: product-service
     version: 1.0.0
     repository: "file://../services/product-service/chart"
+    condition: product-service.enabled
+  - name: cart-service
+    version: 1.0.0
+    repository: "file://../services/cart-service/chart"
+    condition: cart-service.enabled
+  - name: deposit-service
+    version: 1.0.0
+    repository: "file://../services/deposit-service/chart"
+    condition: deposit-service.enabled
+  - name: order-service
+    version: 1.0.0
+    repository: "file://../services/order-service/chart"
+    condition: order-service.enabled
