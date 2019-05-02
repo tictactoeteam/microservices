@@ -20,14 +20,14 @@ dependencies:
     repository: "file://../services/auth-service/chart"
     condition: auth-service.enabled
   - name: cart-service
-      version: 1.0.0
-      repository: "file://../services/cart-service/chart"
-      condition: cart-service.enabled
+    version: 1.0.0
+    repository: "file://../services/cart-service/chart"
+    condition: cart-service.enabled
   - name: deposit-service
-      version: 1.0.0
-      repository: "file://../services/deposit-service/chart"
-      condition: deposit-service.enabled
+    version: 1.0.0
+    repository: "file://../services/deposit-service/chart"
+    condition: deposit-service.enabled
   - name: order-service
-      version: 1.0.0
-      repository: "file://../services/order-service/chart"
-      condition: order-service.enabled
+    version: 1.0.0
+    repository: "file://../services/order-service/chart"
+    condition: order-service.enabled
