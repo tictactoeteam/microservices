@@ -8,6 +8,6 @@ build-docker:
 	docker build . -t tictactoeteam/deposit-service
 
 lint:
-	echo "noop"
+	which npm
 
 .PHONY: run build build-docker lint

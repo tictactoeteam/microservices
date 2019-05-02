@@ -5,7 +5,6 @@ LINTABLE=(
     ./frontend
     ./services/auth-service
     ./services/cart-service
-    ./services/deposit-service
     ./services/order-service
 )
 

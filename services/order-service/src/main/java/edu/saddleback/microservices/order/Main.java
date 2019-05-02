@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.cart;
+package edu.saddleback.microservices.order;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

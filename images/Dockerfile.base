@@ -2,4 +2,4 @@ FROM openjdk:13-alpine
 
 # Add dependencies needed to lint, build, etc.
 RUN apk add --no-cache \
-    bash make gradle
+    bash g++ python make git gradle nodejs npm
