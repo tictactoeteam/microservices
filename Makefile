@@ -5,6 +5,6 @@ up:
 	docker-compose up
 
 lint:
-	sh ./scripts/lint.sh
+	bash ./scripts/lint.sh
 
 .PHONY: build up lint

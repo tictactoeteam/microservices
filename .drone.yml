@@ -2,68 +2,82 @@ kind: pipeline
 name: lint
 
 steps:
-- name: lint
-  image: tictactoeteam/linter:latest
-  commands:
-  - make lint
+  - name: lint
+    image: tictactoeteam/base:latest
+    commands:
+      - make lint
 
 ---
 kind: pipeline
 name: build
 
 steps:
-- name: build-gateway
-  image: plugins/docker
-  settings:
-    repo: tictactoeteam/gateway
-    context: ./services/gateway/
-    dockerfile: ./services/gateway/Dockerfile
-    username: dronetictactoe
-    password:
-      from_secret: docker_hub_password
+  - name: build-frontend
+    image: tictactoeteam/base:latest
+    commands:
+      - cd frontend
+      - make build
+  - name: build-gateway
+    image: plugins/docker
+    settings:
+      repo: tictactoeteam/gateway
+      context: ./services/gateway/
+      dockerfile: ./services/gateway/Dockerfile
+      username: dronetictactoe
+      password:
+        from_secret: docker_hub_password
+  - name: build-auth-service
+    image: plugins/docker
+    settings:
+      repo: tictactoeteam/auth-service
+      context: ./services/auth-service
+      dockerfile: ./services/auth-service/Dockerfile
+      username: dronetictactoe
+      password:
+        from_secret: docker_hub_password
 
 depends_on:
-- lint
+  - lint
 
 ---
 kind: pipeline
 name: deploy
 
 steps:
-- name: deploy
-  image: quay.io/ipedrazas/drone-helm
-  environment:
-    API_SERVER:
-      from_secret: deploy_api_server
-    KUBERNETES_TOKEN:
-      from_secret: deploy_kubernetes_token
-  settings:
-    chart: ./chart
-    update_dependencies: true
-    skip_tls_verify: true
-    tiller_ns: kube-system
-    release: ms
-    namespace: ${DRONE_BRANCH}
-  when:
-    branch:
-      exclude: master
+  - name: deploy
+    image: quay.io/ipedrazas/drone-helm
+    environment:
+      API_SERVER:
+        from_secret: deploy_api_server
+      KUBERNETES_TOKEN:
+        from_secret: deploy_kubernetes_token
+    settings:
+      chart: ./chart
+      update_dependencies: true
+      skip_tls_verify: true
+      tiller_ns: kube-system
+      release: ${DRONE_BRANCH}
+      namespace: ${DRONE_BRANCH}
+    when:
+      branch:
+        exclude: master
 
-- name: deploy-master
-  image: quay.io/ipedrazas/drone-helm
-  environment:
-    API_SERVER:
-      from_secret: deploy_api_server
-    KUBERNETES_TOKEN:
-      from_secret: deploy_kubernetes_token
-  settings:
-    chart: ./chart
-    update_dependencies: true
-    skip_tls_verify: true
-    tiller_ns: kube-system
-    release: ms
-    namespace: default
-  when:
-    branch: master
+  - name: deploy-master
+    image: quay.io/ipedrazas/drone-helm
+    environment:
+      API_SERVER:
+        from_secret: deploy_api_server
+      KUBERNETES_TOKEN:
+        from_secret: deploy_kubernetes_token
+    settings:
+      chart: ./chart
+      update_dependencies: true
+      skip_tls_verify: true
+      tiller_ns: kube-system
+      release: ${DRONE_BRANCH}
+      namespace: default
+    when:
+      branch: master
 
 depends_on:
-- build
+  - build

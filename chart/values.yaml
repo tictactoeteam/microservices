@@ -1,14 +1,20 @@
 rabbitmq:
   enabled: true
+  fullnameOverride: "rabbitmq"
 
 postgresql:
   enabled: true
+  fullnameOverride: "postgres"
   replication:
     enabled: true
     slaveReplicas: 3
 
 redis:
   enabled: true
+  fullnameOverride: "redis"
 
 gateway:
+  enabled: true
+
+auth-service:
   enabled: true
