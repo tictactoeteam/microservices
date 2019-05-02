@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: tictactoeteam/auth-service
+  repository: registry.gitlab.com/typokign/microservices/auth-service
   tag: latest
   pullPolicy: Always
 

@@ -5,7 +5,7 @@ build:
 	gradle build
 
 build-docker:
-	docker build . -t tictactoeteam/auth-service
+	docker build . -t registry.gitlab.com/typokign/microservices/auth-service
 
 lint:
 	gradle check

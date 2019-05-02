@@ -19,10 +19,6 @@ dependencies:
     version: 1.0.0
     repository: "file://../services/auth-service/chart"
     condition: auth-service.enabled
-  - name: product-service
-    version: 1.0.0
-    repository: "file://../services/product-service/chart"
-    condition: product-service.enabled
   - name: cart-service
     version: 1.0.0
     repository: "file://../services/cart-service/chart"
@@ -35,3 +31,7 @@ dependencies:
     version: 1.0.0
     repository: "file://../services/order-service/chart"
     condition: order-service.enabled
+ - name: product-service
+   version: 1.0.0
+   repository: "file://../services/product-service/chart"
+   condition: product-service.enabled

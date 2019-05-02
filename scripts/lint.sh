@@ -4,10 +4,9 @@ set -euo pipefail
 LINTABLE=(
     ./frontend
     ./services/auth-service
-    ./services/product-service
     ./services/cart-service
-    ./services/deposit-service
     ./services/order-service
+    ./services/product-service
 )
 
 for svc in "${LINTABLE[@]}"; do

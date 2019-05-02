@@ -15,35 +15,34 @@ services:
       - "127.0.0.1:6379:6379"
 
   gateway:
-    image: tictactoeteam/gateway
+    image: registry.gitlab.com/typokign/microservices/gateway
     build:
       context: ./services/gateway/
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:8080:8080"
   auth-service:
-    image: tictactoeteam/auth-service
+    image: registry.gitlab.com/typokign/microservices/auth-service
     build:
       context: ./services/auth-service/
       dockerfile: Dockerfile
-  product-service:
-    image: tictactoeteam/product-service
-    build:
-      context: ./services/product-service
-      dockerfile: Dockerfile
   cart-service:
-    image: tictactoeteam/cart-service
+    image: registry.gitlab.com/typokign/microservices/cart-service
     build:
       context: ./services/cart-service/
       dockerfile: Dockerfile
   deposit-service:
-    image: tictactoeteam/deposit-service
+    image: registry.gitlab.com/typokign/microservices/deposit-service
     build:
       context: ./services/deposit-service/
       dockerfile: Dockerfile
   order-service:
-    image: tictactoeteam/order-service
+    image: registry.gitlab.com/typokign/microservices/order-service
     build:
       context: ./services/order-service/
       dockerfile: Dockerfile
-
+  product-service:
+    image: registry.gitlab.com/typokign/microservices/product-service
+    build:
+      context: ./services/product-service
+      dockerfile: Dockerfile

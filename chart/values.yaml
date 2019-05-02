@@ -19,9 +19,6 @@ gateway:
 auth-service:
   enabled: true
 
-product-service:
-  enabled: true
-
 cart-service:
   enabled: true
 
@@ -31,3 +28,5 @@ deposit-service:
 order-service:
   enabled: true
 
+product-service:
+  enabled: true

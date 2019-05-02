@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: tictactoeteam/product-service
+  repository: registry.gitlab.com/typokign/microservices/product-service
   tag: latest
   pullPolicy: Always
 

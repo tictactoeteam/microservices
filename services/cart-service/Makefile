@@ -5,7 +5,7 @@ build:
 	gradle build
 
 build-docker:
-	docker build . -t tictactoeteam/cart-service
+	docker build . -t registry.gitlab.com/typokign/microservices/cart-service
 
 lint:
 	gradle check

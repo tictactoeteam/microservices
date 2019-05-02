@@ -5,7 +5,7 @@ build:
 	gradle build
 
 build-docker:
-	docker build . -t tictactoeteam/order-service
+	docker build . -t registry.gitlab.com/typokign/microservices/order-service
 
 lint:
 	gradle check

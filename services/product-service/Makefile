@@ -5,7 +5,7 @@ build:
 	gradle build
 
 build-docker:
-	docker build . -t tictactoeteam/product-service
+	docker build . -t registry.gitlab.com/typokign/microservices/product-service
 
 lint:
 	gradle check

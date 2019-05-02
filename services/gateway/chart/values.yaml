@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: tictactoeteam/gateway
+  repository: registry.gitlab.com/typokign/microservices/gateway
   tag: latest
   pullPolicy: Always
 
