@@ -43,6 +43,7 @@ steps:
       dockerfile: ./services/product-service/Dockerfile
       username: dronetictactoe
       password:
+        from_secret: docker_hub_password
 
 depends_on:
   - lint
