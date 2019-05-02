@@ -18,3 +18,12 @@ gateway:
 
 auth-service:
   enabled: true
+
+cart-service:
+  enabled: true
+
+deposit-service:
+  enabled: true
+
+order-service:
+  enabled: true
