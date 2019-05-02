@@ -1,0 +1,33 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'checkstyle'
+}
+
+group 'edu.saddleback.microservices'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {}
+
+checkstyle {
+    toolVersion "8.20"
+    maxWarnings 0
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.saddleback.microservices.product.Main'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+mainClassName = 'edu.saddleback.microservices.product.Main'

@@ -35,6 +35,14 @@ steps:
       username: dronetictactoe
       password:
         from_secret: docker_hub_password
+  - name: build-product-service
+    image: plugins/docker
+    settings:
+      repo: tictactoeteam/product-service
+      context: ./services/product-service
+      dockerfile: ./services/product-service/Dockerfile
+      username: dronetictactoe
+      password:
 
 depends_on:
   - lint

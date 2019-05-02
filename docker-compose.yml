@@ -26,3 +26,8 @@ services:
     build:
       context: ./services/auth-service/
       dockerfile: Dockerfile
+  product-service:
+    image: tictactoeteam/product-service
+    build:
+      context: ./services/product-service
+      dockerfile: Dockerfile

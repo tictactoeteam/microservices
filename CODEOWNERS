@@ -6,6 +6,7 @@
 # Services
 /services/gateway/ @dacruz21
 /services/auth-service/ @dacruz21
+/services/product-service/ @datowlcs
 
 # Helm Charts
 /chart/ @dacruz21

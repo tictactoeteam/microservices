@@ -18,3 +18,6 @@ gateway:
 
 auth-service:
   enabled: true
+
+product-service:
+  enabled: true
