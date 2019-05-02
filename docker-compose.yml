@@ -26,3 +26,18 @@ services:
     build:
       context: ./services/auth-service/
       dockerfile: Dockerfile
+  cart-service:
+    image: tictactoeteam/cart-service
+    build:
+      context: ./services/cart-service/
+      dockerfile: Dockerfile
+  deposit-service:
+    image: tictactoeteam/deposit-service
+    build:
+      context: ./services/deposit-service/
+      dockerfile: Dockerfile
+  order-service:
+    image: tictactoeteam/order-service
+    build:
+      context: ./services/order-service/
+      dockerfile: Dockerfile
