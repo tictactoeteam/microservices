@@ -1,13 +1,18 @@
 FROM tictactoeteam/base:latest
 
-WORKDIR /srv
+RUN echo "not ready yet"
 
-COPY package*.json .
+CMD ["true"]
 
-RUN npm install
-
-COPY . .
-
-RUN make build
-
-CMD ["npm", "start"]
+#
+#WORKDIR /srv
+#
+#COPY package*.json .
+#
+#RUN npm install
+#
+#COPY . .
+#
+#RUN make build
+#
+#CMD ["npm", "start"]
