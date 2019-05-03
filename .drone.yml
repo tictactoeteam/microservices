@@ -94,9 +94,10 @@ steps:
       tiller_ns: kube-system
       release: ${DRONE_BRANCH}
       namespace: ${DRONE_BRANCH}
+      debug: true
     when:
       branch:
-        exclude: master
+        exclude: [ master ]
 
   - name: deploy-master
     image: quay.io/ipedrazas/drone-helm
@@ -113,7 +114,7 @@ steps:
       release: ${DRONE_BRANCH}
       namespace: default
     when:
-      branch: master
+      branch: [ master ]
 
 depends_on:
   - build
