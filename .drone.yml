@@ -68,6 +68,7 @@ steps:
       repo: tictactoeteam/order-service
       context: ./services/order-service
       dockerfile: ./services/order-service/Dockerfile
+      username: dronetictactoe
       password:
         from_secret: docker_hub_password
 
