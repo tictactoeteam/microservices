@@ -11,4 +11,4 @@ COPY . .
 
 RUN make build
 
-CMD ["npm", "start"]
+CMD ["make", "run"]
