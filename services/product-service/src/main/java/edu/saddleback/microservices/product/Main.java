@@ -7,4 +7,10 @@ public class Main {
             Thread.sleep(5000);
         }
     }
+
+    public void setProduct(String product){
+        //Making some random text so I can test the build
+
+    }
+
 }
