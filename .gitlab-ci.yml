@@ -35,7 +35,7 @@ build gateway:
 
 .functions: &functions |
   function init_helm() {
-    echo $KUBECONFIG >> ./kubeconfig
+    echo "$KUBECONFIG" >> ./kubeconfig
     helm init --tiller-namespace kube-system --kubeconfig ./kubeconfig --upgrade --wait
   }
 
