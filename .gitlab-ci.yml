@@ -1,4 +1,4 @@
-image: docker:stable
+image: registry.gitlab.com/typokign/microservices/ci:latest
 
 stages:
   - lint
@@ -14,9 +14,9 @@ build gateway:
   stage: build
   script:
     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
-    - docker pull tictactoeteam/gateway || true
-    - docker build --cache-from tictactoeteam/gateway -t tictactoeteam/gateway:${CI_COMMIT_SHA:0:8} services/gateway
-    - docker push tictactoeteam/gateway:${CI_COMMIT_SHA:0:8}
+    - docker pull registry.gitlab.com/TypoKign/microservices/gateway || true
+    - docker build --cache-from registry.gitlab.com/TypoKign/microservices/gateway registry.gitlab.com/TypoKign/microservices/gateway:${CI_COMMIT_SHA:0:8} services/gateway
+    - docker push registry.gitlab.com/TypoKign/microservices/gateway:${CI_COMMIT_SHA:0:8}
 
 #build auth-service:
 #  stage: build
