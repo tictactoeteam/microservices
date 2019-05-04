@@ -14,9 +14,9 @@ build gateway:
   stage: build
   script:
     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
-    - docker pull registry.gitlab.com/TypoKign/microservices/gateway || true
-    - docker build --cache-from registry.gitlab.com/TypoKign/microservices/gateway registry.gitlab.com/TypoKign/microservices/gateway:${CI_COMMIT_SHA:0:8} services/gateway
-    - docker push registry.gitlab.com/TypoKign/microservices/gateway:${CI_COMMIT_SHA:0:8}
+    - docker pull registry.gitlab.com/typokign/microservices/gateway || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/gateway -t registry.gitlab.com/typokign/microservices/gateway:${CI_COMMIT_SHA:0:8} services/gateway
+    - docker push registry.gitlab.com/typokign/microservices/gateway:${CI_COMMIT_SHA:0:8}
 
 #build auth-service:
 #  stage: build
@@ -29,6 +29,16 @@ build gateway:
 
 deploy:
   stage: deploy
+  image: devth/helm
   script:
     - init_helm
     - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_NAME} ${CI_COMMIT_REF_NAME} ./chart
+
+.functions: &functions |
+  function init_helm() {
+    echo ${KUBECONFIG} >> ~/.kube/config
+    helm init --tiller-namespace kube-system --upgrade --wait
+  }
+
+before_script:
+  - *functions
