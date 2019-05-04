@@ -1,0 +1,34 @@
+image: docker:stable
+
+stages:
+  - lint
+  - build
+  - deploy
+
+lint:
+  stage: lint
+  script:
+    - make lint
+
+build gateway:
+  stage: build
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+    - docker pull tictactoeteam/gateway || true
+    - docker build --cache-from tictactoeteam/gateway -t tictactoeteam/gateway:${CI_COMMIT_SHA:0:8} services/gateway
+    - docker push tictactoeteam/gateway:${CI_COMMIT_SHA:0:8}
+
+#build auth-service:
+#  stage: build
+#
+#build cart-service:
+#  stage: build
+#
+#build deposit-service:
+#  stage: build
+
+deploy:
+  stage: deploy
+  script:
+    - init_helm
+    - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_NAME} ${CI_COMMIT_REF_NAME} ./chart
