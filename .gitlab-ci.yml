@@ -1,5 +1,8 @@
 image: registry.gitlab.com/typokign/microservices/ci:latest
 
+services:
+  - docker:dind
+
 stages:
   - lint
   - build
@@ -27,18 +30,17 @@ build gateway:
 #build deposit-service:
 #  stage: build
 
-deploy:
-  stage: deploy
-  image: devth/helm
-  script:
-    - init_helm
-    - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_NAME} ${CI_COMMIT_REF_NAME} ./chart
-
 .functions: &functions |
   function init_helm() {
     echo ${KUBECONFIG} >> ~/.kube/config
     helm init --tiller-namespace kube-system --upgrade --wait
   }
 
-before_script:
-  - *functions
+deploy:
+  stage: deploy
+  image: devth/helm
+  before_script:
+    - *functions
+  script:
+    - init_helm
+    - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_NAME} ${CI_COMMIT_REF_NAME} ./chart
