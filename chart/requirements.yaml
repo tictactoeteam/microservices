@@ -31,7 +31,7 @@ dependencies:
     version: 1.0.0
     repository: "file://../services/order-service/chart"
     condition: order-service.enabled
- - name: product-service
-   version: 1.0.0
-   repository: "file://../services/product-service/chart"
-   condition: product-service.enabled
+  - name: product-service
+    version: 1.0.0
+    repository: "file://../services/product-service/chart"
+    condition: product-service.enabled

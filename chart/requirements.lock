@@ -23,5 +23,8 @@ dependencies:
 - name: order-service
   repository: file://../services/order-service/chart
   version: 1.0.0
-digest: sha256:8b6c7b7a91e88ec70ee3fdfbf3d585b5018b7393470b5549bd96d9145f4ead4e
-generated: 2019-05-04T11:31:41.406242882-07:00
+- name: product-service
+  repository: file://../services/product-service/chart
+  version: 1.0.0
+digest: sha256:c38d5e968b272e776f2cbcf155f8cd70c67d6346041bb53ae5ebb286f4568483
+generated: 2019-05-04T16:54:22.801218544-07:00
