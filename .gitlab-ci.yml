@@ -1,7 +1,8 @@
 image: registry.gitlab.com/typokign/microservices/ci:latest
 
-services:
-  - docker:dind
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
 
 stages:
   - lint
@@ -15,6 +16,8 @@ lint:
 
 build gateway:
   stage: build
+  services:
+    - docker:dind
   script:
     - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
     - docker pull registry.gitlab.com/typokign/microservices/gateway || true
