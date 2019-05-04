@@ -1,4 +1,4 @@
-FROM docker:stable
+FROM openjdk:13-alpine
 
 RUN apk add --no-cache \
-    bash make gradle
+    docker bash make gradle
