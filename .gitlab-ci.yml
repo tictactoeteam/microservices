@@ -107,6 +107,6 @@ deploy master:
     - *init_helm
   script:
     - helm dependency update ./chart
-    - helm upgrade --install --wait --force --namespace default master ./chart -f ./chart/values.yaml -f ./chart/values_prod.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
+    - helm upgrade --install --wait --namespace default master ./chart -f ./chart/values.yaml -f ./chart/values_prod.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
   only:
     - master
