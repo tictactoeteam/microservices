@@ -61,7 +61,8 @@ public class ProductBox extends Pane {
         getChildren().add(productBoxHBox);
 
         //Handles clicking the "Add to Cart" button
-        addToCartButton.setOnMouseClicked(e -> addToCartClicked(thisProduct, Integer.valueOf(quantityTextField.getText())));
+        addToCartButton.setOnMouseClicked(e ->
+                addToCartClicked(thisProduct, Integer.valueOf(quantityTextField.getText())));
 
     }
 
