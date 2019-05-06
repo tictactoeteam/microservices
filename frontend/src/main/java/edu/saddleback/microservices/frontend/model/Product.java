@@ -11,11 +11,12 @@ public class Product {
 
     /**
      * Constructor
+     *
      * @param name
      * @param imagePath
      * @param price
      */
-    public Product(String name, String imagePath, double price){
+    public Product(String name, String imagePath, double price) {
 
         this.name = name;
         this.imagePath = imagePath;
@@ -25,9 +26,10 @@ public class Product {
 
     /**
      * Copy Constructor
+     *
      * @param tmpProduct
      */
-    public Product(Product tmpProduct){
+    public Product(Product tmpProduct) {
 
         this(tmpProduct.getName(), tmpProduct.getImagePath(), tmpProduct.getPrice());
 
@@ -36,29 +38,33 @@ public class Product {
     /**
      * Default Constructor
      */
-    public Product(){
+    public Product() {
         this("", "", 0.00);
     }
 
     //Getters
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public String getImagePath(){
+
+    public String getImagePath() {
         return imagePath;
     }
-    public double getPrice(){
+
+    public double getPrice() {
         return price;
     }
 
     //Setters
-    public void setName(String str){
+    public void setName(String str) {
         name = str;
     }
-    public void setImagePath(String str){
+
+    public void setImagePath(String str) {
         imagePath = str;
     }
-    public void setPrice(double d){
+
+    public void setPrice(double d) {
         price = d;
     }
 

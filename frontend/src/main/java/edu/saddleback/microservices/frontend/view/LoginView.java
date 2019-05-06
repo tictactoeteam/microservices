@@ -19,7 +19,7 @@ public class LoginView {
     @FXML
     private TextField passwordTextField;
 
-    public void initialize(){
+    public void initialize() {
 
         controller = App.getController();
 
@@ -28,19 +28,20 @@ public class LoginView {
     /**
      * Attempts to log the user in based on the entered credentials.
      */
-    public void onLoginClicked(){
+    public void onLoginClicked() {
 
-        if(!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")){
+        if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")) {
             //ATTEMPT TO LOGIN
 
 
             //SUCCESS
             controller.setLoggedInUsername(usernameTextField.getText());
-            try{
+            try {
                 App.getCoordinator().showAppScene();
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
-        }else{
+        } else {
             errorText.setText("***error-missing credentials***");
             errorText.setVisible(true);
         }
@@ -50,18 +51,19 @@ public class LoginView {
     /**
      * Attempts to create an account for the entered credentials.
      */
-    public void onCreateAccountClicked(){
+    public void onCreateAccountClicked() {
 
         String username = usernameTextField.getText();
-        if(!username.equals("") && !passwordTextField.getText().equals("")) {
+        if (!username.equals("") && !passwordTextField.getText().equals("")) {
             //ATTEMPT TO CREATE AN ACCOUNT
 
 
             //SUCCESS
             controller.setLoggedInUsername(usernameTextField.getText());
-            try{
+            try {
                 App.getCoordinator().showAppScene();
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
         }
 

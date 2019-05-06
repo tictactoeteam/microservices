@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -17,9 +18,10 @@ public class SceneCoordinator {
     /**
      * Constructor
      * - Initializes the app's controller class
+     *
      * @param window
      */
-    public SceneCoordinator(Stage window){
+    public SceneCoordinator(Stage window) {
 
         this.window = window;
         this.controller = new AppController();
@@ -27,13 +29,15 @@ public class SceneCoordinator {
     }
 
     /**
-     *
      * @return the app controller.
      */
-    public AppController getController(){return controller;}
+    public AppController getController() {
+        return controller;
+    }
 
     /**
      * Displays the app.fxml to the Window.
+     *
      * @throws IOException
      */
     public void showAppScene() throws IOException {
@@ -47,9 +51,10 @@ public class SceneCoordinator {
 
     /**
      * Displays the login.fxml to the Window.
+     *
      * @throws IOException
      */
-    public void showLoginScene() throws IOException{
+    public void showLoginScene() throws IOException {
 
         URL url = new File("src/main/res/layout/login.fxml").toURL();
         Parent layout = FXMLLoader.load(url);
@@ -60,9 +65,10 @@ public class SceneCoordinator {
 
     /**
      * Displays the login.fxml to the Window.
+     *
      * @throws IOException
      */
-    public void showCartScene() throws IOException{
+    public void showCartScene() throws IOException {
 
         URL url = new File("src/main/res/layout/cart.fxml").toURL();
         Parent layout = FXMLLoader.load(url);

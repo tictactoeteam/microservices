@@ -17,7 +17,7 @@ public class CartView {
     @FXML
     private ListView cartList;
 
-    public void initialize(){
+    public void initialize() {
 
         controller = App.getController();
         usernameLabel.setText(controller.getLoggedInUsername());
@@ -27,11 +27,12 @@ public class CartView {
     /**
      * Returns the user to the main product page.
      */
-    public void onShopButtonClicked(){
+    public void onShopButtonClicked() {
 
         try {
             App.getCoordinator().showAppScene();
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
 

@@ -22,18 +22,18 @@ public class AppView {
     @FXML
     private ScrollPane scrollPane;
 
-    public void initialize(){
+    public void initialize() {
 
         controller = App.getController();
 
-        if(!controller.getLoggedInUsername().equals("")){
+        if (!controller.getLoggedInUsername().equals("")) {
 
             loggedInLabel.setVisible(true);
             usernameLabel.setVisible(true);
             usernameLabel.setText(controller.getLoggedInUsername());
             loginRegisterButton.setText("Logout");
 
-        }else{
+        } else {
 
             loggedInLabel.setVisible(false);
             usernameLabel.setVisible(false);
@@ -47,21 +47,23 @@ public class AppView {
     /**
      * Redirects to the login/register window.
      */
-    public void onLoginRegisterClicked(){
+    public void onLoginRegisterClicked() {
 
-        if(!controller.getLoggedInUsername().equals("")){
+        if (!controller.getLoggedInUsername().equals("")) {
 
             //LOGOUT HERE
             controller.setLoggedInUsername("");
             try {
                 App.getCoordinator().showAppScene();
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
-        }else{
+        } else {
 
             try {
                 App.getCoordinator().showLoginScene();
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
         }
 
@@ -70,19 +72,21 @@ public class AppView {
     /**
      * Shows the user their cart content.
      */
-    public void onCartImageClicked(){
+    public void onCartImageClicked() {
 
-        if(!controller.getLoggedInUsername().equals("")){
+        if (!controller.getLoggedInUsername().equals("")) {
 
             try {
                 App.getCoordinator().showCartScene();
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
-        }else{
+        } else {
 
             try {
                 App.getCoordinator().showLoginScene();
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
         }
 

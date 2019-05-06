@@ -24,9 +24,10 @@ public class ProductBox extends Pane {
 
     /**
      * Constructor
+     *
      * @param product
      */
-    public ProductBox(Product product){
+    public ProductBox(Product product) {
 
         thisProduct = new Product(product);
         controller = App.getController();
@@ -66,12 +67,13 @@ public class ProductBox extends Pane {
 
     /**
      * Handles adding a item and its chosen quantity to the user's cart.
+     *
      * @param product
      * @param quantity
      */
-    private void addToCartClicked(Product product, int quantity){
+    private void addToCartClicked(Product product, int quantity) {
 
-        if(quantity > 0){
+        if (quantity > 0) {
 
             controller.getCart().add(new CartItem(product, quantity));
             quantityTextField.setText("0");

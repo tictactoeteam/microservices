@@ -11,16 +11,17 @@ public class CartItem {
     /**
      * Default Constructor
      */
-    public CartItem(){
+    public CartItem() {
         this(null, 0);
     }
 
     /**
      * Constructor
+     *
      * @param product
      * @param quantity
      */
-    public CartItem(Product product, int quantity){
+    public CartItem(Product product, int quantity) {
 
         this.product = product;
         this.quantity = quantity;
@@ -29,9 +30,10 @@ public class CartItem {
 
     /**
      * Returns the price of the cartItem, which includes the product and the amount to be purchased.
+     *
      * @return
      */
-    public double getPrice(){
+    public double getPrice() {
         return product.getPrice() * quantity;
     }
 

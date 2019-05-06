@@ -8,7 +8,7 @@ public class AppController {
     private Cart cart;
 
 
-    public AppController(){
+    public AppController() {
 
         loggedInUsername = "";
         cart = new Cart();
@@ -16,16 +16,16 @@ public class AppController {
     }
 
     //Getters
-    public String getLoggedInUsername(){
+    public String getLoggedInUsername() {
         return loggedInUsername;
     }
 
-    public Cart getCart(){
+    public Cart getCart() {
         return cart;
     }
 
     //Setters
-    public void setLoggedInUsername(String name){
+    public void setLoggedInUsername(String name) {
         loggedInUsername = name;
     }
 
