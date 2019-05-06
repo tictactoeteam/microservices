@@ -24,18 +24,42 @@ public class Product {
     }
 
     /**
+     * Copy Constructor
+     * @param tmpProduct
+     */
+    public Product(Product tmpProduct){
+
+        this(tmpProduct.getName(), tmpProduct.getImagePath(), tmpProduct.getPrice());
+
+    }
+
+    /**
      * Default Constructor
      */
-    public Product(){this("", "", 0.00);}
+    public Product(){
+        this("", "", 0.00);
+    }
 
     //Getters
-    public String getName(){return name;}
-    public String getImagePath(){return imagePath;}
-    public double getPrice(){return price;}
+    public String getName(){
+        return name;
+    }
+    public String getImagePath(){
+        return imagePath;
+    }
+    public double getPrice(){
+        return price;
+    }
 
     //Setters
-    public void setName(String str){name = str;}
-    public void setImagePath(String str){imagePath = str;}
-    public void setPrice(double d){price = d;}
+    public void setName(String str){
+        name = str;
+    }
+    public void setImagePath(String str){
+        imagePath = str;
+    }
+    public void setPrice(double d){
+        price = d;
+    }
 
 }

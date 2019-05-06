@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class SceneCoordinator {
 
-    private AppController controller;
+    private static AppController controller;
     private Stage window;
 
     /**

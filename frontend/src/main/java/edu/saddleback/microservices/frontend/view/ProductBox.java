@@ -1,5 +1,7 @@
 package edu.saddleback.microservices.frontend.view;
 
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.model.CartItem;
 import edu.saddleback.microservices.frontend.model.Product;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,6 +18,8 @@ import javafx.scene.layout.VBox;
  */
 public class ProductBox extends Pane {
 
+    private Product thisProduct;
+    private AppController controller;
     private TextField quantityTextField;
 
     /**
@@ -24,23 +28,27 @@ public class ProductBox extends Pane {
      */
     public ProductBox(Product product){
 
+        thisProduct = new Product(product);
+        controller = App.getController();
+
         HBox productBoxHBox = new HBox();
         productBoxHBox.setAlignment(Pos.CENTER);
         //Left side column
-        ImageView image = new ImageView(new Image(product.getImagePath()));
+        ImageView image = new ImageView(new Image(thisProduct.getImagePath()));
 
         //Right side column
         VBox productBoxInfoVBox = new VBox();
         productBoxInfoVBox.setAlignment(Pos.CENTER_LEFT);
-        Label nameLabel = new Label(product.getName());
+        Label nameLabel = new Label(thisProduct.getName());
         HBox priceHBox = new HBox();
         Label priceLabel = new Label("Price: $");
-        Label priceLabelValue = new Label(" " + product.getPrice());
+        Label priceLabelValue = new Label(" " + thisProduct.getPrice());
         priceHBox.getChildren().addAll(priceLabel, priceLabelValue);
         HBox quantityHBox = new HBox();
         quantityHBox.setAlignment(Pos.CENTER);
         Label quantityLabel = new Label("Quantity: ");
         quantityTextField = new TextField();
+        quantityTextField.setText("0");
         quantityTextField.setPrefWidth(30);//*********************************************************
         quantityHBox.getChildren().addAll(quantityLabel, quantityTextField);
         Button addToCartButton = new Button("Add to Cart");
@@ -51,9 +59,25 @@ public class ProductBox extends Pane {
         productBoxHBox.getChildren().addAll(image, productBoxInfoVBox);
         getChildren().add(productBoxHBox);
 
+        //Handles clicking the "Add to Cart" button
+        addToCartButton.setOnMouseClicked(e -> addToCartClicked(thisProduct, Integer.valueOf(quantityTextField.getText())));
+
     }
 
-    //Getter
-    public int getQuantityTextFieldQuantity(){return Integer.valueOf(quantityTextField.getText());}
+    /**
+     * Handles adding a item and its chosen quantity to the user's cart.
+     * @param product
+     * @param quantity
+     */
+    private void addToCartClicked(Product product, int quantity){
+
+        if(quantity > 0){
+
+            controller.getCart().add(new CartItem(product, quantity));
+            quantityTextField.setText("0");
+
+        }
+
+    }
 
 }

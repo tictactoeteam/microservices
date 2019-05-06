@@ -57,7 +57,6 @@ public class AppView {
                 App.getCoordinator().showAppScene();
             }catch (Exception e){}
 
-
         }else{
 
             try {
@@ -65,8 +64,6 @@ public class AppView {
             }catch (Exception e){}
 
         }
-
-
 
     }
 

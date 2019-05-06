@@ -16,11 +16,18 @@ public class AppController {
     }
 
     //Getters
-    public String getLoggedInUsername(){return loggedInUsername;}
-    public Cart getCart(){return cart;}
+    public String getLoggedInUsername(){
+        return loggedInUsername;
+    }
+
+    public Cart getCart(){
+        return cart;
+    }
 
     //Setters
-    public void setLoggedInUsername(String name){loggedInUsername = name;}
+    public void setLoggedInUsername(String name){
+        loggedInUsername = name;
+    }
 
 
 }
