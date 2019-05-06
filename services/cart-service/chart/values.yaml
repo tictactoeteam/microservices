@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: tictactoeteam/cart-service
+  repository: registry.gitlab.com/typokign/microservices/cart-service
   tag: latest
   pullPolicy: Always
 

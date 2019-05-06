@@ -11,5 +11,20 @@ dependencies:
 - name: gateway
   repository: file://../services/gateway/chart
   version: 1.0.0
-digest: sha256:cd1ad1053220d01f2c8e0fa092cce0850b4da9c81309c15cb16bf2a12de0be12
-generated: 2019-04-30T08:54:08.436563768-07:00
+- name: auth-service
+  repository: file://../services/auth-service/chart
+  version: 1.0.0
+- name: cart-service
+  repository: file://../services/cart-service/chart
+  version: 1.0.0
+- name: deposit-service
+  repository: file://../services/deposit-service/chart
+  version: 1.0.0
+- name: order-service
+  repository: file://../services/order-service/chart
+  version: 1.0.0
+- name: product-service
+  repository: file://../services/product-service/chart
+  version: 1.0.0
+digest: sha256:c38d5e968b272e776f2cbcf155f8cd70c67d6346041bb53ae5ebb286f4568483
+generated: 2019-05-04T16:54:22.801218544-07:00

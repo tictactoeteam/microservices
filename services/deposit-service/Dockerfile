@@ -1,18 +1,13 @@
-FROM tictactoeteam/base:latest
+FROM registry.gitlab.com/typokign/microservices/base:latest
 
-RUN echo "not ready yet"
+WORKDIR /srv
 
-CMD ["true"]
+COPY package*.json ./
 
-#
-#WORKDIR /srv
-#
-#COPY package*.json .
-#
-#RUN npm install
-#
-#COPY . .
-#
-#RUN make build
-#
-#CMD ["npm", "start"]
+RUN npm install
+
+COPY . .
+
+RUN make build
+
+CMD ["make", "run"]

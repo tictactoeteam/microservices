@@ -5,9 +5,9 @@ build:
 	npm run build
 
 build-docker:
-	docker build . -t tictactoeteam/deposit-service
+	docker build . -t registry.gitlab.com/typokign/microservices/deposit-service
 
 lint:
-	echo "noop"
+	npm run lint
 
 .PHONY: run build build-docker lint

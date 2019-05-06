@@ -1,4 +1,4 @@
-FROM tictactoeteam/base:latest
+FROM registry.gitlab.com/typokign/microservices/base:latest
 
 COPY . .
 

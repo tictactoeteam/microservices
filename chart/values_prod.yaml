@@ -1,0 +1,9 @@
+postgresql:
+  replication:
+    enabled: true
+    slaveReplicas: 3
+
+redis:
+  cluster:
+    enabled: true
+    slaveCount: 3

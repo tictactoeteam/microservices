@@ -1,0 +1,7 @@
+postgresql:
+  replication:
+    enabled: false
+
+redis:
+  cluster:
+    enabled: false

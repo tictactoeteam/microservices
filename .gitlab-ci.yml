@@ -1,0 +1,112 @@
+image: registry.gitlab.com/typokign/microservices/ci:latest
+
+variables:
+  DOCKER_HOST: tcp://localhost:2375/
+  DOCKER_DRIVER: overlay2
+  IMAGE_ARGS: "--set gateway.image.tag=${CI_COMMIT_SHORT_SHA} --set auth-service.image.tag=${CI_COMMIT_SHORT_SHA} --set cart-service.image.tag=${CI_COMMIT_SHORT_SHA} --set deposit-service.image.tag=${CI_COMMIT_SHORT_SHA} --set order-service.image.tag=${CI_COMMIT_SHORT_SHA} --set product-service.image.tag=${CI_COMMIT_SHORT_SHA}"
+
+stages:
+  - lint
+  - build
+  - deploy
+
+lint:
+  stage: lint
+  script:
+    - make lint
+
+build frontend:
+  stage: build
+  script:
+    - cd frontend
+    - make build
+
+build gateway:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull registry.gitlab.com/typokign/microservices/gateway || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/gateway -t registry.gitlab.com/typokign/microservices/gateway:${CI_COMMIT_SHORT_SHA} services/gateway
+    - docker push registry.gitlab.com/typokign/microservices/gateway:${CI_COMMIT_SHORT_SHA}
+
+build auth-service:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull registry.gitlab.com/typokign/microservices/auth-service || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/ -t registry.gitlab.com/typokign/microservices/auth-service:${CI_COMMIT_SHORT_SHA} services/auth-service
+    - docker push registry.gitlab.com/typokign/microservices/auth-service:${CI_COMMIT_SHORT_SHA}
+
+build cart-service:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull registry.gitlab.com/typokign/microservices/cart-service || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/cart-service -t registry.gitlab.com/typokign/microservices/cart-service:${CI_COMMIT_SHORT_SHA} services/cart-service
+    - docker push registry.gitlab.com/typokign/microservices/cart-service:${CI_COMMIT_SHORT_SHA}
+
+build deposit-service:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull registry.gitlab.com/typokign/microservices/deposit-service || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/deposit-service -t registry.gitlab.com/typokign/microservices/deposit-service:${CI_COMMIT_SHORT_SHA} services/deposit-service
+    - docker push registry.gitlab.com/typokign/microservices/deposit-service:${CI_COMMIT_SHORT_SHA}
+
+build order-service:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull registry.gitlab.com/typokign/microservices/order-service || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/order-service -t registry.gitlab.com/typokign/microservices/order-service:${CI_COMMIT_SHORT_SHA} services/order-service
+    - docker push registry.gitlab.com/typokign/microservices/order-service:${CI_COMMIT_SHORT_SHA}
+
+build product-service:
+  stage: build
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull registry.gitlab.com/typokign/microservices/product-service || true
+    - docker build --cache-from registry.gitlab.com/typokign/microservices/product-service -t registry.gitlab.com/typokign/microservices/product-service:${CI_COMMIT_SHORT_SHA} services/product-service
+    - docker push registry.gitlab.com/typokign/microservices/product-service:${CI_COMMIT_SHORT_SHA}
+
+.init_helm: &init_helm |
+  mkdir /etc/deploy
+  echo "$KUBECONFIG" >> /etc/deploy/config
+  helm init --client-only --kubeconfig /etc/deploy/config
+  helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+  helm repo update
+
+deploy:
+  stage: deploy
+  image: lwolf/helm-kubectl-docker:latest
+  before_script:
+    - *init_helm
+  script:
+    - helm dependency update ./chart
+    - helm delete --purge ${CI_COMMIT_REF_SLUG} --kubeconfig /etc/deploy/config || true
+    - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_SLUG} ${CI_COMMIT_REF_SLUG} ./chart -f ./chart/values.yaml -f ./chart/values_pr.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
+  except:
+    - master
+
+deploy master:
+  stage: deploy
+  image: lwolf/helm-kubectl-docker:latest
+  before_script:
+    - *init_helm
+  script:
+    - helm dependency update ./chart
+    - helm upgrade --install --wait --namespace default master ./chart -f ./chart/values.yaml -f ./chart/values_prod.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
+  only:
+    - master

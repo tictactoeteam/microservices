@@ -1,13 +1,14 @@
 rabbitmq:
   enabled: true
   fullnameOverride: "rabbitmq"
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
 
 postgresql:
   enabled: true
   fullnameOverride: "postgres"
-  replication:
-    enabled: true
-    slaveReplicas: 3
 
 redis:
   enabled: true
@@ -26,4 +27,7 @@ deposit-service:
   enabled: true
 
 order-service:
+  enabled: true
+
+product-service:
   enabled: true
