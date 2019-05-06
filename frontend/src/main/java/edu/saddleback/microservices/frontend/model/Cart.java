@@ -14,17 +14,24 @@ public class Cart{
      * - Initializes the cartItems arraylist.
      */
     public Cart(){
-        cartItems = new ArrayList<>();}
+        cartItems = new ArrayList<>();
+    }
 
     //Getters
-    public ArrayList<CartItem> getCartItems(){return cartItems;}
-    public int getSize(){return cartItems.size();}
+    public ArrayList<CartItem> getCartItems(){
+        return cartItems;
+    }
+    public int getSize(){
+        return cartItems.size();
+    }
 
     //Setters
     public void add(CartItem p){
-        cartItems.add(p);}
+        cartItems.add(p);
+    }
     public void remove(CartItem p){
-        cartItems.remove(p);}
+        cartItems.remove(p);
+    }
 
     /**
      *

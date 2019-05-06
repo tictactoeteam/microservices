@@ -2,7 +2,6 @@ package edu.saddleback.microservices.frontend.view;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -17,7 +16,6 @@ public class CartView {
     private Label usernameLabel;
     @FXML
     private ListView cartList;
-
 
     public void initialize(){
 

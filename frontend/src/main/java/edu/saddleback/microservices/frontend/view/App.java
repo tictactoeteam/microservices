@@ -45,13 +45,17 @@ public class App extends Application {
      * Allows the game controller to be accessed by each scene.
      * @return
      */
-    public static AppController getController(){return coordinator.getController();}
+    public static AppController getController(){
+        return coordinator.getController();
+    }
 
     /**
      * Allows the scene controller to be called from the scene views.
      * @return
      */
-    public static SceneCoordinator getCoordinator(){return coordinator;}
+    public static SceneCoordinator getCoordinator(){
+        return coordinator;
+    }
 
     /**
      * Allows for the window sizes to be changes.
@@ -62,6 +66,7 @@ public class App extends Application {
 
         Window.setWidth(width);
         Window.setHeight(height);
+
     }
 
 }
