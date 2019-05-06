@@ -11,7 +11,7 @@ public class Cart {
 
     /**
      * Constructor
-     * - Initializes the cartItems arraylist.
+     * - Initializes the cartItems array list.
      */
     public Cart() {
         cartItems = new ArrayList<>();
@@ -42,8 +42,11 @@ public class Cart {
 
         double sum = 0;
 
-        for (int i = 0; i < cartItems.size(); i++)
+        for (int i = 0; i < cartItems.size(); i++) {
+
             sum += cartItems.get(i).getPrice();
+
+        }
 
         return sum;
 

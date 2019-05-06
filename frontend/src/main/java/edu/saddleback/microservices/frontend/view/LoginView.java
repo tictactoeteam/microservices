@@ -39,6 +39,7 @@ public class LoginView {
             try {
                 App.getCoordinator().showAppScene();
             } catch (Exception e) {
+                System.err.println("oof");
             }
 
         } else {
@@ -63,6 +64,7 @@ public class LoginView {
             try {
                 App.getCoordinator().showAppScene();
             } catch (Exception e) {
+                System.err.println("oof");
             }
 
         }

@@ -35,19 +35,19 @@ public class ProductBox extends Pane {
         HBox productBoxHBox = new HBox();
         productBoxHBox.setAlignment(Pos.CENTER);
         //Left side column
-        ImageView image = new ImageView(new Image(thisProduct.getImagePath()));
+        final ImageView image = new ImageView(new Image(thisProduct.getImagePath()));
 
         //Right side column
         VBox productBoxInfoVBox = new VBox();
         productBoxInfoVBox.setAlignment(Pos.CENTER_LEFT);
-        Label nameLabel = new Label(thisProduct.getName());
+        final Label nameLabel = new Label(thisProduct.getName());
         HBox priceHBox = new HBox();
         Label priceLabel = new Label("Price: $");
         Label priceLabelValue = new Label(" " + thisProduct.getPrice());
         priceHBox.getChildren().addAll(priceLabel, priceLabelValue);
         HBox quantityHBox = new HBox();
         quantityHBox.setAlignment(Pos.CENTER);
-        Label quantityLabel = new Label("Quantity: ");
+        final Label quantityLabel = new Label("Quantity: ");
         quantityTextField = new TextField();
         quantityTextField.setText("0");
         quantityTextField.setPrefWidth(30);//*********************************************************

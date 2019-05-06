@@ -56,6 +56,7 @@ public class AppView {
             try {
                 App.getCoordinator().showAppScene();
             } catch (Exception e) {
+                System.err.println("oof");
             }
 
         } else {
@@ -63,6 +64,7 @@ public class AppView {
             try {
                 App.getCoordinator().showLoginScene();
             } catch (Exception e) {
+                System.err.println("oof");
             }
 
         }
@@ -79,6 +81,7 @@ public class AppView {
             try {
                 App.getCoordinator().showCartScene();
             } catch (Exception e) {
+                System.err.println("oof");
             }
 
         } else {
@@ -86,6 +89,7 @@ public class AppView {
             try {
                 App.getCoordinator().showLoginScene();
             } catch (Exception e) {
+                System.err.println("oof");
             }
 
         }

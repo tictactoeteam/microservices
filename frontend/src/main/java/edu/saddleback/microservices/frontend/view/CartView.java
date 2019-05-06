@@ -32,6 +32,7 @@ public class CartView {
         try {
             App.getCoordinator().showAppScene();
         } catch (Exception e) {
+            System.err.println("oof");
         }
 
     }
