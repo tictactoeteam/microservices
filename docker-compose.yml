@@ -2,9 +2,10 @@ version: "3.7"
 
 services:
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:management
     ports:
       - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
   postgres:
     image: postgres:latest
     ports:
@@ -14,6 +15,51 @@ services:
     ports:
       - "127.0.0.1:6379:6379"
 
+  auth-service:
+    image: registry.gitlab.com/typokign/microservices/auth-service
+    build:
+      context: ./services/auth-service/
+      dockerfile: Dockerfile
+    environment:
+      DO_INIT: "true"
+      POSTGRES_URL: "jdbc:postgresql://postgres:5432/auth"
+      POSTGRES_USER: "auth"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_SU_URL: "jdbc:postgresql://postgres:5432/"
+      POSTGRES_SUPERUSER: "postgres"
+      POSTGRES_SU_PASSWORD: "postgres"
+      RABBIT_USERNAME: "guest"
+      RABBIT_PASSWORD: "guest"
+    volumes:
+      - ./services/auth-service/cert.pem:/opt/cert.pem
+    depends_on:
+      - rabbitmq
+      - postgres
+
+  cart-service:
+    image: registry.gitlab.com/typokign/microservices/cart-service
+    build:
+      context: ./services/cart-service/
+      dockerfile: Dockerfile
+
+  deposit-service:
+    image: registry.gitlab.com/typokign/microservices/deposit-service
+    build:
+      context: ./services/deposit-service/
+      dockerfile: Dockerfile
+
+  order-service:
+    image: registry.gitlab.com/typokign/microservices/order-service
+    build:
+      context: ./services/order-service/
+      dockerfile: Dockerfile
+
+  product-service:
+    image: registry.gitlab.com/typokign/microservices/product-service
+    build:
+      context: ./services/product-service
+      dockerfile: Dockerfile
+
   gateway:
     image: registry.gitlab.com/typokign/microservices/gateway
     build:
@@ -21,28 +67,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:8080:8080"
-  auth-service:
-    image: registry.gitlab.com/typokign/microservices/auth-service
-    build:
-      context: ./services/auth-service/
-      dockerfile: Dockerfile
-  cart-service:
-    image: registry.gitlab.com/typokign/microservices/cart-service
-    build:
-      context: ./services/cart-service/
-      dockerfile: Dockerfile
-  deposit-service:
-    image: registry.gitlab.com/typokign/microservices/deposit-service
-    build:
-      context: ./services/deposit-service/
-      dockerfile: Dockerfile
-  order-service:
-    image: registry.gitlab.com/typokign/microservices/order-service
-    build:
-      context: ./services/order-service/
-      dockerfile: Dockerfile
-  product-service:
-    image: registry.gitlab.com/typokign/microservices/product-service
-    build:
-      context: ./services/product-service
-      dockerfile: Dockerfile
+    depends_on:
+      - auth-service
+      - cart-service
+      - deposit-service
+      - order-service
+      - product-service

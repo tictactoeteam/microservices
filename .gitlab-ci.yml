@@ -87,6 +87,7 @@ build product-service:
   helm init --client-only --kubeconfig /etc/deploy/config
   helm repo add stable https://kubernetes-charts.storage.googleapis.com/
   helm repo update
+  helm dependency update ./chart
 
 deploy:
   stage: deploy
@@ -94,8 +95,9 @@ deploy:
   before_script:
     - *init_helm
   script:
-    - helm dependency update ./chart
     - helm delete --purge ${CI_COMMIT_REF_SLUG} --kubeconfig /etc/deploy/config || true
+    - kubectl --kubeconfig /etc/deploy/config create namespace ${CI_COMMIT_REF_SLUG} || true
+    - echo "$SECRETS" | kubectl --kubeconfig /etc/deploy/config -n ${CI_COMMIT_REF_SLUG} apply -f -
     - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_SLUG} ${CI_COMMIT_REF_SLUG} ./chart -f ./chart/values.yaml -f ./chart/values_pr.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
   except:
     - master
@@ -106,7 +108,7 @@ deploy master:
   before_script:
     - *init_helm
   script:
-    - helm dependency update ./chart
+    - echo "$SECRETS" | kubectl --kubeconfig /etc/deploy/config -n default apply -f -
     - helm upgrade --install --wait --namespace default master ./chart -f ./chart/values.yaml -f ./chart/values_prod.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
   only:
     - master
