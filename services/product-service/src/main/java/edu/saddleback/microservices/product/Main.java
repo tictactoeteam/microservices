@@ -1,16 +1,25 @@
 package edu.saddleback.microservices.product;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import spark.Spark;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        // lol k8s thinks the pod is crashing if I don't give it something to keep busy
-        while (true) {
-            Thread.sleep(5000);
-        }
+        start();
     }
 
-    public void setProduct(String product){
-        //Making some random text so I can test the build
+    public static void start() {
+        Gson gson = new Gson();
 
+        Spark.port(8080);
+
+        // all responses will be JSON
+        Spark.before((req, res) -> {
+            res.type("application/json");
+        });
+        //Example on how to post      Function to call           Json Conversion
+        //Spark.post("/products/", ProductController::createProduct, gson::toJson);
     }
-
 }
