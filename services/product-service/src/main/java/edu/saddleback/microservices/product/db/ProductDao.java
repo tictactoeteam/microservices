@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ProductDao {
 
     private static Connection connection = DbManager.getConnection();
-    List<Product> listProduct = new ArrayList<>();
+    ArrayList<Product> listProduct = new ArrayList<>();
 
     public static Product getProductByID(UUID id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
@@ -29,22 +29,22 @@ public class ProductDao {
         return rs.next() ? extractProduct(rs) : null;
     }
 
-    public List<Product> getAllProducts() throws SQLException{
+    public ArrayList<Product> getAllProducts() throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM products WHERE id=?"
         );
 
         ResultSet rs = statement.executeQuery("SELECT * FROM products");
-        while(rs.next()){
+        while (rs.next()) {
             Product product = new Product();
             product.setProductID(UUID.fromString(rs.getString("id")));
             product.setProductName(rs.getString("name"));
             product.setProductPrice(rs.getString("price"));
-            product.setProductQuantity(rs.getString("quantity");
+            product.setProductQuantity(rs.getString("quantity"));
+            listProduct.add(product);
         }
         return listProduct;
     }
-
 
     private static Product extractProduct(ResultSet rs) throws SQLException {
         Product product = new Product();
