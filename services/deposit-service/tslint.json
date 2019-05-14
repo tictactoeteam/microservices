@@ -18,6 +18,20 @@
       true,
       "always",
       "ignore-bound-class-methods"
-    ]
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "object-literal-sort-keys": false,
+    "object-literal-shorthand": false,
+    "no-shadowed-variable": false
   }
 }

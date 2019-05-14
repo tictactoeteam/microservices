@@ -9,6 +9,10 @@ image:
   tag: latest
   pullPolicy: Always
 
+existingSecretName: "deposit-service"
+redisSecret: "redis"
+rabbitSecret: "rabbitmq"
+
 nameOverride: ""
 fullnameOverride: "deposit-service"
 
