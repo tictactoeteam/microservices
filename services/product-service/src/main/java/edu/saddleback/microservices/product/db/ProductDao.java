@@ -18,7 +18,7 @@ public class ProductDao {
     private static Connection connection = DbManager.getConnection();
     ArrayList<Product> listProduct = new ArrayList<>();
 
-    public static Product getProductByID(UUID id) throws SQLException {
+    public static Product getProductByID(String id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM products WHERE id=?"
         );

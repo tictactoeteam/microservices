@@ -55,4 +55,19 @@ public class ProductController {
 
         return res;
     }
+
+
+    public JsonObject getProductJson(String UUID) {
+        JsonObject res = new JsonObject();
+        Product someProduct = new Product();
+
+        try {
+            someProduct = productDao.getProductByID(UUID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        res = convertDaoToJson(someProduct);
+
+        return res;
+    }
 }
