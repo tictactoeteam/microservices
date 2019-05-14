@@ -19,6 +19,7 @@ dependencies {
     compile 'com.sparkjava:spark-core:2.8.0'
     compile 'org.mindrot:jbcrypt:0.3m'
     compile group: 'org.postgresql', name: 'postgresql', version: '9.3-1100-jdbc4'
+    compile 'com.rabbitmq:amqp-client:5.7.0'
 }
 
 checkstyle {
