@@ -3,27 +3,36 @@ package edu.saddleback.microservices.product.controllers;
 import com.google.gson.*;
 import edu.saddleback.microservices.product.db.ProductDao;
 import edu.saddleback.microservices.product.model.Product;
+import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import spark.Request;
+import spark.Response;
+
+
+
 
 public class ProductController {
     //convert from DAO to JSON
     ProductDao productDao = new ProductDao();
-    Gson gson = new GsonBuilder().create();
-    ArrayList<Product> productList = new ArrayList<>();
 
-    {
-        try {
-            productList = productDao.getAllProducts();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static JsonArray convertDaoListToJson(Request request, Response response) {
+        ArrayList<Product> productList = new ArrayList<>();
+        ProductDao productDaos = new ProductDao();
+        Gson gson = new GsonBuilder().create();
+
+        JsonArray jsonProductList = gson.toJsonTree(productList).getAsJsonArray();
+
+        {
+            try {
+                productList = productDaos.getAllProducts();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    JsonArray jsonProductList = gson.toJsonTree(productList).getAsJsonArray();
-
-    public JsonArray convertDaoListToJson() {
         for (int i = 0; i < productList.size(); i++) {
 
             Product product = new Product();
@@ -42,11 +51,20 @@ public class ProductController {
 
             jsonProductList.add(res);
         }
+
+        try {
+            getChannel().basicPublish("product", "get", null,
+                    jsonProductList.toString().getBytes());
+        } catch (IOException e) {
+            System.err.println("Failed to publish new user to Rabbit");
+            e.printStackTrace();
+        }
+
         return jsonProductList;
     }
 
     //Need to convert one DAO query to Json
-    public JsonObject convertDaoToJson(Product someProduct) {
+    public static JsonObject convertDaoToJson(Product someProduct) {
         JsonObject res = new JsonObject();
         res.addProperty("id", someProduct.getProductId().toString());
         res.addProperty("name", someProduct.getProductName());
@@ -56,13 +74,13 @@ public class ProductController {
         return res;
     }
 
-
-    public JsonObject getProductJson(String UUID) {
+    public static JsonObject getProductJson(String UUID, Request request, Response response) {
         JsonObject res = new JsonObject();
         Product someProduct = new Product();
+        ProductDao productdao = new ProductDao();
 
         try {
-            someProduct = productDao.getProductByID(UUID);
+            someProduct = productdao.getProductByID(UUID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
