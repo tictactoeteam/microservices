@@ -1,7 +1,7 @@
 package edu.saddleback.microservices.frontend.interfaces;
 
-import edu.saddleback.microservices.frontend.controller.backendModels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.controller.backendModels.LoginObject;
+import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
+import edu.saddleback.microservices.frontend.controller.backendmodels.LoginObject;
 import edu.saddleback.microservices.frontend.model.SuccessfulAccountCreatedUser;
 import edu.saddleback.microservices.frontend.model.SuccessfulLoginToken;
 import retrofit2.Call;

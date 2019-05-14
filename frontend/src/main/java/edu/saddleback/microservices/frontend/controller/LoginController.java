@@ -2,7 +2,7 @@ package edu.saddleback.microservices.frontend.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import edu.saddleback.microservices.frontend.controller.backendModels.LoginObject;
+import edu.saddleback.microservices.frontend.controller.backendmodels.LoginObject;
 import edu.saddleback.microservices.frontend.interfaces.BackendService;
 import edu.saddleback.microservices.frontend.model.SuccessfulLoginToken;
 import edu.saddleback.microservices.frontend.observable.Observable;

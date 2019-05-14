@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.frontend.controller.backendModels;
+package edu.saddleback.microservices.frontend.controller.backendmodels;
 
 public class LoginObject {
 

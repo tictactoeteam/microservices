@@ -37,7 +37,7 @@ public class Observable<E> {
      */
     public void set(E object) {
         this.object = object;
-        this.listeners.forEach(eListener -> eListener.update(object));
+        this.listeners.forEach(elistener -> elistener.update(object));
     }
 
     /**

@@ -2,7 +2,7 @@ package edu.saddleback.microservices.frontend.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import edu.saddleback.microservices.frontend.controller.backendModels.CreateAccountObject;
+import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
 import edu.saddleback.microservices.frontend.interfaces.BackendService;
 import edu.saddleback.microservices.frontend.model.SuccessfulAccountCreatedUser;
 import edu.saddleback.microservices.frontend.observable.Observable;
