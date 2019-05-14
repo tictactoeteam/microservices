@@ -1,9 +1,17 @@
 package edu.saddleback.microservices.frontend.view;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.CreateAccountController;
+import edu.saddleback.microservices.frontend.controller.LoginController;
+import edu.saddleback.microservices.frontend.interfaces.BackendService;
+import edu.saddleback.microservices.frontend.model.SuccessfulAccountCreatedUser;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 
 /**
  * Controls the login.fxml page, including registering or logging in a user.
@@ -18,6 +26,8 @@ public class LoginView {
     private TextField usernameTextField;
     @FXML
     private TextField passwordTextField;
+    @FXML
+    private TextField emailTextField;
 
     public void initialize() {
 
@@ -30,17 +40,38 @@ public class LoginView {
      */
     public void onLoginClicked() {
 
-        if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")) {
+        if ((!usernameTextField.getText().equals("") || !emailTextField.getText().equals(""))
+                && !passwordTextField.getText().equals("")) {
             //ATTEMPT TO LOGIN
+            LoginController loginAttempt = new LoginController(usernameTextField.getText(),
+                    passwordTextField.getText());
 
+            //Login Attempt Handler
+            loginAttempt.getLoggedInObservableBoolean().subscribe((onChanged) -> {
 
-            //SUCCESS
-            controller.setLoggedInUsername(usernameTextField.getText());
-            try {
-                App.getCoordinator().showAppScene();
-            } catch (Exception e) {
-                System.err.println("oof");
-            }
+                if (onChanged.equals(true)) {
+
+                    controller.setLoggedInUsername(usernameTextField.getText());
+                    controller.setToken(loginAttempt.getToken());
+                    try {
+                        App.getCoordinator().showAppScene();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+
+                    Platform.runLater(() -> {
+                        errorText.setText("***error-invalid credentials***");
+                        errorText.setVisible(true);
+                    });
+
+                }
+
+            });
+
+            //Attempts to login
+            loginAttempt.start();
 
         } else {
             errorText.setText("***error-missing credentials***");
@@ -54,19 +85,39 @@ public class LoginView {
      */
     public void onCreateAccountClicked() {
 
-        String username = usernameTextField.getText();
-        if (!username.equals("") && !passwordTextField.getText().equals("")) {
-            //ATTEMPT TO CREATE AN ACCOUNT
+        if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")
+               && !emailTextField.getText().equals("")) {
 
+            CreateAccountController createAccountAttempt = new CreateAccountController(usernameTextField.getText(),
+                    emailTextField.getText(), passwordTextField.getText());
 
-            //SUCCESS
-            controller.setLoggedInUsername(usernameTextField.getText());
-            try {
-                App.getCoordinator().showAppScene();
-            } catch (Exception e) {
-                System.err.println("oof");
-            }
+            //Account Created Handler
+            createAccountAttempt.getAccountCreatedObservableBoolean().subscribe((onChanged) -> {
 
+                if (onChanged.equals(true)) {   //SUCCESS
+
+                    Platform.runLater(() -> {
+                        errorText.setText("Account Created! Please Login");
+                        errorText.setVisible(true);
+                    });
+
+                } else {                           //FAILED
+
+                    Platform.runLater(() -> {
+                        errorText.setText("***error-account already exists***");
+                        errorText.setVisible(true);
+                    });
+
+                }
+
+            });
+
+            //Attempts to create an account
+            createAccountAttempt.start();
+
+        } else {
+            errorText.setText("***error-missing credentials***");
+            errorText.setVisible(true);
         }
 
     }
