@@ -1,19 +1,18 @@
 package edu.saddleback.microservices.product.controllers;
 
-import com.google.gson.*;
-import edu.saddleback.microservices.product.db.ProductDao;
-import edu.saddleback.microservices.product.model.Product;
 import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import edu.saddleback.microservices.product.db.ProductDao;
+import edu.saddleback.microservices.product.model.Product;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import spark.Request;
 import spark.Response;
-
-
-
 
 public class ProductController {
     //convert from DAO to JSON
@@ -74,13 +73,13 @@ public class ProductController {
         return res;
     }
 
-    public static JsonObject getProductJson(String UUID, Request request, Response response) {
+    public static JsonObject getProductJson(String uuid, Request request, Response response) {
         JsonObject res = new JsonObject();
         Product someProduct = new Product();
         ProductDao productdao = new ProductDao();
 
         try {
-            someProduct = productdao.getProductByID(UUID);
+            someProduct = productdao.getProductByID(uuid);
         } catch (SQLException e) {
             e.printStackTrace();
         }

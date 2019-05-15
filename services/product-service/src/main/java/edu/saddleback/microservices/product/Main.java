@@ -36,7 +36,7 @@ public class Main {
         //15672 docker compose reference to check rabbitmq
         //Spark.post("/products/", ProductController::createProduct, gson::toJson);
 
-         Spark.post("/product/", ProductController::convertDaoListToJson, gson::toJson);
+        Spark.post("/product/", ProductController::convertDaoListToJson, gson::toJson);
         // Spark.post("/product/", ProductController::convertDaoListToJson, gson::toJson);
 
     }
