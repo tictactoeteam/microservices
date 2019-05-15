@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class DbManager {
     private static final Migration[] migrations = {
-           // new UserTable()
+            // new UserTable()
     };
 
     private static String url = System.getenv("POSTGRES_URL");
@@ -31,8 +31,8 @@ public class DbManager {
             new Init().up(connection);
 
             //Create ProductServices Connection
-           // Connection authConnection = createConnection(url, superuser, suPassword);
-           // new PgCrypto().up(authConnection);
+            // Connection authConnection = createConnection(url, superuser, suPassword);
+            // new PgCrypto().up(authConnection);
         } catch (SQLException e) {
             System.out.println("Database auth already exists");
         }
