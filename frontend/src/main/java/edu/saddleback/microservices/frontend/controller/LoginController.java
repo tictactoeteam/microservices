@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class LoginController implements Callback<SuccessfulLoginToken> {
 
-    static final String BASE_URL = "http://k8s.typokign.com/";
+    static final String BASE_URL = "https://k8s.typokign.com/";
     private String username;
     private String password;
     private String token;

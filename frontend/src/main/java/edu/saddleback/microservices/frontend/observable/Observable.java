@@ -24,9 +24,6 @@ public class Observable<E> {
      * @param listener
      */
     public void subscribe(Listener<E> listener) {
-        if (object != null) {
-            listener.update(object);
-        }
         listeners.add(listener);
     }
 

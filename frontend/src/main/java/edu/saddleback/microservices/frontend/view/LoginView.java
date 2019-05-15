@@ -92,9 +92,9 @@ public class LoginView {
                     emailTextField.getText(), passwordTextField.getText());
 
             //Account Created Handler
-            createAccountAttempt.getAccountCreatedObservableBoolean().subscribe((onChanged) -> {
+            createAccountAttempt.getAccountCreatedObservableBoolean().subscribe((isAccountCreated) -> {
 
-                if (onChanged.equals(true)) {   //SUCCESS
+                if (isAccountCreated.equals(true)) {   //SUCCESS
 
                     Platform.runLater(() -> {
                         errorText.setText("Account Created! Please Login");

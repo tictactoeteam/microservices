@@ -51,8 +51,8 @@ public class AppView {
 
         if (!controller.getLoggedInUsername().equals("")) {
 
-            //LOGOUT HERE
             controller.setLoggedInUsername("");
+            controller.setToken("");
             try {
                 App.getCoordinator().showAppScene();
             } catch (Exception e) {
