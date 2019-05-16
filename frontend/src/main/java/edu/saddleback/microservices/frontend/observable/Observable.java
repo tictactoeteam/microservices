@@ -38,17 +38,6 @@ public class Observable<E> {
     }
 
     /**
-     * Sets the observable object but does not notify listeners.
-     *
-     * @param object
-     */
-    public void softSet(E object) {
-
-        this.object = object;
-
-    }
-
-    /**
      * Returns this object.
      *
      * @return

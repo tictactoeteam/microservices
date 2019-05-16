@@ -36,7 +36,7 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
         this.email = email;
         this.password = password;
         accountCreated = new Observable<>();
-        accountCreated.softSet(false);
+        accountCreated.set(false);
 
     }
 
@@ -68,7 +68,7 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
     @Override
     public void onResponse(Call<SuccessfulAccountCreatedUser> call, Response<SuccessfulAccountCreatedUser> response) {
 
-        if (response.code() != 400) { //If account doesnt already exist
+        if (response.code() == 201) { //If account doesnt already exist
             accountCreated.set(true);
         }
 

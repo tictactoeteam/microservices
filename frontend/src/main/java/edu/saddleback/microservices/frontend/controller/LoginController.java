@@ -34,7 +34,7 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
         this.username = username;
         this.password = password;
         loggedIn = new Observable<>();
-        loggedIn.softSet(false);
+        loggedIn.set(false);
 
     }
 
@@ -68,7 +68,7 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
         System.out.println("RECIEVED LOGIN RESPONSE");
         System.out.println(response.toString());
 
-        if (response.code() != 400 && response.code() != 429) {
+        if (response.code() == 201) {
 
             token = response.body().getToken();
             loggedIn.set(true);
