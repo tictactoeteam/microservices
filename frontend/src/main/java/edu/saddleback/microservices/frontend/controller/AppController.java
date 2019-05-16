@@ -1,5 +1,7 @@
 package edu.saddleback.microservices.frontend.controller;
 
+import edu.saddleback.microservices.frontend.controller.backendmodels.BackendServiceObject;
+import edu.saddleback.microservices.frontend.interfaces.BackendService;
 import edu.saddleback.microservices.frontend.model.Cart;
 
 public class AppController {
@@ -7,13 +9,14 @@ public class AppController {
     private String loggedInUsername;
     private Cart cart;
     private String token;
-
+    private static BackendServiceObject backendServiceObject;
 
     public AppController() {
 
         loggedInUsername = "";
         cart = new Cart();
         token = "";
+        backendServiceObject = new BackendServiceObject();
 
     }
 
@@ -28,6 +31,10 @@ public class AppController {
 
     public String getToken() {
         return token;
+    }
+
+    public static BackendService getBackendService() {
+        return backendServiceObject.getBackendService();
     }
 
     //Setters

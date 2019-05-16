@@ -17,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class CreateAccountController implements Callback<SuccessfulAccountCreatedUser> {
 
-    static final String BASE_URL = "https://k8s.typokign.com/";
     private String username;
     private String email;
     private String password;
@@ -45,16 +44,8 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
      */
     public void start() {
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        BackendService service = retrofit.create(BackendService.class);
-        Call<SuccessfulAccountCreatedUser> call = service.registerAccount(new CreateAccountObject(username, email,
-                password));
+        Call<SuccessfulAccountCreatedUser> call = AppController.getBackendService()
+                .registerAccount(new CreateAccountObject(username, email, password));
         call.enqueue(this);
 
     }
@@ -67,9 +58,11 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
      */
     @Override
     public void onResponse(Call<SuccessfulAccountCreatedUser> call, Response<SuccessfulAccountCreatedUser> response) {
-
-        if (response.code() == 201) { //If account doesnt already exist
+        System.out.println(response.toString());
+        if (response.code() == 200) { //If account doesnt already exist
             accountCreated.set(true);
+        } else if (response.code() == 400) {
+            accountCreated.set(false);
         }
 
     }

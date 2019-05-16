@@ -1,0 +1,32 @@
+package edu.saddleback.microservices.frontend.controller.backendmodels;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import edu.saddleback.microservices.frontend.interfaces.BackendService;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class BackendServiceObject {
+
+    private final String BASE_URL = "https://k8s.typokign.com/";
+    private BackendService service;
+
+    public BackendServiceObject() {
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        service = retrofit.create(BackendService.class);
+
+    }
+
+    public BackendService getBackendService() {
+        return service;
+    }
+
+
+}

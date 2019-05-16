@@ -43,15 +43,7 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
      */
     public void start() {
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        BackendService service = retrofit.create(BackendService.class);
-        Call<SuccessfulLoginToken> call = service.login(new LoginObject(username, password));
+        Call<SuccessfulLoginToken> call = AppController.getBackendService().login(new LoginObject(username, password));
         call.enqueue(this);
 
     }
@@ -68,7 +60,7 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
         System.out.println("RECIEVED LOGIN RESPONSE");
         System.out.println(response.toString());
 
-        if (response.code() == 201) {
+        if (response.code() == 200) {
 
             token = response.body().getToken();
             loggedIn.set(true);
