@@ -19,6 +19,7 @@ postgresql:
 redis:
   enabled: true
   fullnameOverride: "redis"
+  existingSecret: "redis"
 
 gateway:
   enabled: true
