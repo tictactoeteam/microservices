@@ -23,19 +23,36 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: "BG_TOKEN"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: "bitgo-token"
+            - name: "REDIS_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.redisSecret }}
+                  key: "redis-password"
+            - name: "RABBIT_USER"
+              value: "user"
+            - name: "RABBIT_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.rabbitSecret }}
+                  key: "rabbitmq-password"
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-#          TODO: RE-ENABLE THESE WITH PING ROUTE
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
+          livenessProbe:
+            httpGet:
+              path: /ping/
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /ping/
+              port: 8080
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
