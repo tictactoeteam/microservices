@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BackendServiceObject {
 
-    private final String BASE_URL = "https://k8s.typokign.com/";
+    private final String baseUrl = "https://k8s.typokign.com/";
     private BackendService service;
 
     public BackendServiceObject() {
@@ -17,7 +17,7 @@ public class BackendServiceObject {
                 .setLenient()
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         service = retrofit.create(BackendService.class);
