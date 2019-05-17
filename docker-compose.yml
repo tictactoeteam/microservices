@@ -6,6 +6,11 @@ services:
     ports:
       - "127.0.0.1:5672:5672"
       - "127.0.0.1:15672:15672"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 1s
+      timeout: 1s
+      retries: 15
   postgres:
     image: postgres:latest
     ports:
@@ -32,6 +37,7 @@ services:
       RABBIT_PASSWORD: "guest"
     volumes:
       - ./services/auth-service/cert.pem:/opt/cert.pem
+    restart: on-failure
     depends_on:
       - rabbitmq
       - postgres
@@ -47,6 +53,12 @@ services:
     build:
       context: ./services/deposit-service/
       dockerfile: Dockerfile
+    env_file:
+      - .env
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - redis-master
 
   order-service:
     image: registry.gitlab.com/typokign/microservices/order-service

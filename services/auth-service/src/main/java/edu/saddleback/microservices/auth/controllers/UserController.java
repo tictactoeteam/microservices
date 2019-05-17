@@ -59,6 +59,7 @@ public class UserController {
             e.printStackTrace();
         }
 
+        response.status(201);
         return res;
     }
 

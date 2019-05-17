@@ -36,6 +36,7 @@ public class SessionController {
             JsonObject res = new JsonObject();
             res.addProperty("token", TokenUtil.createToken(user.getId().toString()));
 
+            response.status(201);
             return res;
         } else {
             throw new ErrorResponse(400, "Invalid username or password", "BAD_LOGIN");

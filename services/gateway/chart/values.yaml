@@ -27,7 +27,6 @@ ingress:
     - host: k8s.typokign.com
       paths:
         - /
-
   tls:
     - secretName: gateway-tls
       hosts:
