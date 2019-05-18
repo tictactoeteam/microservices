@@ -8,10 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class dbManager {
-    private static final Migration[] migrations = {
-            new UserTable()
-    };
+public class DbManager {
+    private static final Migration[] migrations = { new UserTable() };
 
     private static String url = System.getenv("POSTGRES_URL");
     private static String user = System.getenv("POSTGRES_USER");
@@ -90,7 +88,7 @@ public class dbManager {
         }
     }
 
-    public JsonObject getOrder(String orderId){
+    public JsonObject getOrder(String orderId) {
         return null;
     }
 
