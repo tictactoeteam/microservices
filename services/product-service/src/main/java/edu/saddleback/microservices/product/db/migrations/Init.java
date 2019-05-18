@@ -12,16 +12,16 @@ public class Init implements Migration {
 
     @Override
     public void up(Connection connection) throws SQLException {
-        connection.prepareStatement("CREATE ROLE auth_perms").execute();
+        connection.prepareStatement("CREATE ROLE product_perms").execute();
         connection.prepareStatement("CREATE USER " + username + " WITH PASSWORD '" + password + "'").execute();
-        connection.prepareStatement("GRANT auth_perms TO " + username).execute();
-        connection.prepareStatement("CREATE DATABASE auth OWNER " + username).execute();
+        connection.prepareStatement("GRANT product_perms TO " + username).execute();
+        connection.prepareStatement("CREATE DATABASE product OWNER " + username).execute();
     }
 
     @Override
     public void down(Connection connection) throws SQLException {
-        connection.prepareStatement("DROP ROLE auth_perms").execute();
+        connection.prepareStatement("DROP ROLE product_perms").execute();
         connection.prepareStatement("DROP USER " + username).execute();
-        connection.prepareStatement("DROP DATABASE auth");
+        connection.prepareStatement("DROP DATABASE product");
     }
 }
