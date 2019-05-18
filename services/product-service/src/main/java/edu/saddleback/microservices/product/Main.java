@@ -17,10 +17,10 @@ public class Main {
             if (System.getenv("DO_EXIT") != null && System.getenv("DO_EXIT").equals("true")) {
                 System.exit(0);
             }
-
-            DbManager.migrate();
-            start();
         }
+
+        DbManager.migrate();
+        start();
     }
 
     public static void start() {
