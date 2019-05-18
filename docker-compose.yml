@@ -71,6 +71,19 @@ services:
     build:
       context: ./services/product-service
       dockerfile: Dockerfile
+    environment:
+      DO_INIT: "true"
+      POSTGRES_URL: "jdbc:postgresql://postgres:5432/product"
+      POSTGRES_USER: "product"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_SU_URL: "jdbc:postgresql://postgres:5432/"
+      POSTGRES_SUPERUSER: "postgres"
+      POSTGRES_SU_PASSWORD: "postgres"
+      RABBIT_USERNAME: "guest"
+      RABBIT_PASSWORD: "guest"
+    depends_on:
+      - postgres
+      - rabbitmq
 
   gateway:
     image: registry.gitlab.com/typokign/microservices/gateway

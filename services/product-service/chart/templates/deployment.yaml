@@ -19,25 +19,99 @@ spec:
         app.kubernetes.io/name: {{ include "product-service.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: "init-db"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12}}
+          env:
+            - name: "DO_INIT"
+              value: "true"
+            - name: "DO_EXIT"
+              value: "true"
+            - name: "POSTGRES_URL"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresUrl
+            - name: "POSTGRES_USER"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresUser
+            - name: "POSTGRES_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresPassword
+            - name: "POSTGRES_SU_URL"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresSuperuserUrl
+            - name: "POSTGRES_SUPERUSER"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresSuperuser
+            - name: "POSTGRES_SU_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgresSecret }}
+                  key: postgresql-password
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
-#          TODO: RE-ENABLE THESE WITH PING ROUTE
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
+          livenessProbe:
+            httpGet:
+              path: /ping/
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /ping/
+              port: 8080
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: "POSTGRES_URL"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresUrl
+            - name: "POSTGRES_USER"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresUser
+            - name: "POSTGRES_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecretName }}
+                  key: postgresPassword
+            - name: "RABBIT_USERNAME"
+              value: "user"
+            - name: "RABBIT_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: "rabbitmq"
+                  key: "rabbitmq-password"
+            volumeMounts:
+              - name: "jwt"
+                mountPath: "/opt/"
+                readOnly: true
+            volumes:
+              - name: "jwt"
+                secret:
+                  secretName: "jwt"
+                  items:
+                    - key: public
+                      path: pub.pem
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
