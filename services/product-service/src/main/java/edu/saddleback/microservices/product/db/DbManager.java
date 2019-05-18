@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class DbManager {
     private static final Migration[] migrations = {
-             new ProductTable()
+        new ProductTable()
     };
 
     private static String url = System.getenv("POSTGRES_URL");
@@ -32,8 +32,8 @@ public class DbManager {
             Connection connection = createConnection(suUrl, superuser, suPassword);
             new Init().up(connection);
 
-             Connection productConnection = createConnection(url, superuser, suPassword);
-             new PgCrypto().up(productConnection);
+            Connection productConnection = createConnection(url, superuser, suPassword);
+            new PgCrypto().up(productConnection);
 
         } catch (SQLException e) {
             System.out.println("Database product already exists");
