@@ -32,6 +32,8 @@ public class Main {
         Spark.before((req, res) -> {
             res.type("application/json");
         });
+
+        Spark.get("/ping/", (req, res) -> "Product service is online");
         //Example on how to post      Function to call           Json Conversion
         //15672 docker compose reference to check rabbitmq
         //Spark.post("/products/", ProductController::createProduct, gson::toJson);
