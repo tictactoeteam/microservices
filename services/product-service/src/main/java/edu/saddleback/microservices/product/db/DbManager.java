@@ -1,6 +1,8 @@
 package edu.saddleback.microservices.product.db;
 
 import edu.saddleback.microservices.product.db.migrations.Init;
+import edu.saddleback.microservices.product.db.migrations.PgCrypto;
+import edu.saddleback.microservices.product.db.migrations.ProductTable;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +12,7 @@ import java.util.Properties;
 
 public class DbManager {
     private static final Migration[] migrations = {
-            // new UserTable()
+             new ProductTable()
     };
 
     private static String url = System.getenv("POSTGRES_URL");
@@ -30,11 +32,11 @@ public class DbManager {
             Connection connection = createConnection(suUrl, superuser, suPassword);
             new Init().up(connection);
 
-            //Create ProductServices Connection
-            // Connection authConnection = createConnection(url, superuser, suPassword);
-            // new PgCrypto().up(authConnection);
+             Connection productConnection = createConnection(url, superuser, suPassword);
+             new PgCrypto().up(productConnection);
+
         } catch (SQLException e) {
-            System.out.println("Database auth already exists");
+            System.out.println("Database product already exists");
         }
     }
 
