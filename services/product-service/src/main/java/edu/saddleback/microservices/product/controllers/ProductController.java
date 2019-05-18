@@ -46,7 +46,7 @@ public class ProductController {
             res.addProperty("id", product.getProductId().toString());
             res.addProperty("name", product.getProductName());
             res.addProperty("price", product.getProductPrice().toString());
-            res.addProperty("quantity", product.getProductQuantity().toString());
+            res.addProperty("quantity", product.getProductQuantity());
 
             jsonProductList.add(res);
         }
@@ -68,7 +68,7 @@ public class ProductController {
         res.addProperty("id", someProduct.getProductId().toString());
         res.addProperty("name", someProduct.getProductName());
         res.addProperty("price", someProduct.getProductPrice().toString());
-        res.addProperty("quantity", someProduct.getProductQuantity().toString());
+        res.addProperty("quantity", someProduct.getProductQuantity());
 
         return res;
     }

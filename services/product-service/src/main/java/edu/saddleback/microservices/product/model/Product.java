@@ -1,14 +1,15 @@
 package edu.saddleback.microservices.product.model;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
     UUID id;
     String name;
-    String price;
-    String quantity;
+    BigDecimal price;
+    int quantity;
 
-    public Product(UUID id, String name, String price, String quantity) {
+    public Product(UUID id, String name, BigDecimal price, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -16,7 +17,7 @@ public class Product {
     }
 
     public Product() {
-        this(UUID.randomUUID(), "", "", "");
+        this(UUID.randomUUID(), "", BigDecimal.ZERO, 0);
     }
 
 
@@ -36,19 +37,19 @@ public class Product {
         return id;
     }
 
-    public void setProductQuantity(String productQuantity) {
+    public void setProductQuantity(int productQuantity) {
         this.quantity = productQuantity;
     }
 
-    public String getProductQuantity() {
+    public int getProductQuantity() {
         return quantity;
     }
 
-    public void setProductPrice(String price) {
+    public void setProductPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public String getProductPrice() {
+    public BigDecimal getProductPrice() {
         return price;
     }
 }
