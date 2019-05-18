@@ -9,9 +9,9 @@ public class ProductTable implements Migration {
 
     @Override
     public void up(Connection connection) throws SQLException {
-        connection.prepareStatement("CREATE TABLE products"
+        connection.prepareStatement("CREATE TABLE products "
                + "(id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(), "
-               + "name text UNIQUE NOT NULL,"
+               + "name text UNIQUE NOT NULL, "
                + "price numeric(12,2) NOT NULL, "
                + "quantity int NOT NULL DEFAULT 0 )").execute();
 
