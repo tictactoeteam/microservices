@@ -3,7 +3,7 @@ image: registry.gitlab.com/typokign/microservices/ci:latest
 variables:
   DOCKER_HOST: tcp://localhost:2375/
   DOCKER_DRIVER: overlay2
-  IMAGE_ARGS: "--set gateway.image.tag=${CI_COMMIT_SHORT_SHA} --set auth-service.image.tag=${CI_COMMIT_SHORT_SHA} --set cart-service.image.tag=${CI_COMMIT_SHORT_SHA} --set deposit-service.image.tag=${CI_COMMIT_SHORT_SHA} --set order-service.image.tag=${CI_COMMIT_SHORT_SHA} --set product-service.image.tag=${CI_COMMIT_SHORT_SHA}"
+  IMAGE_ARGS: '--set-string gateway.image.tag=${CI_COMMIT_SHORT_SHA} --set-string auth-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string cart-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string deposit-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string order-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string product-service.image.tag=${CI_COMMIT_SHORT_SHA}'
 
 stages:
   - lint
