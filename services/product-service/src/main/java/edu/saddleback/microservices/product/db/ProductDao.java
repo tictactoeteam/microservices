@@ -1,23 +1,20 @@
 package edu.saddleback.microservices.product.db;
 
 import edu.saddleback.microservices.product.model.Product;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class ProductDao {
 
     private static Connection connection = DbManager.getConnection();
-    ArrayList<Product> listProduct = new ArrayList<>();
 
     public static Product getProductByID(String id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
                 "SELECT * FROM products WHERE id=?"
         );
-        statement.setString(1, id.toString());
+        statement.setString(1, id);
 
         ResultSet rs = statement.executeQuery();
 
@@ -26,27 +23,24 @@ public class ProductDao {
 
     public ArrayList<Product> getAllProducts() throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
-                "SELECT * FROM products WHERE id=?"
+                "SELECT * FROM products"
         );
+
+        ArrayList<Product> products = new ArrayList<>();
 
         ResultSet rs = statement.executeQuery("SELECT * FROM products");
         while (rs.next()) {
-            Product product = new Product();
-            product.setProductID(UUID.fromString(rs.getString("id")));
-            product.setProductName(rs.getString("name"));
-            product.setProductPrice(rs.getString("price"));
-            product.setProductQuantity(rs.getString("quantity"));
-            listProduct.add(product);
+            products.add(extractProduct(rs));
         }
-        return listProduct;
+        return products;
     }
 
     private static Product extractProduct(ResultSet rs) throws SQLException {
         Product product = new Product();
         product.setProductID(UUID.fromString(rs.getString("id")));
         product.setProductName(rs.getString("name"));
-        product.setProductQuantity(rs.getString("quantity"));
-        product.setProductPrice(rs.getString("price"));
+        product.setProductQuantity(rs.getInt("quantity"));
+        product.setProductPrice(rs.getBigDecimal("price"));
 
         return product;
     }
