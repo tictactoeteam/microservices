@@ -1,6 +1,9 @@
-package edu.saddleback.microservices.order.shitidontunderstand;
+package edu.saddleback.microservices.order.db;
 
 import com.google.gson.JsonObject;
+import edu.saddleback.microservices.order.db.migrations.Init;
+import edu.saddleback.microservices.order.db.migrations.PgCrypto;
+import edu.saddleback.microservices.order.db.migrations.UserTable;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,8 +31,8 @@ public class DbManager {
             Connection connection = createConnection(suUrl, superuser, suPassword);
             new Init().up(connection);
 
-            Connection authConnection = createConnection(url, superuser, suPassword);
-            new PgCrypto().up(authConnection);
+            Connection orderConnection = createConnection(url, superuser, suPassword);
+            new PgCrypto().up(orderConnection);
         } catch (SQLException e) {
             System.out.println("Database order already exists");
         }
@@ -86,10 +89,6 @@ public class DbManager {
                 }
             }
         }
-    }
-
-    public JsonObject getOrder(String orderId) {
-        return null;
     }
 
     private static int lastMigration() {

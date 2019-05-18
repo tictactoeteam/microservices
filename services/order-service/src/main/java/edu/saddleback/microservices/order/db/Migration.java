@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.order.shitidontunderstand;
+package edu.saddleback.microservices.order.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;

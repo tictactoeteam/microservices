@@ -1,15 +1,27 @@
 package edu.saddleback.microservices.order;
 
 import com.google.gson.Gson;
-import edu.saddleback.microservices.order.db.DbHandler;
+import edu.saddleback.microservices.order.db.DbManager;
 import spark.Spark;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+        if (System.getenv("DO_INIT") != null && System.getenv("DO_INIT").equals("true")) {
+            DbManager.init();
 
+            if (System.getenv("DO_EXIT") != null && System.getenv("DO_EXIT").equals("true")) {
+                System.exit(0);
+            }
+        }
+
+        DbManager.migrate();
+
+        start();
+    }
+
+    public static void start() {
         Gson gson = new Gson();
         Spark.port(8080);
-        DbHandler db = new DbHandler();
 
         Spark.before((req, res) -> {
 
