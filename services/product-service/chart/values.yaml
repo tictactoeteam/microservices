@@ -9,6 +9,9 @@ image:
   tag: latest
   pullPolicy: Always
 
+existingSecretName: "product-service"
+postgresSecret: "postgres"
+
 nameOverride: ""
 fullnameOverride: "product-service"
 
