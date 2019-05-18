@@ -101,17 +101,17 @@ spec:
                 secretKeyRef:
                   name: "rabbitmq"
                   key: "rabbitmq-password"
-            volumeMounts:
-              - name: "jwt"
-                mountPath: "/opt/"
-                readOnly: true
-            volumes:
-              - name: "jwt"
-                secret:
-                  secretName: "jwt"
-                  items:
-                    - key: public
-                      path: pub.pem
+          volumeMounts:
+            - name: "jwt"
+              mountPath: "/opt/"
+              readOnly: true
+          volumes:
+            - name: "jwt"
+              secret:
+                secretName: "jwt"
+                items:
+                  - key: public
+                    path: pub.pem
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
