@@ -46,7 +46,6 @@ public class SceneCoordinator {
      */
     public void showAppScene() throws IOException {
 
-
         Platform.runLater(() -> {
             URL url = null;
             try {
