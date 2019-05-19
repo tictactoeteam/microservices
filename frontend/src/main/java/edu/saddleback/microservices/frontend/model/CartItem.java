@@ -33,6 +33,10 @@ public class CartItem {
         return quantity;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
     //Setters
     public void setProduct(Product p) {
         product = p;

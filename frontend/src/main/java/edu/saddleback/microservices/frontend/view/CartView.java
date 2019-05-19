@@ -4,6 +4,8 @@ import edu.saddleback.microservices.frontend.controller.AppController;
 
 import java.text.DecimalFormat;
 
+import edu.saddleback.microservices.frontend.controller.DeleteCartController;
+import edu.saddleback.microservices.frontend.controller.UpdateCartController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -66,12 +68,40 @@ public class CartView {
 
                 controller.getCart().getCartItem(selectedIndex).setQuantity(selectedItemQuantity);
                 //UPDATE SERVER CART
+                UpdateCartController cartConn = new UpdateCartController(controller.getToken(), controller.getCart());
+                cartConn.getCartReceivedBoolean().subscribe((onCartUpdated) -> {
+
+                    if (onCartUpdated) {
+
+                        System.out.println("REFRESHED CART RECEIVED");
+                        controller.setCart(cartConn.getCart());
+                        refreshPage();
+
+                    }
+
+                });
+
+                cartConn.start();
                 errorLabel.setVisible(false);
 
             } else if (selectedItemQuantity == 0) {
 
                 controller.getCart().remove(selectedIndex);
                 //UPDATE SERVER CART
+                UpdateCartController cartCon = new UpdateCartController(controller.getToken(), controller.getCart());
+                cartCon.getCartReceivedBoolean().subscribe((onCartUpdated) -> {
+
+                    if (onCartUpdated) {
+
+                        System.out.println("REFRESHED CART RECEIVED");
+                        controller.setCart(cartCon.getCart());
+                        refreshPage();
+
+                    }
+
+                });
+
+                cartCon.start();
                 errorLabel.setVisible(false);
 
             } else {
@@ -89,6 +119,21 @@ public class CartView {
 
         }
 
+
+    }
+
+    public void onDeleteCartClicked() {
+
+        if (controller.getCart().getSize() > 0) {
+
+            DeleteCartController deleteCon = new DeleteCartController(controller.getToken());
+            deleteCon.getCartDeletedObservableBoolean().subscribe((onCartDeleted) -> {
+                refreshPage();
+            });
+
+            deleteCon.start();
+
+        }
 
     }
 
@@ -112,7 +157,9 @@ public class CartView {
 
         //Populates Checkout values
         totalQuantityLabel.setText(Integer.toString(controller.getCart().getTotalQuantity()));
-        totalCostLabel.setText(decimalFormat.format(Double.toString(controller.getCart().getTotalCost())));
+        totalCostLabel.setText(decimalFormat.format(controller.getCart().getTotalCost()));
+
+        System.out.println("REFRESHED");
 
     }
 

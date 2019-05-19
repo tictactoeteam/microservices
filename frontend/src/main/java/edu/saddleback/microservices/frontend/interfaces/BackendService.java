@@ -38,12 +38,10 @@ public interface BackendService {
     @GET("/api/v1/cart")
     Call<List<HollowCartObject>> getCart(@Header("Authorization") String token);
 
-    //Above have controllers written
-
     @PUT("/api/v1/cart")
     Call<List<HollowCartObject>> updateCart(@Header("Authorization") String token, List<HollowCartObject> newCart);
 
     @DELETE("/api/v1/cart")
-    void deleteCart(@Header("Authorization") String token);
+    Call<Void> deleteCart(@Header("Authorization") String token);
 
 }

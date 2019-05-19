@@ -46,4 +46,8 @@ public class AppController {
         token = str;
     }
 
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
 }

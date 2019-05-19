@@ -54,7 +54,7 @@
             <Insets left="50.0" />
          </BorderPane.margin>
          <children>
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" spacing="5.0">
                <children>
                   <ListView fx:id="cartList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="209.0" />
                   <HBox spacing="10.0">
@@ -71,6 +71,11 @@
                         </Label>
                      </children>
                   </HBox>
+                  <Button mnemonicParsing="false" onMouseClicked="#onDeleteCartClicked" text="Delete Cart">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="330.0" prefWidth="202.0">
