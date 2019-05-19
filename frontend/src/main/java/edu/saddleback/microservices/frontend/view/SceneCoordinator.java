@@ -85,10 +85,20 @@ public class SceneCoordinator {
      *
      * @throws IOException
      */
-    public void showCartScene() throws IOException {
+    public void showCartScene() {
 
-        URL url = new File("src/main/res/layout/cart.fxml").toURL();
-        Parent layout = FXMLLoader.load(url);
+        URL url = null;
+        try {
+            url = new File("src/main/res/layout/cart.fxml").toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Parent layout = null;
+        try {
+            layout = FXMLLoader.load(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.window.setScene(new Scene(layout));
         App.setWindowSize(600, 600);
 

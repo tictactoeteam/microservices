@@ -22,6 +22,10 @@ public class Cart {
         return cartItems;
     }
 
+    public CartItem getCartItem(int index) {
+        return cartItems.get(index);
+    }
+
     public int getSize() {
         return cartItems.size();
     }

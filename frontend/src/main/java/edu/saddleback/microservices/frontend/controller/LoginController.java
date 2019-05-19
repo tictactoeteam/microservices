@@ -1,16 +1,11 @@
 package edu.saddleback.microservices.frontend.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import edu.saddleback.microservices.frontend.controller.backendmodels.LoginObject;
-import edu.saddleback.microservices.frontend.interfaces.BackendService;
-import edu.saddleback.microservices.frontend.model.SuccessfulLoginToken;
+import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulLoginToken;
 import edu.saddleback.microservices.frontend.observable.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Controls all login attempt logic, handles sending a request via Retrofit API and the responses as well.
@@ -60,7 +55,7 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
         System.out.println("RECIEVED LOGIN RESPONSE");
         System.out.println(response.toString());
 
-        if (response.code() == 200) {
+        if (response.code() == 201) {
 
             token = response.body().getToken();
             loggedIn.set(true);
@@ -78,8 +73,9 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
      */
     @Override
     public void onFailure(Call<SuccessfulLoginToken> call, Throwable t) {
-        System.out.println("RECIEVED LOGIN FAILURE");
-        t.printStackTrace();
+
+        System.out.println("RECEIVED LOGIN FAILURE");
+        System.out.println(t.toString());
         loggedIn.set(false);
 
     }

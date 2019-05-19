@@ -37,4 +37,9 @@ public class CartItem {
         return product.getPrice() * quantity;
     }
 
+    @Override
+    public String toString() {
+        return product + " Quantity: " + quantity;
+    }
+
 }

@@ -68,4 +68,9 @@ public class Product {
         price = d;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

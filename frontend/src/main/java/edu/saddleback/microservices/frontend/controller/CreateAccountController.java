@@ -1,16 +1,11 @@
 package edu.saddleback.microservices.frontend.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.interfaces.BackendService;
-import edu.saddleback.microservices.frontend.model.SuccessfulAccountCreatedUser;
+import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulAccountCreatedUser;
 import edu.saddleback.microservices.frontend.observable.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Controls all create account attempt logic, handles sending a request via Retrofit API and the responses as well.
@@ -59,7 +54,7 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
     @Override
     public void onResponse(Call<SuccessfulAccountCreatedUser> call, Response<SuccessfulAccountCreatedUser> response) {
         System.out.println(response.toString());
-        if (response.code() == 200) { //If account doesnt already exist
+        if (response.code() == 201) { //If account doesnt already exist
             accountCreated.set(true);
         } else if (response.code() == 400) {
             accountCreated.set(false);

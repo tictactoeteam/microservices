@@ -3,15 +3,10 @@ package edu.saddleback.microservices.frontend.view;
 import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.controller.CreateAccountController;
 import edu.saddleback.microservices.frontend.controller.LoginController;
-import edu.saddleback.microservices.frontend.interfaces.BackendService;
-import edu.saddleback.microservices.frontend.model.SuccessfulAccountCreatedUser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
 
 /**
  * Controls the login.fxml page, including registering or logging in a user.

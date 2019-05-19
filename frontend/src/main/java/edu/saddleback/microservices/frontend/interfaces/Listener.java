@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.frontend.observable;
+package edu.saddleback.microservices.frontend.interfaces;
 
 /**
  * Listener Interface

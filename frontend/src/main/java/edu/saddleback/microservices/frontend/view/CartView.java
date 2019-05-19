@@ -1,6 +1,8 @@
 package edu.saddleback.microservices.frontend.view;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -21,6 +23,20 @@ public class CartView {
 
         controller = App.getController();
         usernameLabel.setText(controller.getLoggedInUsername());
+        cartList.getItems().clear();
+        ObservableList<String> cartItems = FXCollections.observableArrayList();
+
+        if (controller.getCart().getCartItems().size() > 0) {
+
+            for (int i = 0; i < controller.getCart().getCartItems().size(); i++) {
+                cartItems.add(controller.getCart().getCartItem(i).toString());
+            }
+
+        } else {
+            cartItems.add("NO CART ITEMS YET GO BUY MORE ILLEGAL SHHHIIIIIIIIIIIT");
+        }
+
+        cartList.setItems(cartItems);
 
     }
 
