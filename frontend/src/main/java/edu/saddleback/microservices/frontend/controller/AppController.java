@@ -7,15 +7,15 @@ import edu.saddleback.microservices.frontend.model.Cart;
 public class AppController {
 
     private String loggedInUsername;
-    private Cart cart;
     private String token;
+    private Cart cart;
     private static BackendServiceObject backendServiceObject;
 
     public AppController() {
 
         loggedInUsername = "";
-        cart = new Cart();
         token = "";
+        cart = new Cart();
         backendServiceObject = new BackendServiceObject();
 
     }

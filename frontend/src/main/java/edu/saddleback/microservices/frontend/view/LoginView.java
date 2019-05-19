@@ -44,7 +44,7 @@ public class LoginView {
             //Login Attempt Handler
             loginAttempt.getLoggedInObservableBoolean().subscribe((onChanged) -> {
 
-                if (onChanged.equals(true)) {
+                if (onChanged) {
 
                     controller.setLoggedInUsername(usernameTextField.getText());
                     controller.setToken(loginAttempt.getToken());

@@ -28,6 +28,20 @@ public class CartItem {
 
     }
 
+    //Getters
+    public int getQuantity() {
+        return quantity;
+    }
+
+    //Setters
+    public void setProduct(Product p) {
+        product = p;
+    }
+
+    public void setQuantity(int q) {
+        quantity = q;
+    }
+
     /**
      * Returns the price of the cartItem, which includes the product and the amount to be purchased.
      *

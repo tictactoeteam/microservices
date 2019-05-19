@@ -5,6 +5,7 @@ package edu.saddleback.microservices.frontend.model;
  */
 public class Product {
 
+    private String productID;
     private String name;
     private String imagePath;
     private double price;
@@ -16,8 +17,9 @@ public class Product {
      * @param imagePath
      * @param price
      */
-    public Product(String name, String imagePath, double price) {
+    public Product(String productID, String name, String imagePath, double price) {
 
+        this.productID = productID;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
@@ -31,7 +33,7 @@ public class Product {
      */
     public Product(Product tmpProduct) {
 
-        this(tmpProduct.getName(), tmpProduct.getImagePath(), tmpProduct.getPrice());
+        this(tmpProduct.productID, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price);
 
     }
 
@@ -39,10 +41,14 @@ public class Product {
      * Default Constructor
      */
     public Product() {
-        this("", "", 0.00);
+        this("", "", "", 0.00);
     }
 
     //Getters
+    public String getProductID() {
+        return productID;
+    }
+
     public String getName() {
         return name;
     }
@@ -53,19 +59,6 @@ public class Product {
 
     public double getPrice() {
         return price;
-    }
-
-    //Setters
-    public void setName(String str) {
-        name = str;
-    }
-
-    public void setImagePath(String str) {
-        imagePath = str;
-    }
-
-    public void setPrice(double d) {
-        price = d;
     }
 
     @Override

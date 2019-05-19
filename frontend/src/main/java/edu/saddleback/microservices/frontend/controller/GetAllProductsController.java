@@ -12,13 +12,13 @@ import retrofit2.Response;
 public class GetAllProductsController implements Callback<List<Product>> {
 
     private List<Product> products;
-    private Observable<Boolean> productsRecieved;
+    private Observable<Boolean> productsReceived;
 
     public GetAllProductsController() {
 
 
-        productsRecieved = new Observable<>();
-        productsRecieved.set(false);
+        productsReceived = new Observable<>();
+        productsReceived.set(false);
 
     }
 
@@ -34,10 +34,10 @@ public class GetAllProductsController implements Callback<List<Product>> {
 
         System.out.println("RECEIVED getProducts RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 200) {
+        if (response.code() == 201) {
 
             products = response.body();
-            productsRecieved.set(true);
+            productsReceived.set(true);
 
         }
 
@@ -47,13 +47,13 @@ public class GetAllProductsController implements Callback<List<Product>> {
     public void onFailure(Call<List<Product>> call, Throwable t) {
 
         System.out.println("RECEIVED getProducts FAILURE");
-        productsRecieved.set(false);
+        productsReceived.set(false);
 
     }
 
     //Getter
     public Observable<Boolean> getProductsRecievedBoolean() {
-        return productsRecieved;
+        return productsReceived;
     }
 
     public List<Product> getProducts() {

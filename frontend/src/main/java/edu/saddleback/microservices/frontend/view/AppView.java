@@ -56,7 +56,7 @@ public class AppView {
         productsController.getProductsRecievedBoolean().subscribe((isProductsReceived) -> {
 
             if (isProductsReceived.equals(true)) { //Success
-                System.out.println("HERE");
+
                 //Generates the product boxes
                 List<Product> products = productsController.getProducts();
                 ArrayList<ProductBox> productBoxes = new ArrayList<>();
