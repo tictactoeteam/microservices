@@ -4,11 +4,12 @@
 /frontend/ @kdcptkai31
 
 # Services
-/services/gateway/ @dacruz21
 /services/auth-service/ @dacruz21
-/services/product-service/ @datowlcs
+/services/cart-service/ @dacruz21
 /services/deposit-service/ @dacruz21
+/services/gateway/ @dacruz21
 /services/order-service/ @gruszkat98
+/services/product-service/ @datowlcs
 
 # Helm Charts
 /chart/ @dacruz21

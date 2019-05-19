@@ -27,10 +27,10 @@ public class TokenUtil {
                 .withSubject(sub)
                 .withIssuedAt(issuedAt)
                 .withExpiresAt(expiresAt)
-                .sign(Algorithm.ECDSA256(null, (ECPrivateKey) readKey()));
+                .sign(Algorithm.ECDSA256(null, readKey()));
     }
 
-    private static PrivateKey readKey() {
+    private static ECPrivateKey readKey() {
         try {
             PemReader reader = new PemReader(new FileReader(CERT_PATH));
             PemObject object = reader.readPemObject();
@@ -39,7 +39,7 @@ public class TokenUtil {
             KeyFactory kf = KeyFactory.getInstance("EC");
             EncodedKeySpec spec = new PKCS8EncodedKeySpec(content);
 
-            return kf.generatePrivate(spec);
+            return (ECPrivateKey) kf.generatePrivate(spec);
         } catch (IOException | GeneralSecurityException e) {
             e.printStackTrace();
         }
