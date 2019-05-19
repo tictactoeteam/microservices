@@ -1,11 +1,11 @@
 package edu.saddleback.microservices.frontend.view;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.DeleteCartController;
+import edu.saddleback.microservices.frontend.controller.UpdateCartController;
 
 import java.text.DecimalFormat;
 
-import edu.saddleback.microservices.frontend.controller.DeleteCartController;
-import edu.saddleback.microservices.frontend.controller.UpdateCartController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
