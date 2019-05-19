@@ -7,3 +7,7 @@ redis:
   cluster:
     enabled: true
     slaveCount: 3
+
+gateway:
+  ingress:
+    enabled: true
