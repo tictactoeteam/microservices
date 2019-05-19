@@ -58,8 +58,9 @@ public class Cart {
     public int getTotalQuantity() {
 
         int sum = 0;
-        for( int i = 0; i < cartItems.size(); i++)
+        for (int i = 0; i < cartItems.size(); i++) {
             sum += cartItems.get(i).getQuantity();
+        }
 
         return sum;
 

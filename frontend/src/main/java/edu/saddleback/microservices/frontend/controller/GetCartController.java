@@ -4,12 +4,13 @@ import edu.saddleback.microservices.frontend.controller.backendmodels.HollowCart
 import edu.saddleback.microservices.frontend.model.Cart;
 import edu.saddleback.microservices.frontend.model.CartItem;
 import edu.saddleback.microservices.frontend.observable.Observable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GetCartController implements Callback<List<HollowCartObject>> {
 

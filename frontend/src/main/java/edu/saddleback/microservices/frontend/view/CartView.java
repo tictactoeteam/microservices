@@ -4,13 +4,11 @@ import edu.saddleback.microservices.frontend.controller.AppController;
 
 import java.text.DecimalFormat;
 
-import edu.saddleback.microservices.frontend.controller.GetCartController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
 
 /**
  * Controls the cart.fxml page, including showing your cart items with a checkout option.
@@ -67,13 +65,13 @@ public class CartView {
             if (selectedItemQuantity > 1) {
 
                 controller.getCart().getCartItem(selectedIndex).setQuantity(selectedItemQuantity);
-                //UPDATE CART
+                //UPDATE SERVER CART
                 errorLabel.setVisible(false);
 
             } else if (selectedItemQuantity == 0) {
 
                 controller.getCart().remove(selectedIndex);
-                //UPDATE CART
+                //UPDATE SERVER CART
                 errorLabel.setVisible(false);
 
             } else {
