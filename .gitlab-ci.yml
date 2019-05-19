@@ -3,7 +3,7 @@ image: registry.gitlab.com/typokign/microservices/ci:latest
 variables:
   DOCKER_HOST: tcp://localhost:2375/
   DOCKER_DRIVER: overlay2
-  IMAGE_ARGS: "--set gateway.image.tag=${CI_COMMIT_SHORT_SHA} --set auth-service.image.tag=${CI_COMMIT_SHORT_SHA} --set cart-service.image.tag=${CI_COMMIT_SHORT_SHA} --set deposit-service.image.tag=${CI_COMMIT_SHORT_SHA} --set order-service.image.tag=${CI_COMMIT_SHORT_SHA} --set product-service.image.tag=${CI_COMMIT_SHORT_SHA}"
+  IMAGE_ARGS: '--set-string gateway.image.tag=${CI_COMMIT_SHORT_SHA} --set-string auth-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string cart-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string deposit-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string order-service.image.tag=${CI_COMMIT_SHORT_SHA} --set-string product-service.image.tag=${CI_COMMIT_SHORT_SHA}'
 
 stages:
   - lint
@@ -104,7 +104,7 @@ deploy:
     - helm delete --purge ${CI_COMMIT_REF_SLUG} --kubeconfig /etc/deploy/config || true
     - kubectl --kubeconfig /etc/deploy/config create namespace ${CI_COMMIT_REF_SLUG} || true
     - echo "$SECRETS" | kubectl --kubeconfig /etc/deploy/config -n ${CI_COMMIT_REF_SLUG} apply -f -
-    - helm upgrade --install --wait --namespace ${CI_COMMIT_REF_SLUG} ${CI_COMMIT_REF_SLUG} ./chart -f ./chart/values.yaml -f ./chart/values_pr.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
+    - helm upgrade --install --wait --debug --namespace ${CI_COMMIT_REF_SLUG} ${CI_COMMIT_REF_SLUG} ./chart -f ./chart/values.yaml -f ./chart/values_pr.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
   except:
     - master
 
@@ -115,6 +115,6 @@ deploy master:
     - *init_helm
   script:
     - echo "$SECRETS" | kubectl --kubeconfig /etc/deploy/config -n default apply -f -
-    - helm upgrade --install --wait --namespace default master ./chart -f ./chart/values.yaml -f ./chart/values_prod.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
+    - helm upgrade --install --wait --debug --namespace default master ./chart -f ./chart/values.yaml -f ./chart/values_prod.yaml --kubeconfig /etc/deploy/config ${IMAGE_ARGS}
   only:
     - master
