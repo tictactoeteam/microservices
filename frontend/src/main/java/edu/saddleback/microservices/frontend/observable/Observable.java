@@ -1,8 +1,8 @@
 package edu.saddleback.microservices.frontend.observable;
 
-import edu.saddleback.microservices.frontend.interfaces.Listener;
-
 import java.util.ArrayList;
+
+import edu.saddleback.microservices.frontend.interfaces.Listener;
 
 /**
  * Allows for making Observable variables active listeners with a subscribe method.

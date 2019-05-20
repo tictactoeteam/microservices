@@ -2,9 +2,10 @@ package edu.saddleback.microservices.frontend.controller.backendmodels;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import edu.saddleback.microservices.frontend.interfaces.BackendService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import edu.saddleback.microservices.frontend.interfaces.BackendService;
 
 public class BackendServiceObject {
 

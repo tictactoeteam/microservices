@@ -1,17 +1,17 @@
 package edu.saddleback.microservices.auth.util;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
-import java.security.PrivateKey;
 import java.security.interfaces.ECPrivateKey;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemReader;
 
@@ -27,10 +27,10 @@ public class TokenUtil {
                 .withSubject(sub)
                 .withIssuedAt(issuedAt)
                 .withExpiresAt(expiresAt)
-                .sign(Algorithm.ECDSA256(null, (ECPrivateKey) readKey()));
+                .sign(Algorithm.ECDSA256(null, readKey()));
     }
 
-    private static PrivateKey readKey() {
+    private static ECPrivateKey readKey() {
         try {
             PemReader reader = new PemReader(new FileReader(CERT_PATH));
             PemObject object = reader.readPemObject();
@@ -39,7 +39,7 @@ public class TokenUtil {
             KeyFactory kf = KeyFactory.getInstance("EC");
             EncodedKeySpec spec = new PKCS8EncodedKeySpec(content);
 
-            return kf.generatePrivate(spec);
+            return (ECPrivateKey) kf.generatePrivate(spec);
         } catch (IOException | GeneralSecurityException e) {
             e.printStackTrace();
         }

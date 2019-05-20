@@ -1,12 +1,13 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.CreateAccountController;
-import edu.saddleback.microservices.frontend.controller.LoginController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.CreateAccountController;
+import edu.saddleback.microservices.frontend.controller.LoginController;
 
 /**
  * Controls the login.fxml page, including registering or logging in a user.
@@ -35,8 +36,7 @@ public class LoginView {
      */
     public void onLoginClicked() {
 
-        if ((!usernameTextField.getText().equals("") || !emailTextField.getText().equals(""))
-                && !passwordTextField.getText().equals("")) {
+        if ((!usernameTextField.getText().equals("") || !emailTextField.getText().equals("")) && !passwordTextField.getText().equals("")) {
             //ATTEMPT TO LOGIN
             LoginController loginAttempt = new LoginController(usernameTextField.getText(),
                     passwordTextField.getText());
@@ -80,8 +80,7 @@ public class LoginView {
      */
     public void onCreateAccountClicked() {
 
-        if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("")
-               && !emailTextField.getText().equals("")) {
+        if (!usernameTextField.getText().equals("") && !passwordTextField.getText().equals("") && !emailTextField.getText().equals("")) {
 
             CreateAccountController createAccountAttempt = new CreateAccountController(usernameTextField.getText(),
                     emailTextField.getText(), passwordTextField.getText());

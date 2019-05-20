@@ -1,9 +1,5 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.UpdateCartController;
-import edu.saddleback.microservices.frontend.model.CartItem;
-import edu.saddleback.microservices.frontend.model.Product;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,6 +10,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.UpdateCartController;
+import edu.saddleback.microservices.frontend.model.CartItem;
+import edu.saddleback.microservices.frontend.model.Product;
 
 /**
  * Represents a FX box that holds the data about a product, including its name, price, and and image of it.

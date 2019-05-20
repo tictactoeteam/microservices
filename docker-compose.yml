@@ -36,7 +36,7 @@ services:
       RABBIT_USERNAME: "guest"
       RABBIT_PASSWORD: "guest"
     volumes:
-      - ./services/auth-service/cert.pem:/opt/cert.pem
+      - "./services/auth-service/cert.pem:/opt/cert.pem"
     restart: on-failure
     depends_on:
       - rabbitmq
@@ -47,6 +47,12 @@ services:
     build:
       context: ./services/cart-service/
       dockerfile: Dockerfile
+    environment:
+      REDIS_PASSWORD: ""
+    volumes:
+      - "./services/auth-service/pub.pem:/opt/pub.pem"
+    depends_on:
+      - redis-master
 
   deposit-service:
     image: registry.gitlab.com/typokign/microservices/deposit-service

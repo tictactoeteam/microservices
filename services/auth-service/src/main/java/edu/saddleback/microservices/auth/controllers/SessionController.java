@@ -1,16 +1,18 @@
 package edu.saddleback.microservices.auth.controllers;
 
+import java.sql.SQLException;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import spark.Request;
+import spark.Response;
+
 import edu.saddleback.microservices.auth.db.UserDao;
 import edu.saddleback.microservices.auth.models.User;
 import edu.saddleback.microservices.auth.util.ErrorResponse;
 import edu.saddleback.microservices.auth.util.InvalidRequest;
 import edu.saddleback.microservices.auth.util.TokenUtil;
-import java.sql.SQLException;
-import spark.Request;
-import spark.Response;
 
 public class SessionController {
     public static JsonObject createSession(Request request, Response response) throws ErrorResponse {

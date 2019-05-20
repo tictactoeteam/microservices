@@ -1,6 +1,5 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import edu.saddleback.microservices.frontend.controller.AppController;
 
 public class SceneCoordinator {
 

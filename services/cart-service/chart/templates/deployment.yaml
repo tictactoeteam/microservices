@@ -25,19 +25,35 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
-#          TODO: RE-ENABLE THESE WITH PING ROUTE
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: http
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: http
+          livenessProbe:
+            httpGet:
+              path: /ping/
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /ping/
+              port: 8080
+          env:
+            - name: "REDIS_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.redisSecret }}
+                  key: "redis-password"
+          volumeMounts:
+            - name: "jwt"
+              mountPath: "/opt/"
+              readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: "jwt"
+          secret:
+            secretName: "jwt"
+            items:
+              - key: public
+                path: pub.pem
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -9,7 +9,7 @@ const bitgo = new bitgojs.BitGo({ env: config.env, accessToken: config.token });
 const wallets: { [coin: string]: any } = {};
 
 export default async function refreshAddresses(coin: string) {
-  const len = await redis.scard(`receive-addresses-${coin}`);
+  const len = await redis.scard(`receive-addresses:${coin}`);
   if (len < config.addresses.min) {
     const addresses: string[] = [];
 
@@ -23,6 +23,6 @@ export default async function refreshAddresses(coin: string) {
 
       addresses.push(address.address);
     }
-    await redis.sadd(`receive-addresses-${coin}`, ...addresses);
+    await redis.sadd(`receive-addresses:${coin}`, ...addresses);
   }
 }
