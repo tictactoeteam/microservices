@@ -1,5 +1,6 @@
 package edu.saddleback.microservices.order.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import spark.Request;
 import spark.Response;
+
 
 import edu.saddleback.microservices.order.db.OrderDao;
 import edu.saddleback.microservices.order.util.CartObject;
@@ -45,6 +47,13 @@ public class RouteController {
         }
 
         result.add("cart", array);
+
+        try {
+            RabbitController.getChannel().basicPublish("order", "placed", null,
+                    result.toString().getBytes());
+        } catch (IOException ex) {
+            System.out.println("Something wen bad trying to publish rabbit message");
+        }
 
         response.status(201);
         return result;

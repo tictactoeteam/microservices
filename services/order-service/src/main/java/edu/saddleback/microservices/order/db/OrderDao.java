@@ -26,16 +26,6 @@ public class OrderDao {
     }
 
 
-    public Order getOrder(String orderId) {
-
-        return null;
-    }
-
-    public List<Order> getAllOrders(String customerId) {
-
-        return null;
-    }
-
     public Order addOrder(String customerId, List<CartObject> cart, String coin) {
         Connection connection = DbManager.getConnection();
 
