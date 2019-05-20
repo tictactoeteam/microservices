@@ -11,11 +11,8 @@ import spark.Request;
 import spark.Response;
 
 import edu.saddleback.microservices.order.db.OrderDao;
-import edu.saddleback.microservices.order.util.Order;
-
-
 import edu.saddleback.microservices.order.util.CartObject;
-
+import edu.saddleback.microservices.order.util.Order;
 
 
 public class RouteController {
