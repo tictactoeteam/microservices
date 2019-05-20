@@ -105,13 +105,13 @@ public class CheckoutView {
         switch (abbreviation) {
 
             case "tbtc":
-                return "Bitcoin";
+                return "Bitcoin (BTC)";
             case "tltc":
-                return "Litecoin";
+                return "Litecoin (LTC)";
             case "tzec":
-                return "Zcash";
+                return "Zcash (ZEC)";
             default:
-                return "Lumens";
+                return "Lumens (XLM)";
 
         }
 

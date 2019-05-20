@@ -42,7 +42,7 @@ public class CartView {
         decimalFormat = new DecimalFormat("#.##");
         usernameLabel.setText(controller.getLoggedInUsername());
         refreshPage();
-        cryptoChoiceBox.getItems().addAll("Bitcoin(BTC)", "Litecoin(LTC)", "Zcash(ZEC)", "Lumens(XLM)");
+        cryptoChoiceBox.getItems().addAll("Bitcoin (BTC)", "Litecoin (LTC)", "Zcash (ZEC)", "Lumens (XLM)");
 
     }
 
@@ -193,11 +193,11 @@ public class CartView {
 
         switch (word) {
 
-            case "Bitcoin":
+            case "Bitcoin (BTC)":
                 return "tbtc";
-            case "Litecoin":
+            case "Litecoin (LTC)":
                 return "tltc";
-            case "Zcash":
+            case "Zcash (ZEC)":
                 return "tzec";
             default:
                 return "txlm";
