@@ -32,7 +32,7 @@ public class DeleteCartController implements Callback<Void> {
 
         System.out.println("RECEIVED deleteCart RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 201) {
+        if (response.code() == 204) {
             cartDeleted.set(true);
         }
 

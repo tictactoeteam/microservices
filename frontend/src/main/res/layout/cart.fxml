@@ -109,7 +109,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ChoiceBox fx:id="cryptoChoiceBox" prefHeight="25.0" prefWidth="53.0">
+                  <ChoiceBox fx:id="cryptoChoiceBox" prefHeight="25.0" prefWidth="69.0">
                      <VBox.margin>
                         <Insets bottom="-10.0" />
                      </VBox.margin></ChoiceBox>

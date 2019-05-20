@@ -42,7 +42,7 @@ public class CartView {
         decimalFormat = new DecimalFormat("#.##");
         usernameLabel.setText(controller.getLoggedInUsername());
         refreshPage();
-        cryptoChoiceBox.getItems().addAll("tbtc", "tltc", "tzec", "txlm");
+        cryptoChoiceBox.getItems().addAll("Bitcoin", "Litecoin", "Zcash", "Lumens");
 
     }
 
@@ -133,6 +133,7 @@ public class CartView {
 
             DeleteCartController deleteCon = new DeleteCartController(controller.getToken());
             deleteCon.getCartDeletedObservableBoolean().subscribe((onCartDeleted) -> {
+                controller.deleteCart();
                 refreshPage();
             });
 
@@ -145,7 +146,9 @@ public class CartView {
     public void onCheckoutClicked() {
 
         if (controller.getCart().getTotalCost() > 0 && cryptoChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
-            controller.setSelectedCoin(cryptoChoiceBox.getSelectionModel().getSelectedItem().toString());
+            controller.setSelectedCoin(returnCryptoAbbreviation(cryptoChoiceBox
+                    .getSelectionModel().getSelectedItem().toString()));
+
             App.getCoordinator().showCheckoutScene();
         } else if (controller.getCart().getTotalCost() == 0) {
             checkoutErrorText.setText("Go buy something m8");
@@ -183,6 +186,23 @@ public class CartView {
         checkoutErrorText.setVisible(false);
 
         System.out.println("REFRESHED");
+
+    }
+
+    private String returnCryptoAbbreviation(String word) {
+
+        switch (word) {
+
+            case "Bitcoin":
+                return "tbtc";
+            case "Litecoin":
+                return "tltc";
+            case "Zcash":
+                return "tzec";
+            default:
+                return "txlm";
+
+        }
 
     }
 

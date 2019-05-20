@@ -59,4 +59,8 @@ public class AppController {
         this.selectedCoin = coin;
     }
 
+    public void deleteCart() {
+        cart = new Cart();
+    }
+
 }

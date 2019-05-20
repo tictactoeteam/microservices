@@ -49,7 +49,7 @@ public class CheckoutView {
             OrderTransaction orderMade = makeOrderCon.getOrder();
             orderNumberLabel.setText(orderMade.id);
             statusLabel.setText(orderMade.status);
-            cryptoTypeLabel.setText(orderMade.coin);
+            cryptoTypeLabel.setText(returnCryptoWord(orderMade.coin));
             priceLabel.setText(orderMade.price + " " + orderMade.coin.replaceFirst("t", ""));
             qrImageView.setImage(getQrCodeImage(orderMade.cryptoAddress, 200, 200));
 
@@ -97,6 +97,23 @@ public class CheckoutView {
         ByteArrayInputStream in = new ByteArrayInputStream(pngOutputStream.toByteArray());
 
         return new Image(in);
+
+    }
+
+    private String returnCryptoWord(String abbreviation) {
+
+        switch (abbreviation) {
+
+            case "tbtc":
+                return "Bitcoin";
+            case "tltc":
+                return "Litecoin";
+            case "tzec":
+                return "Zcash";
+            default:
+                return "Lumens";
+
+        }
 
     }
 

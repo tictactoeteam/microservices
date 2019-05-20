@@ -47,7 +47,7 @@ public class UpdateCartController implements Callback<List<HollowCartObj>> {
 
         System.out.println("RECEIVED updateCart RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 201) {
+        if (response.code() == 200) {
 
             List<HollowCartObj> hollowCart = response.body();
             ArrayList<CartItem> fullCart = new ArrayList<>();

@@ -36,7 +36,7 @@ public class GetAllUserOrdersController implements Callback<List<OrderTransactio
 
         System.out.println("RECEIVED getAllUserOrders RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 201) {
+        if (response.code() == 200) {
 
             orders = response.body();
             ordersReceived.set(true);
