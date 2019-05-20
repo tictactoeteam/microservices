@@ -1,5 +1,9 @@
 package edu.saddleback.microservices.frontend.view;
 
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.UpdateCartController;
+import edu.saddleback.microservices.frontend.model.CartItem;
+import edu.saddleback.microservices.frontend.model.Product;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

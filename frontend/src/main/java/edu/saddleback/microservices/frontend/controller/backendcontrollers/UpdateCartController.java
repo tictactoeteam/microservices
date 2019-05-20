@@ -1,4 +1,10 @@
-package edu.saddleback.microservices.frontend.controller;
+package edu.saddleback.microservices.frontend.controller.backendcontrollers;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObject;
+import edu.saddleback.microservices.frontend.model.Cart;
+import edu.saddleback.microservices.frontend.model.CartItem;
+import edu.saddleback.microservices.frontend.observable.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,28 +13,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.HollowCartObject;
-import edu.saddleback.microservices.frontend.model.Cart;
-import edu.saddleback.microservices.frontend.model.CartItem;
-import edu.saddleback.microservices.frontend.observable.Observable;
-
-public class GetCartController implements Callback<List<HollowCartObject>> {
+public class UpdateCartController implements Callback<List<HollowCartObject>> {
 
     private String token;
     private List<CartItem> cartItems;
     private Observable<Boolean> cartReceived;
+    private List<HollowCartObject> newCart;
 
-    public GetCartController(String token) {
+    public UpdateCartController(String token, Cart cart) {
 
         cartReceived = new Observable<>();
         cartReceived.set(false);
         this.token = token;
 
+        for (int i = 0; i < cart.getSize(); i++) {
+
+            newCart.add(new HollowCartObject(cart.getCartItem(i).getProduct().getProductID(),
+                    cart.getCartItem(i).getQuantity()));
+
+        }
+
     }
 
     public void start() {
 
-        Call<List<HollowCartObject>> call = AppController.getBackendService().getCart(token);
+        Call<List<HollowCartObject>> call = AppController.getBackendService().updateCart(token, newCart);
         call.enqueue(this);
 
     }
@@ -36,7 +45,7 @@ public class GetCartController implements Callback<List<HollowCartObject>> {
     @Override
     public void onResponse(Call<List<HollowCartObject>> call, Response<List<HollowCartObject>> response) {
 
-        System.out.println("RECEIVED getProducts RESPONSE");
+        System.out.println("RECEIVED updateCart RESPONSE");
         System.out.println(response.toString());
         if (response.code() == 201) {
 
@@ -74,7 +83,7 @@ public class GetCartController implements Callback<List<HollowCartObject>> {
     @Override
     public void onFailure(Call<List<HollowCartObject>> call, Throwable t) {
 
-        System.out.println("RECEIVED getCart FAILURE");
+        System.out.println("RECEIVED updateCart FAILURE");
         cartReceived.set(false);
 
     }
@@ -82,10 +91,6 @@ public class GetCartController implements Callback<List<HollowCartObject>> {
     //Getters
     public Observable<Boolean> getCartReceivedBoolean() {
         return cartReceived;
-    }
-
-    public List<CartItem> getCartItems() {
-        return cartItems;
     }
 
     public Cart getCart() {
