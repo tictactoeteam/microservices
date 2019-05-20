@@ -1,9 +1,9 @@
 package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObject;
 import edu.saddleback.microservices.frontend.model.Cart;
 import edu.saddleback.microservices.frontend.model.CartItem;
+import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetCartController implements Callback<List<HollowCartObject>> {
+public class GetCartController implements Callback<List<HollowCartObj>> {
 
     private String token;
     private List<CartItem> cartItems;
@@ -29,19 +29,19 @@ public class GetCartController implements Callback<List<HollowCartObject>> {
 
     public void start() {
 
-        Call<List<HollowCartObject>> call = AppController.getBackendService().getCart(token);
+        Call<List<HollowCartObj>> call = AppController.getBackendService().getCart(token);
         call.enqueue(this);
 
     }
 
     @Override
-    public void onResponse(Call<List<HollowCartObject>> call, Response<List<HollowCartObject>> response) {
+    public void onResponse(Call<List<HollowCartObj>> call, Response<List<HollowCartObj>> response) {
 
-        System.out.println("RECEIVED getProducts RESPONSE");
+        System.out.println("RECEIVED getCart RESPONSE");
         System.out.println(response.toString());
         if (response.code() == 201) {
 
-            List<HollowCartObject> hollowCart = response.body();
+            List<HollowCartObj> hollowCart = response.body();
             ArrayList<CartItem> fullCart = new ArrayList<>();
             ArrayList<GetProductController> controllerList = new ArrayList<>();
             for (int i = 0; i < hollowCart.size(); i++) {
@@ -73,7 +73,7 @@ public class GetCartController implements Callback<List<HollowCartObject>> {
     }
 
     @Override
-    public void onFailure(Call<List<HollowCartObject>> call, Throwable t) {
+    public void onFailure(Call<List<HollowCartObj>> call, Throwable t) {
 
         System.out.println("RECEIVED getCart FAILURE");
         cartReceived.set(false);

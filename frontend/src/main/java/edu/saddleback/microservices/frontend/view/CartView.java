@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -34,6 +35,10 @@ public class CartView {
     private Label totalCostLabel;
     @FXML
     private Label errorLabel;
+    @FXML
+    private Label checkoutErrorText;
+    @FXML
+    private ChoiceBox cryptoChoiceBox;
 
     public void initialize() {
 
@@ -41,7 +46,7 @@ public class CartView {
         decimalFormat = new DecimalFormat("#.##");
         usernameLabel.setText(controller.getLoggedInUsername());
         refreshPage();
-        errorLabel.setVisible(false);
+        cryptoChoiceBox.getItems().addAll("tbtc", "tltc", "tzec", "txlm");
 
     }
 
@@ -141,6 +146,21 @@ public class CartView {
 
     }
 
+    public void onCheckoutClicked() {
+
+        if (controller.getCart().getTotalCost() > 0 && cryptoChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
+            controller.setSelectedCoin(cryptoChoiceBox.getSelectionModel().getSelectedItem().toString());
+            App.getCoordinator().showCheckoutScene();
+        } else if (controller.getCart().getTotalCost() == 0) {
+            checkoutErrorText.setText("Go buy something m8");
+            checkoutErrorText.setVisible(true);
+        } else if (cryptoChoiceBox.getSelectionModel().getSelectedIndex() == 0) {
+            checkoutErrorText.setText("select a crypto currency");
+            checkoutErrorText.setVisible(true);
+        }
+
+    }
+
     private void refreshPage() {
 
         //Populates the table with cart items
@@ -162,6 +182,9 @@ public class CartView {
         //Populates Checkout values
         totalQuantityLabel.setText(Integer.toString(controller.getCart().getTotalQuantity()));
         totalCostLabel.setText(decimalFormat.format(controller.getCart().getTotalCost()));
+
+        errorLabel.setVisible(false);
+        checkoutErrorText.setVisible(false);
 
         System.out.println("REFRESHED");
 

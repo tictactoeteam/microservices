@@ -29,7 +29,7 @@ public class DeleteCartController implements Callback<Void> {
     @Override
     public void onResponse(Call<Void> call, Response<Void> response) {
 
-        System.out.println("RECEIVED getProducts RESPONSE");
+        System.out.println("RECEIVED deleteCart RESPONSE");
         System.out.println(response.toString());
         if (response.code() == 201) {
             cartDeleted.set(true);
@@ -40,7 +40,7 @@ public class DeleteCartController implements Callback<Void> {
     @Override
     public void onFailure(Call<Void> call, Throwable t) {
 
-        System.out.println("RECEIVED getCart FAILURE");
+        System.out.println("RECEIVED deleteCart FAILURE");
         cartDeleted.set(false);
 
     }

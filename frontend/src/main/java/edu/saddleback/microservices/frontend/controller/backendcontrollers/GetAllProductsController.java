@@ -33,7 +33,7 @@ public class GetAllProductsController implements Callback<List<Product>> {
     @Override
     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
-        System.out.println("RECEIVED getProducts RESPONSE");
+        System.out.println("RECEIVED getAllProducts RESPONSE");
         System.out.println(response.toString());
         if (response.code() == 201) {
 
@@ -47,7 +47,7 @@ public class GetAllProductsController implements Callback<List<Product>> {
     @Override
     public void onFailure(Call<List<Product>> call, Throwable t) {
 
-        System.out.println("RECEIVED getProducts FAILURE");
+        System.out.println("RECEIVED getAllProducts FAILURE");
         productsReceived.set(false);
 
     }

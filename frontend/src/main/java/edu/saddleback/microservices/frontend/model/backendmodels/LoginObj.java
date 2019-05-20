@@ -1,15 +1,13 @@
 package edu.saddleback.microservices.frontend.model.backendmodels;
 
-public class CreateAccountObject {
+public class LoginObj {
 
     public String username;
-    public String email;
     public String password;
 
-    public CreateAccountObject(String u, String e, String p) {
+    public LoginObj(String u, String p) {
 
         username = u;
-        email = e;
         password = p;
 
     }
