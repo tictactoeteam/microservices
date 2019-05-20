@@ -5,7 +5,3 @@ postgresql:
 redis:
   cluster:
     enabled: false
-
-gateway:
-  ingress:
-    enabled: false
