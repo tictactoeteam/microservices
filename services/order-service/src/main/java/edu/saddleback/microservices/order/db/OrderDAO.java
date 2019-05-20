@@ -25,11 +25,31 @@ public class OrderDAO {
     // doesn't work!
     public JsonObject getOrder(String orderId){
         Connection connection = DbManager.getConnection();
-
+        
         try {
             ResultSet rs = connection.prepareStatement("SELECT * FROM orders WHERE id = " + orderId).executeQuery();
-            java.sql.Array array = rs.getArray("cart");
 
+            String id = rs.getString("id");
+            String status = rs.getString("status");
+            String cartJsonString = rs.getString("cart");
+            JsonArray cartJson =  (JsonArray)new JsonParser().parse(cartJsonString);
+            String coin = rs.getString("coin");
+            String address = rs.getString("address");
+            long price = rs.getLong("price");
+            Timestamp timestamp = rs.getTimestamp("timestamp");
+
+
+            JsonObject response = new JsonObject();
+
+            response.addProperty("id", id);
+            response.addProperty("status", status);
+            response.add("cart", cartJson);
+            response.addProperty("coin", coin);
+            response.addProperty("address", address);
+            response.addProperty("price", price);
+            response.addProperty("timestamp", timestamp.toString());
+
+            return response;
 
         } catch (SQLException ex) {
             System.out.println("boom");
@@ -88,7 +108,7 @@ public class OrderDAO {
 
             statement.setString(1, "UNPAID");
             statement.setString(2, "123");
-            statement.setString(3, cart.getAsString());
+            statement.setString(3, cart.toString());
             statement.setString(4, coin);
             statement.setString(5, "123@gmail.com");
 
