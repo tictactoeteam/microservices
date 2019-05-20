@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import edu.saddleback.microservices.order.db.OrderDao;
+import edu.saddleback.microservices.order.util.Order;
 import spark.Request;
 import spark.Response;
 
@@ -23,8 +25,29 @@ public class RouteController {
         List<CartObject> cart = translate(body.get("cart").getAsJsonArray());
         String coin = body.get("coin").getAsString();
 
-        return null;
 
+        Order order = OrderDao.getInstance().addOrder(customerId, cart, coin);
+
+        JsonObject result = new JsonObject();
+
+        result.addProperty("id", order.id);
+        result.addProperty("status", order.status);
+        result.addProperty("coin", order.coin);
+        result.addProperty("address", order.address);
+        result.addProperty("price", order.price);
+        result.addProperty("timestamp", order.timestamp);
+
+        JsonArray array = new JsonArray();
+        for (CartObject cartObject : cart) {
+            JsonObject temp = new JsonObject();
+            temp.addProperty("product", cartObject.product);
+            temp.addProperty("quantity", cartObject.quantity);
+            array.add(temp);
+        }
+
+        result.add("cart", array);
+
+        return result;
     }
 
 

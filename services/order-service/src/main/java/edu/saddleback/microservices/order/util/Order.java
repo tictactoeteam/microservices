@@ -1,6 +1,5 @@
 package edu.saddleback.microservices.order.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -13,7 +12,7 @@ public class Order {
     public String timestamp;
 
 
-    public Order(String id, String status, ArrayList<CartObject> cart, String coin, String address, long price, String timestamp) {
+    public Order(String id, String status, List<CartObject> cart, String coin, String address, long price, String timestamp) {
 
         this.id = id;
         this.status = status;
