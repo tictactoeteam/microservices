@@ -1,11 +1,11 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
-
 import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
 
 public class App extends Application {
 

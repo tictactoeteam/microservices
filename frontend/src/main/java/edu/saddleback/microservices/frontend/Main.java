@@ -1,7 +1,8 @@
 package edu.saddleback.microservices.frontend;
 
-import edu.saddleback.microservices.frontend.view.App;
 import javafx.application.Application;
+
+import edu.saddleback.microservices.frontend.view.App;
 
 /**
  * Launches the main App FXApplication, which can therefore have its methods called statically.

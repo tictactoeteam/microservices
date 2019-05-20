@@ -1,9 +1,5 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.GetAllProductsController;
-import edu.saddleback.microservices.frontend.model.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.GetAllProductsController;
+import edu.saddleback.microservices.frontend.model.Product;
 
 /**
  * Controls the app.fxml page, including purchasing items and logging in/registering.

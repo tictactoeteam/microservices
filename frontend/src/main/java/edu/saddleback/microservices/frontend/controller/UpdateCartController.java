@@ -1,16 +1,16 @@
 package edu.saddleback.microservices.frontend.controller;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.HollowCartObject;
-import edu.saddleback.microservices.frontend.model.Cart;
-import edu.saddleback.microservices.frontend.model.CartItem;
-import edu.saddleback.microservices.frontend.observable.Observable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import edu.saddleback.microservices.frontend.controller.backendmodels.HollowCartObject;
+import edu.saddleback.microservices.frontend.model.Cart;
+import edu.saddleback.microservices.frontend.model.CartItem;
+import edu.saddleback.microservices.frontend.observable.Observable;
 
 public class UpdateCartController implements Callback<List<HollowCartObject>> {
 

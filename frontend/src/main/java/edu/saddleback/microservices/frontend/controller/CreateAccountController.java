@@ -1,11 +1,12 @@
 package edu.saddleback.microservices.frontend.controller;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulAccountCreatedUser;
-import edu.saddleback.microservices.frontend.observable.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
+import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulAccountCreatedUser;
+import edu.saddleback.microservices.frontend.observable.Observable;
 
 /**
  * Controls all create account attempt logic, handles sending a request via Retrofit API and the responses as well.

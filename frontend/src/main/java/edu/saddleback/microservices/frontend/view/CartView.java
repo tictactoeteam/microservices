@@ -1,9 +1,5 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.DeleteCartController;
-import edu.saddleback.microservices.frontend.controller.UpdateCartController;
-
 import java.text.DecimalFormat;
 
 import javafx.collections.FXCollections;
@@ -11,6 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.DeleteCartController;
+import edu.saddleback.microservices.frontend.controller.UpdateCartController;
 
 /**
  * Controls the cart.fxml page, including showing your cart items with a checkout option.
