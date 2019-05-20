@@ -31,11 +31,7 @@ public class Main {
             res.type("application/json");
         });
 
-        Spark.get("/orders/:orderId", (request, response) -> {
-
-            return OrderDao.getInstance().getOrder(request.params("orderId"));
-
-        }, gson::toJson);
+        Spark.get("/orders/:orderId", RouteController::getOrder, gson::toJson);
 
         Spark.post("/orders/", RouteController::createOrder, gson::toJson);
 

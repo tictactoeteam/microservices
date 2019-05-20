@@ -46,10 +46,13 @@ public class RouteController {
 
         result.add("cart", array);
 
+        response.status(201);
         return result;
     }
 
-
+    public static JsonObject getOrder(Request request, Response response) {
+        return null;
+    }
 
     private static List<CartObject> translate(JsonArray array) {
         int size = array.size();
