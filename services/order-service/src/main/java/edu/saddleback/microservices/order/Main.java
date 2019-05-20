@@ -1,6 +1,7 @@
 package edu.saddleback.microservices.order;
 
 import com.google.gson.Gson;
+import edu.saddleback.microservices.order.controller.RouteController;
 import spark.Spark;
 
 import edu.saddleback.microservices.order.db.DbManager;
@@ -36,12 +37,7 @@ public class Main {
 
         }, gson::toJson);
 
-
-        Spark.post("/orders", ((request, response) -> {
-
-            return OrderDao.getInstance().addOrder(request.body());
-
-        }), gson::toJson);
+        Spark.post("/orders/", RouteController::createOrder, gson::toJson);
 
         Spark.get("/orders", ((request, response) -> {
 
