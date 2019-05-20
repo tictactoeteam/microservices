@@ -23,14 +23,7 @@ ingress:
      certmanager.k8s.io/cluster-issuer: letsencrypt
      certmanager.k8s.io/acme-challenge-type: http01
   path: /
-  hosts:
-    - host: k8s.typokign.com
-      paths:
-        - /
-  tls:
-    - secretName: gateway-tls
-      hosts:
-        - k8s.typokign.com
+  hostname: k8s.typokign.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
