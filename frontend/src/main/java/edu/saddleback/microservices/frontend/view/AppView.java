@@ -12,7 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.GetAllProductsController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.GetAllProductsController;
 import edu.saddleback.microservices.frontend.model.Product;
 
 /**

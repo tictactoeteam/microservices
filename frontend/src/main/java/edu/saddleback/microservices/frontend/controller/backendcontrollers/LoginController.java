@@ -1,11 +1,12 @@
-package edu.saddleback.microservices.frontend.controller;
+package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.LoginObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulLoginToken;
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.model.backendmodels.LoginObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulLoginToken;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
 /**
@@ -39,7 +40,7 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
      */
     public void start() {
 
-        Call<SuccessfulLoginToken> call = AppController.getBackendService().login(new LoginObject(username, password));
+        Call<SuccessfulLoginToken> call = AppController.getBackendService().login(new LoginObj(username, password));
         call.enqueue(this);
 
     }

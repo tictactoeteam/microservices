@@ -1,9 +1,10 @@
-package edu.saddleback.microservices.frontend.controller;
+package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.Product;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
@@ -33,7 +34,7 @@ public class GetProductController implements Callback<Product> {
 
         System.out.println("RECEIVED getProducts RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 201) {
+        if (response.code() == 200) {
 
             product = response.body();
             productRecieved.set(true);

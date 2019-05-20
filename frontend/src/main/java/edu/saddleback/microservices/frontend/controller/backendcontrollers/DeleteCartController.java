@@ -1,9 +1,10 @@
-package edu.saddleback.microservices.frontend.controller;
+package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
 public class DeleteCartController implements Callback<Void> {
@@ -29,9 +30,9 @@ public class DeleteCartController implements Callback<Void> {
     @Override
     public void onResponse(Call<Void> call, Response<Void> response) {
 
-        System.out.println("RECEIVED getProducts RESPONSE");
+        System.out.println("RECEIVED deleteCart RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 201) {
+        if (response.code() == 204) {
             cartDeleted.set(true);
         }
 
@@ -40,7 +41,7 @@ public class DeleteCartController implements Callback<Void> {
     @Override
     public void onFailure(Call<Void> call, Throwable t) {
 
-        System.out.println("RECEIVED getCart FAILURE");
+        System.out.println("RECEIVED deleteCart FAILURE");
         cartDeleted.set(false);
 
     }

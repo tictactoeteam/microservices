@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.CreateAccountController;
-import edu.saddleback.microservices.frontend.controller.LoginController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.CreateAccountController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.LoginController;
 
 /**
  * Controls the login.fxml page, including registering or logging in a user.

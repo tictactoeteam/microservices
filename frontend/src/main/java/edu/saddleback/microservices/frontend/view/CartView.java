@@ -5,12 +5,13 @@ import java.text.DecimalFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.DeleteCartController;
-import edu.saddleback.microservices.frontend.controller.UpdateCartController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.DeleteCartController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.UpdateCartController;
 
 /**
  * Controls the cart.fxml page, including showing your cart items with a checkout option.
@@ -30,6 +31,10 @@ public class CartView {
     private Label totalCostLabel;
     @FXML
     private Label errorLabel;
+    @FXML
+    private Label checkoutErrorText;
+    @FXML
+    private ChoiceBox cryptoChoiceBox;
 
     public void initialize() {
 
@@ -37,7 +42,7 @@ public class CartView {
         decimalFormat = new DecimalFormat("#.##");
         usernameLabel.setText(controller.getLoggedInUsername());
         refreshPage();
-        errorLabel.setVisible(false);
+        cryptoChoiceBox.getItems().addAll("Bitcoin (BTC)", "Litecoin (LTC)", "Zcash (ZEC)", "Lumens (XLM)");
 
     }
 
@@ -128,11 +133,29 @@ public class CartView {
 
             DeleteCartController deleteCon = new DeleteCartController(controller.getToken());
             deleteCon.getCartDeletedObservableBoolean().subscribe((onCartDeleted) -> {
+                controller.deleteCart();
                 refreshPage();
             });
 
             deleteCon.start();
 
+        }
+
+    }
+
+    public void onCheckoutClicked() {
+
+        if (controller.getCart().getTotalCost() > 0 && cryptoChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
+            controller.setSelectedCoin(returnCryptoAbbreviation(cryptoChoiceBox
+                    .getSelectionModel().getSelectedItem().toString()));
+
+            App.getCoordinator().showCheckoutScene();
+        } else if (controller.getCart().getTotalCost() == 0) {
+            checkoutErrorText.setText("Go buy something m8");
+            checkoutErrorText.setVisible(true);
+        } else if (cryptoChoiceBox.getSelectionModel().getSelectedIndex() == 0) {
+            checkoutErrorText.setText("select a crypto currency");
+            checkoutErrorText.setVisible(true);
         }
 
     }
@@ -159,7 +182,27 @@ public class CartView {
         totalQuantityLabel.setText(Integer.toString(controller.getCart().getTotalQuantity()));
         totalCostLabel.setText(decimalFormat.format(controller.getCart().getTotalCost()));
 
+        errorLabel.setVisible(false);
+        checkoutErrorText.setVisible(false);
+
         System.out.println("REFRESHED");
+
+    }
+
+    private String returnCryptoAbbreviation(String word) {
+
+        switch (word) {
+
+            case "Bitcoin (BTC)":
+                return "tbtc";
+            case "Litecoin (LTC)":
+                return "tltc";
+            case "Zcash (ZEC)":
+                return "tzec";
+            default:
+                return "txlm";
+
+        }
 
     }
 

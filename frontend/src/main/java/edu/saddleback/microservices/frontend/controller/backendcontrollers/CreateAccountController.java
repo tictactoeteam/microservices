@@ -1,11 +1,12 @@
-package edu.saddleback.microservices.frontend.controller;
+package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulAccountCreatedUser;
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulAccountCreatedUser;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
 /**
@@ -41,7 +42,7 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
     public void start() {
 
         Call<SuccessfulAccountCreatedUser> call = AppController.getBackendService()
-                .registerAccount(new CreateAccountObject(username, email, password));
+                .registerAccount(new CreateAccountObj(username, email, password));
         call.enqueue(this);
 
     }
@@ -54,6 +55,8 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
      */
     @Override
     public void onResponse(Call<SuccessfulAccountCreatedUser> call, Response<SuccessfulAccountCreatedUser> response) {
+
+        System.out.println("RECIEVED CREATE ACCOUNT RESPONSE");
         System.out.println(response.toString());
         if (response.code() == 201) { //If account doesnt already exist
             accountCreated.set(true);
@@ -71,9 +74,11 @@ public class CreateAccountController implements Callback<SuccessfulAccountCreate
      */
     @Override
     public void onFailure(Call<SuccessfulAccountCreatedUser> call, Throwable t) {
+
         System.out.println("RECIEVED CREATE ACCOUNT FAILURE");
         t.printStackTrace();
         accountCreated.set(false);
+
     }
 
     //Getter

@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.frontend.controller;
+package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.Product;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
@@ -32,9 +33,9 @@ public class GetAllProductsController implements Callback<List<Product>> {
     @Override
     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
-        System.out.println("RECEIVED getProducts RESPONSE");
+        System.out.println("RECEIVED getAllProducts RESPONSE");
         System.out.println(response.toString());
-        if (response.code() == 201) {
+        if (response.code() == 200) {
 
             products = response.body();
             productsReceived.set(true);
@@ -46,7 +47,7 @@ public class GetAllProductsController implements Callback<List<Product>> {
     @Override
     public void onFailure(Call<List<Product>> call, Throwable t) {
 
-        System.out.println("RECEIVED getProducts FAILURE");
+        System.out.println("RECEIVED getAllProducts FAILURE");
         productsReceived.set(false);
 
     }

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -78,7 +79,7 @@
                   </Button>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="330.0" prefWidth="202.0">
+            <VBox alignment="TOP_CENTER" prefHeight="330.0" prefWidth="202.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="6.0" prefWidth="202.0">
                      <children>
@@ -108,7 +109,31 @@
                         </Label>
                      </children>
                   </HBox>
+                  <ChoiceBox fx:id="cryptoChoiceBox" prefHeight="25.0" prefWidth="103.0">
+                     <VBox.margin>
+                        <Insets bottom="-10.0" />
+                     </VBox.margin></ChoiceBox>
+                  <VBox alignment="CENTER" spacing="4.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onCheckoutClicked" text="Checkout">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="checkoutErrorText" text="errortext" textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
+               <HBox.margin>
+                  <Insets top="75.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>

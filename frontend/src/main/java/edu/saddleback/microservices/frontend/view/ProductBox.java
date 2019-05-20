@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.controller.UpdateCartController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.UpdateCartController;
 import edu.saddleback.microservices.frontend.model.CartItem;
 import edu.saddleback.microservices.frontend.model.Product;
 
