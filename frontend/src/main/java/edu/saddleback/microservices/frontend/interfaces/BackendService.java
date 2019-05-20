@@ -1,11 +1,12 @@
 package edu.saddleback.microservices.frontend.interfaces;
 
-import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObject;
-import edu.saddleback.microservices.frontend.model.backendmodels.LoginObject;
+import edu.saddleback.microservices.frontend.model.Product;
+import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.LoginObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
 import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulAccountCreatedUser;
 import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulLoginToken;
-import edu.saddleback.microservices.frontend.model.Product;
 
 import java.util.List;
 
@@ -23,25 +24,39 @@ import retrofit2.http.Path;
  */
 public interface BackendService {
 
+    //AUTH SERVICE
     @POST("/api/v1/users")
-    Call<SuccessfulAccountCreatedUser> registerAccount(@Body CreateAccountObject obj);
+    Call<SuccessfulAccountCreatedUser> registerAccount(@Body CreateAccountObj obj);
 
     @POST("/api/v1/session")
-    Call<SuccessfulLoginToken> login(@Body LoginObject obj);
+    Call<SuccessfulLoginToken> login(@Body LoginObj obj);
 
+    //PRODUCT SERVICE
     @GET("/api/v1/products")
     Call<List<Product>> getAllProducts();
 
     @GET("/api/v1/products/{id}")
     Call<Product> getProduct(@Path("id") String id);
 
+    //CART SERVICE
     @GET("/api/v1/cart")
-    Call<List<HollowCartObject>> getCart(@Header("Authorization") String token);
+    Call<List<HollowCartObj>> getCart(@Header("Authorization") String token);
 
     @PUT("/api/v1/cart")
-    Call<List<HollowCartObject>> updateCart(@Header("Authorization") String token, List<HollowCartObject> newCart);
+    Call<List<HollowCartObj>> updateCart(@Header("Authorization") String token, List<HollowCartObj> newCart);
 
     @DELETE("/api/v1/cart")
     Call<Void> deleteCart(@Header("Authorization") String token);
+
+    //ORDER SERVICE
+    @GET("/api/v1/orders/")
+    Call<List<OrderTransaction>> getAllUserOrders(@Header("Authorization") String token);
+
+    @POST("/api/v1/orders")
+    Call<OrderTransaction> makeOrder(@Header("Authorization") String token, List<HollowCartObj> cart, String coin);
+
+    //Controllers are finished for these above
+    @GET("/api/v1/orders/{id}")
+    Call<OrderTransaction> getOrder(@Path("id") String id);
 
 }

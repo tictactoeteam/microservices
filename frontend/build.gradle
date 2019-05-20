@@ -18,6 +18,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    compile "com.google.zxing:core:3.3.0"
+    compile 'com.google.zxing:javase:3.3.0'
 }
 
 javafx {
