@@ -42,7 +42,7 @@ public class CartView {
         decimalFormat = new DecimalFormat("#.##");
         usernameLabel.setText(controller.getLoggedInUsername());
         refreshPage();
-        cryptoChoiceBox.getItems().addAll("Bitcoin", "Litecoin", "Zcash", "Lumens");
+        cryptoChoiceBox.getItems().addAll("Bitcoin(BTC)", "Litecoin(LTC)", "Zcash(ZEC)", "Lumens(XLM)");
 
     }
 
