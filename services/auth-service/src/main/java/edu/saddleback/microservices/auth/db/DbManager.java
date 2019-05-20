@@ -1,14 +1,14 @@
 package edu.saddleback.microservices.auth.db;
 
-import edu.saddleback.microservices.auth.db.migrations.Init;
-import edu.saddleback.microservices.auth.db.migrations.PgCrypto;
-import edu.saddleback.microservices.auth.db.migrations.UserTable;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import edu.saddleback.microservices.auth.db.migrations.Init;
+import edu.saddleback.microservices.auth.db.migrations.PgCrypto;
+import edu.saddleback.microservices.auth.db.migrations.UserTable;
 
 public class DbManager {
     private static final Migration[] migrations = {

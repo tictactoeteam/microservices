@@ -1,21 +1,20 @@
 package edu.saddleback.microservices.auth.controllers;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Date;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import spark.Request;
+import spark.Response;
+
 import edu.saddleback.microservices.auth.db.UserDao;
 import edu.saddleback.microservices.auth.models.User;
 import edu.saddleback.microservices.auth.util.ErrorResponse;
 import edu.saddleback.microservices.auth.util.InvalidRequest;
 import edu.saddleback.microservices.auth.util.RabbitProvider;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Date;
-
-import spark.Request;
-import spark.Response;
-
 
 public class UserController {
     public static JsonObject createUser(Request request, Response response) throws ErrorResponse {

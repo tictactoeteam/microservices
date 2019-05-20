@@ -1,17 +1,17 @@
 package edu.saddleback.microservices.auth.util;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
-import java.security.PrivateKey;
 import java.security.interfaces.ECPrivateKey;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemReader;
 

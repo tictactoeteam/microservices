@@ -1,7 +1,5 @@
 package edu.saddleback.microservices.auth.db;
 
-import edu.saddleback.microservices.auth.models.User;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,13 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import edu.saddleback.microservices.auth.models.User;
+
 public class UserDao {
     private static Connection connection = DbManager.getConnection();
 
     public static void insertUser(User user) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO users (username, email, password, disabled, created_at, last_login)"
-                + "VALUES (?,?,?,?,?,?)");
+                "INSERT INTO users (username, email, password, disabled, created_at, last_login)" +
+                        "VALUES (?,?,?,?,?,?)");
 
         Date createdAt = user.getCreatedDate() == null ? null : new Date(user.getCreatedDate().getTime());
         Date lastLogin = user.getLastLogin() == null ? null : new Date(user.getLastLogin().getTime());
