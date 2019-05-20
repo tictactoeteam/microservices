@@ -11,6 +11,7 @@ image:
 
 existingSecretName: "order-service"
 postgresSecret: "postgres"
+redisSecret: "redis"
 
 nameOverride: ""
 fullnameOverride: "order-service"
