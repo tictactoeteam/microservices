@@ -2,6 +2,7 @@ package edu.saddleback.microservices.order;
 
 import com.google.gson.Gson;
 import edu.saddleback.microservices.order.db.DbManager;
+import edu.saddleback.microservices.order.db.OrderDAO;
 import spark.Spark;
 
 public class Main {
@@ -30,20 +31,20 @@ public class Main {
 
         Spark.get("/orders/:orderId", (request, response) -> {
 
-            return db.getOrder(request.params("orderId"));
+            return OrderDAO.getInstance().getOrder(request.params("orderId"));
 
         }, gson::toJson);
 
 
         Spark.post("/orders", ((request, response) -> {
 
-            return db.addOrder(request.body());
+            return OrderDAO.getInstance().addOrder(request.body());
 
         }), gson::toJson);
 
         Spark.get("/orders", ((request, response) -> {
 
-            return db.getOrders(request.body());
+            return OrderDAO.getInstance().getAllOrders(request.body());
 
         }), gson::toJson);
     }
