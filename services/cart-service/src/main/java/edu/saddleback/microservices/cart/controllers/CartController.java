@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import edu.saddleback.microservices.cart.util.InvalidRequest;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -16,6 +19,7 @@ import spark.Response;
 
 import edu.saddleback.microservices.cart.model.CartItem;
 import edu.saddleback.microservices.cart.util.ErrorResponse;
+import edu.saddleback.microservices.cart.util.InvalidRequest;
 import edu.saddleback.microservices.cart.util.TokenUtil;
 
 public class CartController {
