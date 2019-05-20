@@ -44,7 +44,7 @@ public class Main {
 
         Spark.get("/orders", ((request, response) -> {
 
-            return OrderDAO.getInstance().getAllOrders(request.body());
+            return OrderDAO.getInstance().getAllOrders("SOMEHOW GET THE USER ID HERE!");
 
         }), gson::toJson);
     }

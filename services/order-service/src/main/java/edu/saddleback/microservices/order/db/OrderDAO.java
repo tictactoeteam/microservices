@@ -21,6 +21,8 @@ public class OrderDAO {
         return instance;
     }
 
+
+    // doesn't work!
     public JsonObject getOrder(String orderId){
         Connection connection = DbManager.getConnection();
 
@@ -28,7 +30,6 @@ public class OrderDAO {
             ResultSet rs = connection.prepareStatement("SELECT * FROM orders WHERE id = " + orderId).executeQuery();
             java.sql.Array array = rs.getArray("cart");
 
-            array.getBaseTypeName();
 
         } catch (SQLException ex) {
             System.out.println("boom");
@@ -36,8 +37,36 @@ public class OrderDAO {
         return null;
     }
 
-    public JsonObject getAllOrders(String jsonBody){
-        return null;
+    public JsonObject getAllOrders(String customerId){
+        Connection connection = DbManager.getConnection();
+        JsonObject response = new JsonObject();
+        JsonArray orders = new JsonArray();
+
+        try {
+            ResultSet rs = connection.prepareStatement("SELECT id FROM orders WHERE customer_id = " + customerId).executeQuery();
+
+            int size = 0;
+            if (rs != null) {
+                rs.last();    // moves cursor to the last row
+                size = rs.getRow(); // get row id
+            }
+
+            rs.first();
+
+            response = new JsonObject();
+
+            orders = new JsonArray(size);
+
+            for (int i = 0; i < size; ++i) {
+                orders.add(getOrder(rs.getString("id")));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("oooo");
+        }
+
+        response.add("orders", orders);
+        return response;
     }
 
     public JsonObject addOrder(String jsonBody){
