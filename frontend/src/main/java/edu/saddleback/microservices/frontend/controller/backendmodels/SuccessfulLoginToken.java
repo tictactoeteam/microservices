@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.frontend.model;
+package edu.saddleback.microservices.frontend.controller.backendmodels;
 
 public class SuccessfulLoginToken {
 

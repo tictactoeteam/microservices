@@ -22,6 +22,10 @@ public class Cart {
         return cartItems;
     }
 
+    public CartItem getCartItem(int index) {
+        return cartItems.get(index);
+    }
+
     public int getSize() {
         return cartItems.size();
     }
@@ -31,8 +35,8 @@ public class Cart {
         cartItems.add(p);
     }
 
-    public void remove(CartItem p) {
-        cartItems.remove(p);
+    public void remove(int index) {
+        cartItems.remove(index);
     }
 
     /**
@@ -41,11 +45,21 @@ public class Cart {
     public double getTotalCost() {
 
         double sum = 0;
-
         for (int i = 0; i < cartItems.size(); i++) {
 
             sum += cartItems.get(i).getPrice();
 
+        }
+
+        return sum;
+
+    }
+
+    public int getTotalQuantity() {
+
+        int sum = 0;
+        for (int i = 0; i < cartItems.size(); i++) {
+            sum += cartItems.get(i).getQuantity();
         }
 
         return sum;

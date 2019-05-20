@@ -1,7 +1,9 @@
 package edu.saddleback.microservices.frontend.view;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
+
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -69,6 +71,11 @@ public class App extends Application {
         Window.setWidth(width);
         Window.setHeight(height);
 
+    }
+
+    @Override
+    public void stop() {
+        System.exit(1);
     }
 
 }

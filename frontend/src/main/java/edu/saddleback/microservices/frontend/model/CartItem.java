@@ -28,6 +28,24 @@ public class CartItem {
 
     }
 
+    //Getters
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    //Setters
+    public void setProduct(Product p) {
+        product = p;
+    }
+
+    public void setQuantity(int q) {
+        quantity = q;
+    }
+
     /**
      * Returns the price of the cartItem, which includes the product and the amount to be purchased.
      *
@@ -35,6 +53,11 @@ public class CartItem {
      */
     public double getPrice() {
         return product.getPrice() * quantity;
+    }
+
+    @Override
+    public String toString() {
+        return product + " Quantity: " + quantity;
     }
 
 }
