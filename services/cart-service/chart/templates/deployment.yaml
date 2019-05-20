@@ -45,6 +45,8 @@ spec:
             - name: "jwt"
               mountPath: "/opt/"
               readOnly: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: "jwt"
           secret:
@@ -52,8 +54,6 @@ spec:
             items:
               - key: public
                 path: pub.pem
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

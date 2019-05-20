@@ -38,15 +38,13 @@ public class CartItem {
     }
 
     public boolean isValid() {
-        if (quantity <= 0) {
-            return false;
-        }
         try {
             UUID.fromString(this.product);
         } catch (IllegalArgumentException e) {
             return false;
         }
-        return true;
+
+        return quantity > 0;
     }
 
     @Override
