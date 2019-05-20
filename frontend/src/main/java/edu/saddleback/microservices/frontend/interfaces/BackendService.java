@@ -1,13 +1,5 @@
 package edu.saddleback.microservices.frontend.interfaces;
 
-import edu.saddleback.microservices.frontend.model.Product;
-import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObj;
-import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
-import edu.saddleback.microservices.frontend.model.backendmodels.LoginObj;
-import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
-import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulAccountCreatedUser;
-import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulLoginToken;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,12 +11,13 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.HollowCartObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.LoginObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulAccountCreatedUser;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulLoginToken;
 import edu.saddleback.microservices.frontend.model.Product;
+import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.LoginObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
+import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulAccountCreatedUser;
+import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulLoginToken;
 
 /**
  * Provides Retrofit API with a interface to let it generate the packing and unpacking of Json objects.

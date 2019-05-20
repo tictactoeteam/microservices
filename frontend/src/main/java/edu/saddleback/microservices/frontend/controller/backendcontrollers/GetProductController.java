@@ -1,11 +1,12 @@
 package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
-import edu.saddleback.microservices.frontend.model.Product;
-import edu.saddleback.microservices.frontend.observable.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.model.Product;
+import edu.saddleback.microservices.frontend.observable.Observable;
 
 public class GetProductController implements Callback<Product> {
 
