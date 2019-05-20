@@ -2,13 +2,12 @@ package edu.saddleback.microservices.auth;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import spark.Spark;
 
 import edu.saddleback.microservices.auth.controllers.SessionController;
 import edu.saddleback.microservices.auth.controllers.UserController;
 import edu.saddleback.microservices.auth.db.DbManager;
 import edu.saddleback.microservices.auth.util.ErrorResponse;
-
-import spark.Spark;
 
 public class Main {
     public static void main(String[] args) {

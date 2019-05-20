@@ -1,10 +1,19 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
+
+import edu.saddleback.microservices.frontend.controller.AppController;
+import edu.saddleback.microservices.frontend.controller.GetAllProductsController;
+import edu.saddleback.microservices.frontend.model.Product;
 
 /**
  * Controls the app.fxml page, including purchasing items and logging in/registering.
@@ -42,6 +51,47 @@ public class AppView {
 
         }
 
+        GetAllProductsController productsController = new GetAllProductsController();
+
+        productsController.getProductsRecievedBoolean().subscribe((isProductsReceived) -> {
+
+            if (isProductsReceived.equals(true)) { //Success
+
+                //Generates the product boxes
+                List<Product> products = productsController.getProducts();
+                ArrayList<ProductBox> productBoxes = new ArrayList<>();
+                for (int i = 0; i < products.size(); i++) {
+                    productBoxes.add(new ProductBox(products.get(i)));
+                }
+
+                VBox productBoxVBox = new VBox();
+                productBoxVBox.setAlignment(Pos.CENTER);
+                for (int i = 0; i < productBoxes.size(); i++) {
+                    productBoxVBox.getChildren().add(productBoxes.get(i));
+                }
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollPane.setContent(productBoxVBox);
+                    }
+                });
+
+            } else {                                //Failed
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollPane.setContent(new Label("***error-cannot reach product service***"));
+                    }
+                });
+
+            }
+
+        });
+
+        productsController.start();
+
     }
 
     /**
@@ -51,8 +101,8 @@ public class AppView {
 
         if (!controller.getLoggedInUsername().equals("")) {
 
-            //LOGOUT HERE
             controller.setLoggedInUsername("");
+            controller.setToken("");
             try {
                 App.getCoordinator().showAppScene();
             } catch (Exception e) {

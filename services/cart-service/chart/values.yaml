@@ -9,6 +9,8 @@ image:
   tag: latest
   pullPolicy: Always
 
+redisSecret: "redis"
+
 nameOverride: ""
 fullnameOverride: "cart-service"
 

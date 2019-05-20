@@ -1,9 +1,9 @@
 package edu.saddleback.microservices.auth.db.migrations;
 
-import edu.saddleback.microservices.auth.db.Migration;
-
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import edu.saddleback.microservices.auth.db.Migration;
 
 // NOTE - REQUIRES SUPERUSER PERM
 public class Init implements Migration {

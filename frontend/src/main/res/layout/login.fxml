@@ -14,7 +14,7 @@
 
 <Pane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.microservices.frontend.view.LoginView">
     <children>
-        <ImageView fitHeight="300.0" fitWidth="600.0" pickOnBounds="true">
+        <ImageView fitHeight="350.0" fitWidth="600.0" pickOnBounds="true">
             <image>
                 <Image url="@../images/loginBackground.jpg" />
             </image></ImageView>
@@ -25,6 +25,16 @@
                         <Image url="@../images/silkroadlogo.png" />
                     </image>
                 </ImageView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="        Email: " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailTextField" />
+               </children>
+            </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label text="Username: " textFill="WHITE">

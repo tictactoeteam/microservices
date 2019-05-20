@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.saddleback.microservices.frontend.view.CartView">
@@ -47,10 +48,69 @@
          </children>
       </HBox>
    </top>
-   <left>
-      <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="209.0" BorderPane.alignment="CENTER">
+   <center>
+      <HBox spacing="30.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="50.0" />
-         </BorderPane.margin></ListView>
-   </left>
+         </BorderPane.margin>
+         <children>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <ListView fx:id="cartList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="209.0" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onRemoveItemClicked" text="Remove 1 Selected Item">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="errorLabel" text="error" textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onMouseClicked="#onDeleteCartClicked" text="Delete Cart">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="330.0" prefWidth="202.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="6.0" prefWidth="202.0">
+                     <children>
+                        <Label text="Total Items:   " textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="totalQuantityLabel" text="Label" textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="202.0">
+                     <children>
+                        <Label text="Total Cost:   $" textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="totalCostLabel" text="Label" textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
 </BorderPane>

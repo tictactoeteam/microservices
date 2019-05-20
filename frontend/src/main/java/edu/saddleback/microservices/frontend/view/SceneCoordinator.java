@@ -1,15 +1,18 @@
 package edu.saddleback.microservices.frontend.view;
 
-import edu.saddleback.microservices.frontend.controller.AppController;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+import edu.saddleback.microservices.frontend.controller.AppController;
 
 public class SceneCoordinator {
 
@@ -43,10 +46,22 @@ public class SceneCoordinator {
      */
     public void showAppScene() throws IOException {
 
-        URL url = new File("src/main/res/layout/app.fxml").toURL();
-        Parent layout = FXMLLoader.load(url);
-        this.window.setScene(new Scene(layout));
-        App.setWindowSize(600, 700);
+        Platform.runLater(() -> {
+            URL url = null;
+            try {
+                url = new File("src/main/res/layout/app.fxml").toURL();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Parent layout = null;
+            try {
+                layout = FXMLLoader.load(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.window.setScene(new Scene(layout));
+            App.setWindowSize(600, 700);
+        });
 
     }
 
@@ -60,7 +75,7 @@ public class SceneCoordinator {
         URL url = new File("src/main/res/layout/login.fxml").toURL();
         Parent layout = FXMLLoader.load(url);
         this.window.setScene(new Scene(layout));
-        App.setWindowSize(600, 300);
+        App.setWindowSize(600, 350);
 
     }
 
@@ -69,10 +84,20 @@ public class SceneCoordinator {
      *
      * @throws IOException
      */
-    public void showCartScene() throws IOException {
+    public void showCartScene() {
 
-        URL url = new File("src/main/res/layout/cart.fxml").toURL();
-        Parent layout = FXMLLoader.load(url);
+        URL url = null;
+        try {
+            url = new File("src/main/res/layout/cart.fxml").toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Parent layout = null;
+        try {
+            layout = FXMLLoader.load(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.window.setScene(new Scene(layout));
         App.setWindowSize(600, 600);
 
