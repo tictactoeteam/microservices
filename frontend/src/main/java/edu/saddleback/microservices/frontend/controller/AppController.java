@@ -1,6 +1,6 @@
 package edu.saddleback.microservices.frontend.controller;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.BackendServiceObject;
+import edu.saddleback.microservices.frontend.model.backendmodels.BackendServiceObject;
 import edu.saddleback.microservices.frontend.interfaces.BackendService;
 import edu.saddleback.microservices.frontend.model.Cart;
 

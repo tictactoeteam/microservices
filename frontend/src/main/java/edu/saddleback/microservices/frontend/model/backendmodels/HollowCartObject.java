@@ -1,4 +1,4 @@
-package edu.saddleback.microservices.frontend.controller.backendmodels;
+package edu.saddleback.microservices.frontend.model.backendmodels;
 
 public class HollowCartObject {
 

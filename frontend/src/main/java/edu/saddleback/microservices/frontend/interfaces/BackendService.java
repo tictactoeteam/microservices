@@ -1,10 +1,10 @@
 package edu.saddleback.microservices.frontend.interfaces;
 
-import edu.saddleback.microservices.frontend.controller.backendmodels.CreateAccountObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.HollowCartObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.LoginObject;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulAccountCreatedUser;
-import edu.saddleback.microservices.frontend.controller.backendmodels.SuccessfulLoginToken;
+import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObject;
+import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObject;
+import edu.saddleback.microservices.frontend.model.backendmodels.LoginObject;
+import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulAccountCreatedUser;
+import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulLoginToken;
 import edu.saddleback.microservices.frontend.model.Product;
 
 import java.util.List;
