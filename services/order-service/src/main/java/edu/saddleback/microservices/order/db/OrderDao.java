@@ -105,7 +105,7 @@ public class OrderDao {
         Connection connection = DbManager.getConnection();
 
         long total = 0;
-        String uuid = "";
+        String uuid = "defaultIg";
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
                     "(status, customer_id, cart, coin, address, price)" +
