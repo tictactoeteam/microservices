@@ -1,9 +1,9 @@
 package edu.saddleback.microservices.order.db.migrations;
 
-import edu.saddleback.microservices.order.db.Migration;
-
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import edu.saddleback.microservices.order.db.Migration;
 
 // NOTE - REQUIRES SUPERUSER PERM
 public class Init implements Migration {

@@ -1,15 +1,15 @@
 package edu.saddleback.microservices.order.db;
 
-import com.google.gson.JsonObject;
-import edu.saddleback.microservices.order.db.migrations.Init;
-import edu.saddleback.microservices.order.db.migrations.PgCrypto;
-import edu.saddleback.microservices.order.db.migrations.UserTable;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import edu.saddleback.microservices.order.db.migrations.Init;
+import edu.saddleback.microservices.order.db.migrations.PgCrypto;
+import edu.saddleback.microservices.order.db.migrations.UserTable;
+
 
 //LOL
 public class DbManager {

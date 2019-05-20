@@ -1,29 +1,33 @@
 package edu.saddleback.microservices.order.db;
 
-import com.google.gson.Gson;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.sql.*;
-import java.util.Date;
-
-public class OrderDAO {
-    private OrderDAO(){
+public class OrderDao {
+    private OrderDao(){
 
     }
 
-    private static OrderDAO instance = null;
+    private static OrderDao instance = null;
 
-    public static OrderDAO getInstance(){
-        if (instance == null)
-            instance = new OrderDAO();
+    public static OrderDao getInstance() {
+        if (instance == null) {
+            instance = new OrderDao();
+        }
         return instance;
     }
 
 
     // doesn't work!
-    public JsonObject getOrder(String orderId){
+    public JsonObject getOrder(String orderId) {
         Connection connection = DbManager.getConnection();
         
         try {
@@ -57,7 +61,7 @@ public class OrderDAO {
         return null;
     }
 
-    public JsonObject getAllOrders(String customerId){
+    public JsonObject getAllOrders(String customerId) {
         Connection connection = DbManager.getConnection();
         JsonObject response = new JsonObject();
         JsonArray orders = new JsonArray();
@@ -89,7 +93,7 @@ public class OrderDAO {
         return response;
     }
 
-    public JsonObject addOrder(String jsonBody){
+    public JsonObject addOrder(String jsonBody) {
         JsonParser parser = new JsonParser();
 
         JsonObject requestBody = (JsonObject)parser.parse(jsonBody);
@@ -103,8 +107,9 @@ public class OrderDAO {
         long total = 0;
         String uuid = "";
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO orders (status, customer_id, cart, coin, address, price)"
-                            + "VALUES(?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
+                    "(status, customer_id, cart, coin, address, price)" +
+                    "VALUES(?, ?, ?, ?, ?, ?)");
 
             statement.setString(1, "UNPAID");
             statement.setString(2, "123");
@@ -114,12 +119,12 @@ public class OrderDAO {
 
 
             long temp = 0;
-            for (int i=0; i<cart.size(); ++i){
-               ResultSet rs = connection.prepareStatement("SELECT * FROM product WHERE name = "
-                       + cart.get(i).getAsJsonObject().get("product)")).executeQuery();
-               temp = rs.getLong("price_per_unit");
-               temp *= cart.get(i).getAsJsonObject().get("quantity").getAsInt();
-               total += temp;
+            for (int i = 0; i < cart.size(); ++i) {
+                ResultSet rs = connection.prepareStatement("SELECT * FROM product WHERE name = " +
+                        cart.get(i).getAsJsonObject().get("product)")).executeQuery();
+                temp = rs.getLong("price_per_unit");
+                temp *= cart.get(i).getAsJsonObject().get("quantity").getAsInt();
+                total += temp;
             }
 
             statement.setLong(6, total);

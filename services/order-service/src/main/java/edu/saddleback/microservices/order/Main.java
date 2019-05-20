@@ -1,9 +1,10 @@
 package edu.saddleback.microservices.order;
 
 import com.google.gson.Gson;
-import edu.saddleback.microservices.order.db.DbManager;
-import edu.saddleback.microservices.order.db.OrderDAO;
 import spark.Spark;
+
+import edu.saddleback.microservices.order.db.DbManager;
+import edu.saddleback.microservices.order.db.OrderDao;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -31,20 +32,20 @@ public class Main {
 
         Spark.get("/orders/:orderId", (request, response) -> {
 
-            return OrderDAO.getInstance().getOrder(request.params("orderId"));
+            return OrderDao.getInstance().getOrder(request.params("orderId"));
 
         }, gson::toJson);
 
 
         Spark.post("/orders", ((request, response) -> {
 
-            return OrderDAO.getInstance().addOrder(request.body());
+            return OrderDao.getInstance().addOrder(request.body());
 
         }), gson::toJson);
 
         Spark.get("/orders", ((request, response) -> {
 
-            return OrderDAO.getInstance().getAllOrders("SOMEHOW GET THE USER ID HERE!");
+            return OrderDao.getInstance().getAllOrders("SOMEHOW GET THE USER ID HERE!");
 
         }), gson::toJson);
     }
