@@ -2,15 +2,12 @@ package edu.saddleback.microservices.product.controllers;
 
 import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
 
+import com.google.gson.*;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import edu.saddleback.microservices.product.util.RabbitProvider;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import edu.saddleback.microservices.product.db.ProductDao;
 import edu.saddleback.microservices.product.model.Product;
 import java.io.IOException;
@@ -94,25 +91,30 @@ public class ProductController {
         return res;
     }
 
-//    public static void productPurchased() {
-//        channel.basicConsume("order-placed", null, "productTag",
-//                new DefaultConsumer(channel) {
-//                    @Override
-//                    public void handleDelivery(String consumerTag,
-//                                               Envelope envelope,
-//                                               AMQP.BasicProperties properties,
-//                                               byte[] body)
-//                            throws IOException {
-//                        String routingKey = envelope.getRoutingKey();
-//                        String contentType = properties.getContentType();
-//                        long deliveryTag = envelope.getDeliveryTag();
-//
-//                        JsonParser parser = new JsonParser();
-//                        JsonObject json = parser.parse(body.toString()).getAsJsonObject();
-//
-//                        //go through the json array here?
-//
-//                    }
-//                });
-//    }
+    public static void productPurchased() {
+        try {
+            RabbitProvider.getChannel().basicConsume("order-placed", false, "productTag",
+                    new DefaultConsumer(RabbitProvider.getChannel()) {
+                        @Override
+                        public void handleDelivery(String consumerTag,
+                                                   Envelope envelope,
+                                                   AMQP.BasicProperties properties,
+                                                   byte[] body)
+                                throws IOException {
+                            String routingKey = envelope.getRoutingKey();
+                            String contentType = properties.getContentType();
+                            long deliveryTag = envelope.getDeliveryTag();
+
+                            JsonParser parser = new JsonParser();
+                            JsonObject json = parser.parse(body.toString()).getAsJsonObject();
+
+                            //go through the json array here?
+                            json.get("cart").getAsJsonArray();
+
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
