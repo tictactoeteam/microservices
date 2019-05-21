@@ -28,7 +28,7 @@ public class OrderDao {
 
         String cartString = "array[";
         for (int i = 0; i < cart.size(); ++i) {
-            cartString += "(" + cart.get(i).product + ", " + cart.get(i).quantity + ")";
+            cartString += "('" + cart.get(i).product + "', " + cart.get(i).quantity + ")";
 
             if (i != cart.size() - 1) {
                 cartString += ", ";
