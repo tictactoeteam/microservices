@@ -1,5 +1,6 @@
 package edu.saddleback.microservices.product.db;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import edu.saddleback.microservices.product.model.Product;
+import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
 
 public class ProductDao {
 
@@ -52,7 +54,7 @@ public class ProductDao {
     public void insertProduct(Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO products (id, name, quantity, price, image_path)" +
-                        " VALUES (?::uuid,?,?,?,?)");
+                        " VALUES (?::uuid,?,?,?,?) ON CONFLICT DO NOTHING");
 
         statement.setString(1,product.getProductId().toString());
         statement.setString(2,product.getProductName());
@@ -61,5 +63,13 @@ public class ProductDao {
         statement.setString(5, product.getProductImage());
 
         statement.executeUpdate();
+
+        try {
+            getChannel().basicPublish("product", "created", null,
+                    product.toJson().toString().getBytes());
+        } catch (IOException e) {
+            System.err.println("Failed to publish new user to Rabbit");
+            e.printStackTrace();
+        }
     }
 }

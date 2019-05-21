@@ -3,6 +3,8 @@ package edu.saddleback.microservices.product.model;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import com.google.gson.JsonObject;
+
 public class Product {
     UUID id;
     String name;
@@ -60,5 +62,15 @@ public class Product {
 
     public void setProductImage(String image) {
         this.imagepath = image;
+    }
+
+    public JsonObject toJson() {
+        JsonObject res = new JsonObject();
+        res.addProperty("id", getProductId().toString());
+        res.addProperty("name", getProductName());
+        res.addProperty("price", getProductPrice().toString());
+        res.addProperty("quantity", getProductQuantity());
+        res.addProperty("image_path", getProductImage());
+        return res;
     }
 }
