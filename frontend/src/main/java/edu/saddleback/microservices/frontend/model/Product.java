@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class Product {
 
-    private String productID;
+    private String id;
     private String name;
     private String imagePath;
     private BigDecimal price;
@@ -20,9 +20,9 @@ public class Product {
      * @param imagePath
      * @param price
      */
-    public Product(String productID, String name, String imagePath, BigDecimal price, int quantity) {
+    public Product(String id, String name, String imagePath, BigDecimal price, int quantity) {
 
-        this.productID = productID;
+        this.id = id;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
@@ -37,7 +37,7 @@ public class Product {
      */
     public Product(Product tmpProduct) {
 
-        this(tmpProduct.productID, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price, tmpProduct.quantity);
+        this(tmpProduct.id, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price, tmpProduct.quantity);
 
     }
 
@@ -50,7 +50,7 @@ public class Product {
 
     //Getters
     public String getProductID() {
-        return productID;
+        return id;
     }
 
     public String getName() {
@@ -74,13 +74,14 @@ public class Product {
         quantity = num;
     }
 
-    /**
-     * Overrides the toString property.
-     * @return
-     */
     @Override
     public String toString() {
-        return name;
+        return "Product{" +
+                "productID='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
-
 }

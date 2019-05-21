@@ -39,6 +39,7 @@ public class ProductBox extends Pane {
         HBox productBoxHBox = new HBox();
         productBoxHBox.setAlignment(Pos.CENTER);
         //Left side column
+        System.out.println("PATH: " + thisProduct.getImagePath());
         final ImageView image = new ImageView(new Image(thisProduct.getImagePath()));
 
         //Right side column
