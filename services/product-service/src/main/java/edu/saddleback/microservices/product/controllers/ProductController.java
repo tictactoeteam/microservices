@@ -2,19 +2,20 @@ package edu.saddleback.microservices.product.controllers;
 
 import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
 
-import com.google.gson.*;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import edu.saddleback.microservices.product.util.RabbitProvider;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import edu.saddleback.microservices.product.db.ProductDao;
 import edu.saddleback.microservices.product.model.Product;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import edu.saddleback.microservices.product.util.RabbitProvider;
 import spark.Request;
 import spark.Response;
 
@@ -53,10 +54,9 @@ public class ProductController {
             res.addProperty("quantity", product.getProductQuantity());
             res.addProperty("imagepath", product.getProductImage());
 
+
             jsonProductList.add(res);
         }
-
-        //
         try {
             getChannel().basicPublish("product", "get", null,
                     jsonProductList.toString().getBytes());
@@ -76,7 +76,6 @@ public class ProductController {
         res.addProperty("price", someProduct.getProductPrice().toString());
         res.addProperty("quantity", someProduct.getProductQuantity());
         res.addProperty("imagepath", someProduct.getProductImage());
-
         return res;
     }
 

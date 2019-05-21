@@ -22,7 +22,6 @@ public class Product {
         this(UUID.randomUUID(), "", BigDecimal.ZERO, 0, "");
     }
 
-
     public void setProductName(String product) {
         this.name = product;
     }
@@ -62,5 +61,4 @@ public class Product {
     public void setProductImage(String image) {
         this.imagepath = image;
     }
-
 }
