@@ -36,6 +36,8 @@ public class CheckoutView {
     private Label priceLabel;
     @FXML
     private ImageView qrImageView;
+    @FXML
+    private Label addressLabel;
 
     /**
      * Constructor
@@ -48,6 +50,7 @@ public class CheckoutView {
         statusLabel.setText("null");
         cryptoTypeLabel.setText("null");
         priceLabel.setText("null");
+        addressLabel.setText("null");
 
         MakeOrderController makeOrderCon = new MakeOrderController(controller.getToken(), controller.getCart(),
                 controller.getSelectedCoin());
@@ -58,6 +61,7 @@ public class CheckoutView {
             statusLabel.setText(orderMade.status);
             cryptoTypeLabel.setText(returnCryptoWord(orderMade.coin));
             priceLabel.setText(orderMade.price + " " + orderMade.coin.replaceFirst("t", ""));
+            addressLabel.setText(orderMade.cryptoAddress);
             qrImageView.setImage(getQrCodeImage(orderMade.cryptoAddress, 200, 200));
 
         });

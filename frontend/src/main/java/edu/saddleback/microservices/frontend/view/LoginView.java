@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.controller.backendcontrollers.CreateAccountController;
+import edu.saddleback.microservices.frontend.controller.backendcontrollers.GetCartController;
 import edu.saddleback.microservices.frontend.controller.backendcontrollers.LoginController;
 
 /**
@@ -51,6 +52,19 @@ public class LoginView {
 
                     controller.setLoggedInUsername(usernameTextField.getText());
                     controller.setToken(loginAttempt.getToken());
+
+                    System.out.println("HERE1");
+                    GetCartController con = new GetCartController(controller.getToken());
+                    con.getCartReceivedBoolean().subscribe((onCartReceived) -> {
+
+                        if (onCartReceived) {
+
+                            controller.setCart(con.getCart());
+                        }
+
+                    });
+                    con.start();
+
                     try {
                         App.getCoordinator().showAppScene();
                     } catch (Exception e) {

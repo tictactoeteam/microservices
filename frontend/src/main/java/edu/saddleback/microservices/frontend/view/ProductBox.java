@@ -37,10 +37,13 @@ public class ProductBox extends Pane {
         controller = App.getController();
 
         HBox productBoxHBox = new HBox();
+        productBoxHBox.setSpacing(10);
         productBoxHBox.setAlignment(Pos.CENTER);
         //Left side column
         System.out.println("PATH: " + thisProduct.getImagePath());
-        final ImageView image = new ImageView(new Image(thisProduct.getImagePath()));
+        ImageView image = new ImageView(new Image(thisProduct.getImagePath()));
+        image.setFitHeight(150);
+        image.setFitWidth(150);
 
         //Right side column
         VBox productBoxInfoVBox = new VBox();
@@ -95,6 +98,7 @@ public class ProductBox extends Pane {
                 });
 
             });
+            updateCon.start();
 
         } else if (product.getQuantity() - quantity < 0) {
 

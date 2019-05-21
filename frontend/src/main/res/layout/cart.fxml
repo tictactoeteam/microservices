@@ -58,20 +58,6 @@
             <VBox alignment="CENTER" spacing="5.0">
                <children>
                   <ListView fx:id="cartList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="209.0" />
-                  <HBox spacing="10.0">
-                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onRemoveItemClicked" text="Remove 1 Selected Item">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Label fx:id="errorLabel" text="error" textFill="#1b8035">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
                   <Button mnemonicParsing="false" onMouseClicked="#onDeleteCartClicked" text="Delete Cart">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -123,7 +109,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <Label fx:id="checkoutErrorText" text="errortext" textFill="#1b8035">
+                        <Label fx:id="checkoutErrorText" text="errortext" textFill="#1b8035" visible="false">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

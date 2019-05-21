@@ -12,9 +12,10 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 import edu.saddleback.microservices.frontend.model.Product;
+import edu.saddleback.microservices.frontend.model.backendmodels.CartObj;
 import edu.saddleback.microservices.frontend.model.backendmodels.CreateAccountObj;
-import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
 import edu.saddleback.microservices.frontend.model.backendmodels.LoginObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.MakeOrderObj;
 import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
 import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulAccountCreatedUser;
 import edu.saddleback.microservices.frontend.model.backendmodels.SuccessfulLoginToken;
@@ -40,10 +41,10 @@ public interface BackendService {
 
     //CART SERVICE
     @GET("/api/v1/cart")
-    Call<List<HollowCartObj>> getCart(@Header("Authorization") String token);
+    Call<CartObj> getCart(@Header("Authorization") String token);
 
     @PUT("/api/v1/cart")
-    Call<List<HollowCartObj>> updateCart(@Header("Authorization") String token, List<HollowCartObj> newCart);
+    Call<CartObj> updateCart(@Header("Authorization") String token, @Body CartObj cart);
 
     @DELETE("/api/v1/cart")
     Call<Void> deleteCart(@Header("Authorization") String token);
@@ -53,7 +54,7 @@ public interface BackendService {
     Call<List<OrderTransaction>> getAllUserOrders(@Header("Authorization") String token);
 
     @POST("/api/v1/orders")
-    Call<OrderTransaction> makeOrder(@Header("Authorization") String token, List<HollowCartObj> cart, String coin);
+    Call<OrderTransaction> makeOrder(@Header("Authorization") String token, @Body MakeOrderObj obj);
 
     //Controllers are finished for these above
     @GET("/api/v1/orders/{id}")
