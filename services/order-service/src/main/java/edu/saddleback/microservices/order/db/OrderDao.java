@@ -74,15 +74,14 @@ public class OrderDao {
         Connection connection = DbManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
                 "(status, customer_id, cart, coin, address, price, timestamp) " +
-                "VALUES (?::order_status, ?::uuid, ?, ?, ?, ?, ?)");
+                "VALUES (?::order_status, ?::uuid, " + convertCart(order.getCart()) + ", ?, ?, ?, ?)");
 
         statement.setString(1, order.getStatus().toString());
         statement.setString(2, order.getCustomerId());
-        statement.setString(3, convertCart(order.getCart()));
-        statement.setString(4, order.getCoin());
-        statement.setString(5, order.getAddress());
-        statement.setLong(6, order.getPrice());
-        statement.setString(7, order.getTimestamp().toString());
+        statement.setString(3,  order.getCoin());
+        statement.setString(4, order.getAddress());
+        statement.setLong(5, order.getPrice());
+        statement.setString(6, order.getTimestamp().toString());
 
         int affectedRows = statement.executeUpdate();
         if (affectedRows == 0) {
