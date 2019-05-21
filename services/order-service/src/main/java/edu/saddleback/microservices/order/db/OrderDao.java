@@ -59,7 +59,7 @@ public class OrderDao {
     public Order getOrder(String id) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders" +
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders " +
                 "WHERE id = ?");
 
         statement.setString(1, id);
@@ -72,8 +72,8 @@ public class OrderDao {
 
     public Order addOrder(Order order) throws SQLException {
         Connection connection = DbManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO orders" +
-                "(status, customer_id, cart, coin, address, price, timestamp)" +
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
+                "(status, customer_id, cart, coin, address, price, timestamp) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         statement.setString(1, order.getStatus().toString());
