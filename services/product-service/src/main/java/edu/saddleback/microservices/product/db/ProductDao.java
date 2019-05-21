@@ -52,7 +52,7 @@ public class ProductDao {
     public void insertProduct(Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO products (id, name, quantity, price, image_path)" +
-                        " VALUES (?,?,?,?,?)");
+                        " VALUES (?::uuid,?,?,?,?)");
 
         statement.setString(1,product.getProductId().toString());
         statement.setString(2,product.getProductName());
