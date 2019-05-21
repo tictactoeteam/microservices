@@ -28,15 +28,13 @@ public class OrderDao {
 
         String cartString = "array[";
         for (int i = 0; i < cart.size(); ++i) {
-            cartString += "(" + cart.get(i).product + ", " + cart.get(i).quantity + ")";
+            cartString += "('" + cart.get(i).product + "', " + cart.get(i).quantity + ")";
 
             if (i != cart.size() - 1) {
                 cartString += ", ";
-            } else {
-                cartString += "]::cart_item[]";
             }
         }
-
+        cartString += "]::cart_item[]";
         return cartString;
 
     }
@@ -64,6 +62,7 @@ public class OrderDao {
 
         statement.setString(1, id);
 
+        System.out.println(statement);
         ResultSet rs = statement.executeQuery();
 
         return rs.next() ? extractOrder(rs) : null;
@@ -74,15 +73,14 @@ public class OrderDao {
         Connection connection = DbManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
                 "(status, customer_id, cart, coin, address, price, timestamp) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                "VALUES (?::order_status, ?::uuid, " + convertCart(order.getCart()) + ", ?, ?, ?, ?)");
 
         statement.setString(1, order.getStatus().toString());
         statement.setString(2, order.getCustomerId());
-        statement.setString(3, convertCart(order.getCart()));
-        statement.setString(4, order.getCoin());
-        statement.setString(5, order.getAddress());
-        statement.setLong(6, order.getPrice());
-        statement.setString(7, order.getTimestamp().toString());
+        statement.setString(3,  order.getCoin());
+        statement.setString(4, order.getAddress());
+        statement.setLong(5, order.getPrice());
+        statement.setDate(6, new java.sql.Date(order.getTimestamp().getTime()));
 
         int affectedRows = statement.executeUpdate();
         if (affectedRows == 0) {
@@ -93,5 +91,21 @@ public class OrderDao {
 
         return getOrder(id);
 
+    }
+
+    public void markPending(String address) throws SQLException {
+        Connection connection = DbManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status='PENDING'::order_status WHERE address=?");
+
+        statement.setString(1, address);
+        statement.executeUpdate();
+    }
+
+    public void markConfirmed(String address) throws SQLException {
+        Connection connection = DbManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status='PAID'::order_status WHERE address=?");
+
+        statement.setString(1, address);
+        statement.executeUpdate();
     }
 }

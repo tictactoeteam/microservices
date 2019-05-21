@@ -12,20 +12,20 @@ public class ProductDao  {
     public static double getProductPrice(String id) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("SELECT price FROM product " +
-                "WHERE id IN ?::uuid");
+        PreparedStatement statement = connection.prepareStatement("SELECT price FROM products " +
+                "WHERE id = ?::uuid");
 
         statement.setString(1, id);
 
         ResultSet rs = statement.executeQuery();
 
-        return rs.getDouble(1);
+        return rs.next() ? rs.getDouble(1) : 0;
     }
 
     public static void addProduct(String id, double price) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO products (id, price) VALUES (?,?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO products (id, price) VALUES (?::uuid,?)");
         statement.setString(1, id);
         statement.setDouble(2, price);
 

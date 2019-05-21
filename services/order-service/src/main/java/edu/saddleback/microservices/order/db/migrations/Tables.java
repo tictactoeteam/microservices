@@ -18,7 +18,6 @@ public class Tables implements Migration {
         connection.prepareStatement("CREATE TABLE products " +
                 "(id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(), " +
                 "price numeric(12,2) NOT NULL)").execute();
-        connection.prepareStatement("CREATE INDEX idx_products_id ON products(name)").execute();
 
         connection.prepareStatement("CREATE TYPE order_status AS ENUM ('UNPAID', 'PENDING', 'PAID')").execute();
 
