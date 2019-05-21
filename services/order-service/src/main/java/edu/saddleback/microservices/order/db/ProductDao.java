@@ -13,7 +13,7 @@ public class ProductDao  {
         Connection connection = DbManager.getConnection();
 
         PreparedStatement statement = connection.prepareStatement("SELECT price FROM product " +
-                "WHERE id IN ?::uuid");
+                "WHERE id = ?::uuid");
 
         statement.setString(1, id);
 
