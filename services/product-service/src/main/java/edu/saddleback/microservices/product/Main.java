@@ -24,6 +24,9 @@ public class Main {
             }
         }
 
+
+        DbManager.migrate();
+        
         ProductDao productDao = new ProductDao();
         Product coke = new Product(UUID.randomUUID(),"Cocaine", new BigDecimal(27.03),300,
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Crack-cocaine-2-grams.jpeg" +
@@ -49,7 +52,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        DbManager.migrate();
         start();
     }
 
