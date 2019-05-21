@@ -19,7 +19,7 @@ public class ProductDao  {
 
         ResultSet rs = statement.executeQuery();
 
-        return rs.getDouble(1);
+        return rs.next() ? rs.getDouble(1) : 0;
     }
 
     public static void addProduct(String id, double price) throws SQLException {
