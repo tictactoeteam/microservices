@@ -80,7 +80,7 @@ public class OrderDao {
         statement.setString(3,  order.getCoin());
         statement.setString(4, order.getAddress());
         statement.setLong(5, order.getPrice());
-        statement.setString(6, order.getTimestamp().toString());
+        statement.setDate(6, new java.sql.Date(order.getTimestamp().getTime()));
 
         int affectedRows = statement.executeUpdate();
         if (affectedRows == 0) {
