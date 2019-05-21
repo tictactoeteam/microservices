@@ -6,10 +6,10 @@ Final class project of CS4B. The task was to create a RESTful microservices stac
 
 ## Packages
 
-- [frontend/](Frontend) - JavaFX app to interact with the backend (via Retrofit)
-- [services/auth-service/](Auth Service) - Java microservice for creating user accounts and logging in
-- [services/cart-service/](Cart Service) - Java microservice for storing products in a user's cart
-- [services/deposit-service/](Deposit Service) - TypeScript + Node microservice for tracking cryptocurrency deposits to pay for orders
+- [frontend](Frontend) - JavaFX app to interact with the backend (via Retrofit)
+- [services/auth-service](Auth Service) - Java microservice for creating user accounts and logging in
+- [services/cart-service](Cart Service) - Java microservice for storing products in a user's cart
+- [services/deposit-service](Deposit Service) - TypeScript + Node microservice for tracking cryptocurrency deposits to pay for orders
 - [services/gateway](Gateway) - Nginx reverse proxy to expose API routes
 - [services/order-service](Order Service) - Java microservice for placing and tracking orders
 - [services/product-service](Product Service) - Java microservice for retrieving available products and stock
