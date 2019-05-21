@@ -62,6 +62,7 @@ public class OrderDao {
 
         statement.setString(1, id);
 
+        System.out.println(statement);
         ResultSet rs = statement.executeQuery();
 
         return rs.next() ? extractOrder(rs) : null;
