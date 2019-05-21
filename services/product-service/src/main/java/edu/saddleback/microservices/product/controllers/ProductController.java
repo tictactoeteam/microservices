@@ -51,24 +51,9 @@ public class ProductController {
             product.setProductQuantity(productList.get(i).getProductQuantity());
             product.setProductPrice(productList.get(i).getProductPrice());
 
-            JsonObject res = new JsonObject();
-            res.addProperty("id", product.getProductId().toString());
-            res.addProperty("name", product.getProductName());
-            res.addProperty("price", product.getProductPrice().toString());
-            res.addProperty("quantity", product.getProductQuantity());
-            res.addProperty("image_path", product.getProductImage());
-
-
+            JsonObject res = product.toJson();
             jsonProductList.add(res);
         }
-        try {
-            getChannel().basicPublish("product", "get", null,
-                    jsonProductList.toString().getBytes());
-        } catch (IOException e) {
-            System.err.println("Failed to publish new user to Rabbit");
-            e.printStackTrace();
-        }
-
         return jsonProductList;
     }
 
