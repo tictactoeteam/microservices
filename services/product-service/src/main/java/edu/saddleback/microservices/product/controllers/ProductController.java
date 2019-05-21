@@ -13,6 +13,8 @@ import edu.saddleback.microservices.product.model.Product;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import spark.Request;
 import spark.Response;
 
@@ -109,12 +111,19 @@ public class ProductController {
                             JsonObject json = parser.parse(body.toString()).getAsJsonObject();
 
                             //go through the json array here?
-                            json.get("cart").getAsJsonArray();
+                            JsonArray cartArray = json.get("cart").getAsJsonArray();
+
+                            for(int i = 0; i<cartArray.size(); i++){
+                            String productName = cartArray.getAsString();
+
+                            }
 
                         }
                     });
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
