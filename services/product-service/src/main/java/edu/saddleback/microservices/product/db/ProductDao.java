@@ -31,7 +31,7 @@ public class ProductDao {
 
         ArrayList<Product> products = new ArrayList<>();
 
-        ResultSet rs = statement.executeQuery("SELECT * FROM products");
+        ResultSet rs = statement.executeQuery();
         while (rs.next()) {
             products.add(extractProduct(rs));
         }

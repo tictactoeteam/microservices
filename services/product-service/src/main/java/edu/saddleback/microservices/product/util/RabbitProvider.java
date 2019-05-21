@@ -41,6 +41,9 @@ public class RabbitProvider {
 
         try {
             channel = getConnection().createChannel();
+            channel.exchangeDeclare("product", "direct", true);
+            channel.queueDeclare("product-created", true, false, false, null);
+            channel.queueBind("product-created", "product", "created");
         } catch (IOException e) {
             e.printStackTrace();
         }
