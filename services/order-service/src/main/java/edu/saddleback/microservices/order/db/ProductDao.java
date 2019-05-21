@@ -25,7 +25,7 @@ public class ProductDao  {
     public static void addProduct(String id, double price) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO products (id, price) VALUES (?,?)");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO products (id, price) VALUES (?::uuid,?)");
         statement.setString(1, id);
         statement.setDouble(2, price);
 
