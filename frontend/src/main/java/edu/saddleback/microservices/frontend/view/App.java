@@ -7,11 +7,19 @@ import javafx.stage.Stage;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
 
+/**
+ * This starts the application, loads the window and sets the stage with the main application page.
+ */
 public class App extends Application {
 
     private static SceneCoordinator coordinator;
     private static Stage Window;
 
+    /**
+     * Creates the scene coordinator and shows the App Scene.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         coordinator = new SceneCoordinator(Window);
@@ -23,6 +31,11 @@ public class App extends Application {
         }
     }
 
+    /**
+     * Creates the window assigns it to the scene coordinator, showing the App Scene.
+     *
+     * @param window
+     */
     @Override
     public void start(Stage window) {
 
@@ -73,6 +86,9 @@ public class App extends Application {
 
     }
 
+    /**
+     * Kills the application on exit request.
+     */
     @Override
     public void stop() {
         System.exit(1);

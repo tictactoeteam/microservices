@@ -16,7 +16,7 @@ import edu.saddleback.microservices.frontend.controller.backendcontrollers.GetAl
 import edu.saddleback.microservices.frontend.model.Product;
 
 /**
- * Controls the app.fxml page, including purchasing items and logging in/registering.
+ * Controls the app.fxml page, including adding items to the cart and logging in/registering.
  */
 public class AppView {
 
@@ -31,6 +31,10 @@ public class AppView {
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * Constructor
+     * Initializes the logged in username label and fills the scroll pane with all ProductBoxs.
+     */
     public void initialize() {
 
         controller = App.getController();
@@ -52,7 +56,6 @@ public class AppView {
         }
 
         GetAllProductsController productsController = new GetAllProductsController();
-
         productsController.getProductsRecievedBoolean().subscribe((isProductsReceived) -> {
 
             if (isProductsReceived.equals(true)) { //Success

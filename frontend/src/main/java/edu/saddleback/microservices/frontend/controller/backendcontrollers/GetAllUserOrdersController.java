@@ -10,12 +10,21 @@ import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
+/**
+ * Controls all get all of a user's orders attempt logic, handles sending a request via Retrofit API and the responses
+ * as well.
+ */
 public class GetAllUserOrdersController implements Callback<List<OrderTransaction>> {
 
     private String token;
     private Observable<Boolean> ordersReceived;
     List<OrderTransaction> orders;
 
+    /**
+     * Constructor
+     *
+     * @param token
+     */
     public GetAllUserOrdersController(String token) {
 
         this.token = token;
@@ -24,6 +33,9 @@ public class GetAllUserOrdersController implements Callback<List<OrderTransactio
 
     }
 
+    /**
+     * Sends the https request.
+     */
     public void start() {
 
         Call<List<OrderTransaction>> call = AppController.getBackendService().getAllUserOrders(token);
@@ -31,6 +43,12 @@ public class GetAllUserOrdersController implements Callback<List<OrderTransactio
 
     }
 
+    /**
+     * Handles the response, saves all data, and notifies listeners.
+     *
+     * @param call
+     * @param response
+     */
     @Override
     public void onResponse(Call<List<OrderTransaction>> call, Response<List<OrderTransaction>> response) {
 
@@ -44,6 +62,12 @@ public class GetAllUserOrdersController implements Callback<List<OrderTransactio
 
     }
 
+    /**
+     * Handles the failure response and notifies listeners.
+     *
+     * @param call
+     * @param t
+     */
     @Override
     public void onFailure(Call<List<OrderTransaction>> call, Throwable t) {
 
@@ -61,6 +85,11 @@ public class GetAllUserOrdersController implements Callback<List<OrderTransactio
         return orders;
     }
 
+    /**
+     * Returns the sum of all items' cost.
+     *
+     * @return
+     */
     public long getOrdersSum() {
 
         long sum = 0;

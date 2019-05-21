@@ -7,11 +7,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import edu.saddleback.microservices.frontend.interfaces.BackendService;
 
+/**
+ * Represents the setup data for all https requests.
+ */
 public class BackendServiceObject {
 
     private final String baseUrl = "https://k8s.typokign.com/";
     private BackendService service;
 
+    /**
+     * Constructor
+     * Builds the retrofit https api classes.
+     */
     public BackendServiceObject() {
 
         Gson gson = new GsonBuilder()
@@ -25,6 +32,7 @@ public class BackendServiceObject {
 
     }
 
+    //Getters
     public BackendService getBackendService() {
         return service;
     }

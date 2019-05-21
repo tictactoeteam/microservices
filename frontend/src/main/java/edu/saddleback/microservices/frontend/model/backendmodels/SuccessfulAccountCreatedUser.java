@@ -1,5 +1,8 @@
 package edu.saddleback.microservices.frontend.model.backendmodels;
 
+/**
+ * Represents a create account https return data object.
+ */
 public class SuccessfulAccountCreatedUser {
 
     private String id;
@@ -8,6 +11,15 @@ public class SuccessfulAccountCreatedUser {
     private long dateCreated;
     private long lastLoginDate;
 
+    /**
+     * Constructor
+     *
+     * @param id
+     * @param username
+     * @param email
+     * @param createdAt
+     * @param lastLogin
+     */
     public SuccessfulAccountCreatedUser(String id, String username, String email, long createdAt, long lastLogin) {
 
         this.id = id;

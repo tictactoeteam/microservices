@@ -1,5 +1,6 @@
 package edu.saddleback.microservices.frontend.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -44,17 +45,22 @@ public class Cart {
      */
     public double getTotalCost() {
 
-        double sum = 0;
+        BigDecimal sum = new BigDecimal(0);
         for (int i = 0; i < cartItems.size(); i++) {
 
-            sum += cartItems.get(i).getPrice();
+            sum.add(cartItems.get(i).getPrice());
 
         }
 
-        return sum;
+        return sum.doubleValue();
 
     }
 
+    /**
+     * Returns the total quantity of cart items.
+     *
+     * @return
+     */
     public int getTotalQuantity() {
 
         int sum = 0;

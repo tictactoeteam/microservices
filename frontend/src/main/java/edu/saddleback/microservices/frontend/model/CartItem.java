@@ -1,7 +1,9 @@
 package edu.saddleback.microservices.frontend.model;
 
+import java.math.BigDecimal;
+
 /**
- * Represents a cart item, which is a product and its quantity.
+ * Represents a cart item, which is a product and its quantity chosen to be bought.
  */
 public class CartItem {
 
@@ -51,10 +53,14 @@ public class CartItem {
      *
      * @return
      */
-    public double getPrice() {
-        return product.getPrice() * quantity;
+    public BigDecimal getPrice() {
+        return product.getPrice().multiply(new BigDecimal(quantity));
     }
 
+    /**
+     * Overrides the toString property.
+     * @return
+     */
     @Override
     public String toString() {
         return product + " Quantity: " + quantity;

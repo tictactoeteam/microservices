@@ -27,6 +27,7 @@ public class ProductBox extends Pane {
 
     /**
      * Constructor
+     * Builds the javafx object and holds the addToCartClicked lambda method.
      *
      * @param product
      */
@@ -77,7 +78,7 @@ public class ProductBox extends Pane {
      */
     private void addToCartClicked(Product product, int quantity) {
 
-        if (quantity > 0) {
+        if (quantity > 0 && product.getQuantity() - quantity >= 0) {
 
             controller.getCart().add(new CartItem(product, quantity));
 
@@ -93,6 +94,10 @@ public class ProductBox extends Pane {
                 });
 
             });
+
+        } else if (product.getQuantity() - quantity < 0) {
+
+            quantityTextField.setText("***");
 
         }
 

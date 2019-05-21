@@ -1,14 +1,17 @@
 package edu.saddleback.microservices.frontend.model;
 
+import java.math.BigDecimal;
+
 /**
- * Represents a product, with name, image, and price.
+ * Represents a product, with ID, name, image, price, and total quantity.
  */
 public class Product {
 
     private String productID;
     private String name;
     private String imagePath;
-    private double price;
+    private BigDecimal price;
+    private int quantity;
 
     /**
      * Constructor
@@ -17,12 +20,13 @@ public class Product {
      * @param imagePath
      * @param price
      */
-    public Product(String productID, String name, String imagePath, double price) {
+    public Product(String productID, String name, String imagePath, BigDecimal price, int quantity) {
 
         this.productID = productID;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
+        this.quantity = quantity;
 
     }
 
@@ -33,7 +37,7 @@ public class Product {
      */
     public Product(Product tmpProduct) {
 
-        this(tmpProduct.productID, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price);
+        this(tmpProduct.productID, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price, tmpProduct.quantity);
 
     }
 
@@ -41,7 +45,7 @@ public class Product {
      * Default Constructor
      */
     public Product() {
-        this("", "", "", 0.00);
+        this("", "", "", BigDecimal.valueOf(0.00), -1);
     }
 
     //Getters
@@ -57,10 +61,23 @@ public class Product {
         return imagePath;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    //Setters
+    public void setQuantity(int num) {
+        quantity = num;
+    }
+
+    /**
+     * Overrides the toString property.
+     * @return
+     */
     @Override
     public String toString() {
         return name;

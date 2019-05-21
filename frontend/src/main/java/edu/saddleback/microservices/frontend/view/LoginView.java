@@ -25,6 +25,9 @@ public class LoginView {
     @FXML
     private TextField emailTextField;
 
+    /**
+     * Constructor
+     */
     public void initialize() {
 
         controller = App.getController();

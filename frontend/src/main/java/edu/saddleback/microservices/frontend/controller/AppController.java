@@ -4,6 +4,10 @@ import edu.saddleback.microservices.frontend.interfaces.BackendService;
 import edu.saddleback.microservices.frontend.model.Cart;
 import edu.saddleback.microservices.frontend.model.backendmodels.BackendServiceObject;
 
+/**
+ * Controller of the user's UI experience, holds the user's information and holds their cart, as well as holding the
+ * https request methods.
+ */
 public class AppController {
 
     private String loggedInUsername;
@@ -12,6 +16,9 @@ public class AppController {
     private static BackendServiceObject backendServiceObject;
     private String selectedCoin;
 
+    /**
+     * Constructor
+     */
     public AppController() {
 
         loggedInUsername = "";
