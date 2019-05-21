@@ -1,5 +1,6 @@
 package edu.saddleback.microservices.frontend.model.backendmodels;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
@@ -23,6 +24,7 @@ public class BackendServiceObject {
 
         Gson gson = new GsonBuilder()
                 .setLenient()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)

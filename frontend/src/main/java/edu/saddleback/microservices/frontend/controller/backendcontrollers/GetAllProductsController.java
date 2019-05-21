@@ -53,6 +53,7 @@ public class GetAllProductsController implements Callback<List<Product>> {
         if (response.code() == 200) {
 
             products = response.body();
+            System.out.println(products);
             productsReceived.set(true);
 
         } else {
