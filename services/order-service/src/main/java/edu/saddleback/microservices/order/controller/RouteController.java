@@ -137,7 +137,7 @@ public class RouteController {
             double conversion = rezJson.get("marketData").getAsJsonArray().get(0).getAsJsonObject().get("currencies")
                 .getAsJsonObject().get("USD").getAsJsonObject().get("last").getAsDouble();
 
-            return (long)((price / 100.0) / conversion * Math.pow(10, getDecimals(coin)));
+            return (long)((price / conversion * Math.pow(10, getDecimals(coin))));
         } catch (IOException ex) {
             ex.printStackTrace();
             return 0;
