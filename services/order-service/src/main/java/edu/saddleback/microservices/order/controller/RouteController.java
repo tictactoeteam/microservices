@@ -44,7 +44,13 @@ public class RouteController {
         order.setCoin(coin);
 
         order.setAddress(AddressUtil.getAddress(coin));
-        order.setPrice(convertUsd(coin, ProductDao.getProductPrice(cart)));
+
+        double price = 0;
+        for (CartObject obj : cart) {
+            price += ProductDao.getProductPrice(obj.product) * obj.quantity;
+        }
+
+        order.setPrice(convertUsd(coin, price));
         order.setTimestamp(new Date());
 
         order = OrderDao.getInstance().addOrder(order);
@@ -112,7 +118,7 @@ public class RouteController {
         }
     }
 
-    private static long convertUsd(String coin, long price) {
+    private static long convertUsd(String coin, double price) {
         try {
             URL url = new URL("https://test.bitgo.com/api/v2/market/latest?coin=" + coin);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

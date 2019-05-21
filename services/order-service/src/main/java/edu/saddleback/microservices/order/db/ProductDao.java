@@ -9,21 +9,30 @@ import java.util.ArrayList;
 import edu.saddleback.microservices.order.util.CartObject;
 
 public class ProductDao  {
-    public static long getProductPrice(ArrayList<CartObject> cart) throws SQLException {
+    public static double getProductPrice(String id) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("SELECT SUM(price) FROM product " +
-                "WHERE id IN ?::uuid[]");
+        PreparedStatement statement = connection.prepareStatement("SELECT price FROM product " +
+                "WHERE id IN ?::uuid");
 
-        String[] ids = cart.stream().map((cartObject) -> cartObject.product).toArray(String[]::new);
-        statement.setArray(1, connection.createArrayOf("text", ids));
+        statement.setString(1, id);
 
         ResultSet rs = statement.executeQuery();
 
-        long price = rs.getLong(1);
+        return rs.getDouble(1);
+    }
 
-        System.out.println(price);
+    public static void addProduct(String id, double price) throws SQLException {
+        Connection connection = DbManager.getConnection();
 
-        return price;
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO products (id, price) VALUES (?,?)");
+        statement.setString(1, id);
+        statement.setDouble(2, price);
+
+        int rowsAffected = statement.executeUpdate();
+
+        if (rowsAffected == 0) {
+            throw new SQLException("Failed to create product " + id);
+        }
     }
 }

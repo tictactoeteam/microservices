@@ -41,9 +41,11 @@ public class RabbitController {
         try {
             channel = getConnection().createChannel();
 
-            channel.exchangeDeclare("user", "direct", true);
-            channel.queueDeclare("user-created", true, false, false, null);
-            channel.queueBind("user-created", "user", "created");
+            channel.exchangeDeclare("order", "direct", true);
+            channel.queueDeclare("order-placed", true, false, false, null);
+            channel.queueDeclare("order-shipped", true, false, false, null);
+            channel.queueBind("order-placed", "order", "placed");
+            channel.queueBind("order-shipped", "order", "shipped");
         } catch (IOException e) {
             e.printStackTrace();
         }

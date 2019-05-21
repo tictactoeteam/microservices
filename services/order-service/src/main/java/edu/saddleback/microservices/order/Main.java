@@ -3,6 +3,7 @@ package edu.saddleback.microservices.order;
 import com.google.gson.Gson;
 import spark.Spark;
 
+import edu.saddleback.microservices.order.controller.ProductController;
 import edu.saddleback.microservices.order.controller.RouteController;
 import edu.saddleback.microservices.order.db.DbManager;
 
@@ -34,5 +35,6 @@ public class Main {
         Spark.get("/orders/:orderId/", RouteController::getOrder, gson::toJson);
         Spark.post("/orders/", RouteController::createOrder, gson::toJson);
 
+        new ProductController().start();
     }
 }
