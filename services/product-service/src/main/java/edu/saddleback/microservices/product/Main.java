@@ -39,7 +39,7 @@ public class Main {
                 "https://i0.wp.com/metro.co.uk/wp-content/uploads/2017/10/pri_55481725.jpg?quality=90&strip=all&zoom=1&resize=644%2C402&ssl=1\n");
         Product magicCroissant = new Product(UUID.randomUUID(),"Magic Croissant", new BigDecimal(27.03),344,
                 "https://www.wowamazing.com/wp-content/uploads/2015/06/cutoms-confiscated-items-1.jpg");
-        Product pizza = new Product(UUID.randomUUID(),"Pizza", new BigDecimal(93.03),411,
+        Product pizza = new Product(UUID.randomUUID(),"2x Large Pepperoni Pizza", new BigDecimal(80_000_000.00),411,
                 "https://mypizzaiole.com/wp-content/uploads/2017/03/Untitled-1-36.png");
         try {
             productDao.insertProduct(coke);
