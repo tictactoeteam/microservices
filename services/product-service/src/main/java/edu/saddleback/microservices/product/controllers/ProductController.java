@@ -120,6 +120,7 @@ public class ProductController {
 
                             for (int i = 0; i < cartArray.size(); i++) {
                                 String productName = cartArray.getAsString();
+                                System.out.println(productName + " was received");
 
                             }
 
