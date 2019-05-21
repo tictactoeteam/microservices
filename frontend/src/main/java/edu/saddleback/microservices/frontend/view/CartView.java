@@ -71,7 +71,7 @@ public class CartView {
 
             if (selectedItemQuantity > 1) {
 
-                controller.getCart().getCartItem(selectedIndex).setQuantity(selectedItemQuantity);
+                controller.getCart().getCartItem(selectedIndex).setQuantity(selectedItemQuantity - 1);
                 //UPDATE SERVER CART
                 UpdateCartController cartConn = new UpdateCartController(controller.getToken(), controller.getCart());
                 cartConn.getCartReceivedBoolean().subscribe((onCartUpdated) -> {

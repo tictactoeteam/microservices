@@ -9,6 +9,7 @@ public class Product {
     private String name;
     private String imagePath;
     private double price;
+    private int quantity;
 
     /**
      * Constructor
@@ -17,12 +18,13 @@ public class Product {
      * @param imagePath
      * @param price
      */
-    public Product(String productID, String name, String imagePath, double price) {
+    public Product(String productID, String name, String imagePath, double price, int quantity) {
 
         this.productID = productID;
         this.name = name;
         this.imagePath = imagePath;
         this.price = price;
+        this.quantity = quantity;
 
     }
 
@@ -33,7 +35,7 @@ public class Product {
      */
     public Product(Product tmpProduct) {
 
-        this(tmpProduct.productID, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price);
+        this(tmpProduct.productID, tmpProduct.name, tmpProduct.imagePath, tmpProduct.price, tmpProduct.quantity);
 
     }
 
@@ -41,7 +43,7 @@ public class Product {
      * Default Constructor
      */
     public Product() {
-        this("", "", "", 0.00);
+        this("", "", "", 0.00, -1);
     }
 
     //Getters
@@ -59,6 +61,15 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    //Setters
+    public void setQuantity(int num) {
+        quantity = num;
     }
 
     @Override
