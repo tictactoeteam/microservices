@@ -51,7 +51,7 @@ public class ProductDao {
 
     public void insertProduct(Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO users (id, name, quantity, price, imagepath)" +
+                "INSERT INTO products (id, name, quantity, price, imagepath)" +
                         "VALUES (?,?,?,?,?)");
 
         statement.setString(1,product.getProductId().toString());
