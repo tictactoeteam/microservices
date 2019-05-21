@@ -1,14 +1,16 @@
 package edu.saddleback.microservices.frontend.model;
 
+import java.math.BigDecimal;
+
 /**
- * Represents a product, with name, image, and price.
+ * Represents a product, with ID, name, image, price, and total quantity.
  */
 public class Product {
 
     private String productID;
     private String name;
     private String imagePath;
-    private double price;
+    private BigDecimal price;
     private int quantity;
 
     /**
@@ -18,7 +20,7 @@ public class Product {
      * @param imagePath
      * @param price
      */
-    public Product(String productID, String name, String imagePath, double price, int quantity) {
+    public Product(String productID, String name, String imagePath, BigDecimal price, int quantity) {
 
         this.productID = productID;
         this.name = name;
@@ -43,7 +45,7 @@ public class Product {
      * Default Constructor
      */
     public Product() {
-        this("", "", "", 0.00, -1);
+        this("", "", "", BigDecimal.valueOf(0.00), -1);
     }
 
     //Getters
@@ -59,7 +61,7 @@ public class Product {
         return imagePath;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -72,6 +74,10 @@ public class Product {
         quantity = num;
     }
 
+    /**
+     * Overrides the toString property.
+     * @return
+     */
     @Override
     public String toString() {
         return name;

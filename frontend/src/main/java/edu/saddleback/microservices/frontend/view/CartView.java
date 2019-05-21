@@ -36,6 +36,10 @@ public class CartView {
     @FXML
     private ChoiceBox cryptoChoiceBox;
 
+    /**
+     * Constructor
+     * Initializes the cart UI with all cart values.
+     */
     public void initialize() {
 
         controller = App.getController();
@@ -60,7 +64,7 @@ public class CartView {
     }
 
     /**
-     * Removes one of a selected item.
+     * Removes one of a selected item, if possible, from the user's cart.
      */
     public void onRemoveItemClicked() {
 
@@ -127,6 +131,9 @@ public class CartView {
 
     }
 
+    /**
+     * Deletes the user's cart, emptying it.
+     */
     public void onDeleteCartClicked() {
 
         if (controller.getCart().getSize() > 0) {
@@ -143,6 +150,10 @@ public class CartView {
 
     }
 
+    /**
+     * If checkout conditions are met, checkout scene is called and a transaction is sent to the server, generating a
+     * crypto QR code.
+     */
     public void onCheckoutClicked() {
 
         if (controller.getCart().getTotalCost() > 0 && cryptoChoiceBox.getSelectionModel().getSelectedIndex() >= 0) {
@@ -160,6 +171,9 @@ public class CartView {
 
     }
 
+    /**
+     * Refreshes the UI with current cart items and values.
+     */
     private void refreshPage() {
 
         //Populates the table with cart items
@@ -189,6 +203,12 @@ public class CartView {
 
     }
 
+    /**
+     * Utility method that returns the abbreviation for the transaction https request.
+     *
+     * @param word
+     * @return
+     */
     private String returnCryptoAbbreviation(String word) {
 
         switch (word) {

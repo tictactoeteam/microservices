@@ -10,11 +10,17 @@ import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.Product;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
+/**
+ * Controls all get all products attempt logic, handles sending a request via Retrofit API and the responses as well.
+ */
 public class GetAllProductsController implements Callback<List<Product>> {
 
     private List<Product> products;
     private Observable<Boolean> productsReceived;
 
+    /**
+     * Constructor
+     */
     public GetAllProductsController() {
 
 
@@ -23,6 +29,9 @@ public class GetAllProductsController implements Callback<List<Product>> {
 
     }
 
+    /**
+     * Sends the https request.
+     */
     public void start() {
 
         Call<List<Product>> call = AppController.getBackendService().getAllProducts();
@@ -30,6 +39,12 @@ public class GetAllProductsController implements Callback<List<Product>> {
 
     }
 
+    /**
+     * Handles the response, saves the data, notifies the listeners.
+     *
+     * @param call
+     * @param response
+     */
     @Override
     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 
@@ -44,6 +59,12 @@ public class GetAllProductsController implements Callback<List<Product>> {
 
     }
 
+    /**
+     * Handles the failure response and notifies the listeners.
+     *
+     * @param call
+     * @param t
+     */
     @Override
     public void onFailure(Call<List<Product>> call, Throwable t) {
 

@@ -13,12 +13,20 @@ import edu.saddleback.microservices.frontend.model.CartItem;
 import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
+/**
+ * Controls all get cart attempt logic, handles sending a request via Retrofit API and the responses as well.
+ */
 public class GetCartController implements Callback<List<HollowCartObj>> {
 
     private String token;
     private List<CartItem> cartItems;
     private Observable<Boolean> cartReceived;
 
+    /**
+     * Constructor
+     *
+     * @param token
+     */
     public GetCartController(String token) {
 
         cartReceived = new Observable<>();
@@ -27,6 +35,9 @@ public class GetCartController implements Callback<List<HollowCartObj>> {
 
     }
 
+    /**
+     * Sends the https request.
+     */
     public void start() {
 
         Call<List<HollowCartObj>> call = AppController.getBackendService().getCart(token);
@@ -34,6 +45,12 @@ public class GetCartController implements Callback<List<HollowCartObj>> {
 
     }
 
+    /**
+     * Handles the response, saves and translates the hollow cart items into cartItems, and notifies listeners.
+     *
+     * @param call
+     * @param response
+     */
     @Override
     public void onResponse(Call<List<HollowCartObj>> call, Response<List<HollowCartObj>> response) {
 
@@ -72,6 +89,12 @@ public class GetCartController implements Callback<List<HollowCartObj>> {
 
     }
 
+    /**
+     * Handles the failure message and notifies listeners
+     *
+     * @param call
+     * @param t
+     */
     @Override
     public void onFailure(Call<List<HollowCartObj>> call, Throwable t) {
 
@@ -88,7 +111,7 @@ public class GetCartController implements Callback<List<HollowCartObj>> {
     public List<CartItem> getCartItems() {
         return cartItems;
     }
-
+    
     public Cart getCart() {
 
         Cart tmpCart = new Cart();

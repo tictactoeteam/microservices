@@ -19,6 +19,9 @@ import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.controller.backendcontrollers.MakeOrderController;
 import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
 
+/**
+ * Controls the checkout.fxml page, displaying the order data and the crypto QR code to make an actual purchase.
+ */
 public class CheckoutView {
 
     private AppController controller;
@@ -34,6 +37,10 @@ public class CheckoutView {
     @FXML
     private ImageView qrImageView;
 
+    /**
+     * Constructor
+     * Initializes the UI with the returned transaction values and generates the correct crypto QR code.
+     */
     public void initialize() {
 
         controller = App.getController();
@@ -59,6 +66,9 @@ public class CheckoutView {
 
     }
 
+    /**
+     * Shows the main App Scene.
+     */
     public void onShopButtonClicked() {
 
         try {
@@ -69,6 +79,9 @@ public class CheckoutView {
 
     }
 
+    /**
+     * Shows the cart scene.
+     */
     public void onCartImageClicked() {
 
         try {
@@ -79,6 +92,14 @@ public class CheckoutView {
 
     }
 
+    /**
+     * Utility method to generate a QR image for the given crypto transaction.
+     *
+     * @param text
+     * @param width
+     * @param height
+     * @return
+     */
     private Image getQrCodeImage(String text, int width, int height) {
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -100,6 +121,12 @@ public class CheckoutView {
 
     }
 
+    /**
+     * Utility method that returns the full word for the transaction https request.
+     *
+     * @param abbreviation
+     * @return
+     */
     private String returnCryptoWord(String abbreviation) {
 
         switch (abbreviation) {

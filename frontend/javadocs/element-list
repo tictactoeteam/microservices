@@ -1,0 +1,8 @@
+edu.saddleback.microservices.frontend
+edu.saddleback.microservices.frontend.controller
+edu.saddleback.microservices.frontend.controller.backendcontrollers
+edu.saddleback.microservices.frontend.interfaces
+edu.saddleback.microservices.frontend.model
+edu.saddleback.microservices.frontend.model.backendmodels
+edu.saddleback.microservices.frontend.observable
+edu.saddleback.microservices.frontend.view

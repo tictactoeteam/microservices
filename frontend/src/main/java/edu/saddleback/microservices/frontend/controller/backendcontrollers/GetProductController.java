@@ -8,20 +8,31 @@ import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.Product;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
+/**
+ * Controls all get product attempt logic, handles sending a request via Retrofit API and the responses as well.
+ */
 public class GetProductController implements Callback<Product> {
 
     private String productID;
     private Product product;
-    private Observable<Boolean> productRecieved;
+    private Observable<Boolean> productReceived;
 
+    /**
+     * Constructor
+     *
+     * @param productID
+     */
     public GetProductController(String productID) {
 
         this.productID = productID;
-        productRecieved = new Observable<>();
-        productRecieved.set(false);
+        productReceived = new Observable<>();
+        productReceived.set(false);
 
     }
 
+    /**
+     * Sends the https request.
+     */
     public void start() {
 
         Call<Product> call = AppController.getBackendService().getProduct(productID);
@@ -29,6 +40,12 @@ public class GetProductController implements Callback<Product> {
 
     }
 
+    /**
+     * Handles the respojse, saves the data, and notifies listeners.
+     *
+     * @param call
+     * @param response
+     */
     @Override
     public void onResponse(Call<Product> call, Response<Product> response) {
 
@@ -37,23 +54,29 @@ public class GetProductController implements Callback<Product> {
         if (response.code() == 200) {
 
             product = response.body();
-            productRecieved.set(true);
+            productReceived.set(true);
 
         }
 
     }
 
+    /**
+     * Handles the failure message and notifies listeners.
+     *
+     * @param call
+     * @param t
+     */
     @Override
     public void onFailure(Call<Product> call, Throwable t) {
 
         System.out.println("RECEIVED getProducts FAILURE");
-        productRecieved.set(false);
+        productReceived.set(false);
 
     }
 
     //Getter
     public Observable<Boolean> getProductRecievedBoolean() {
-        return productRecieved;
+        return productReceived;
     }
 
     public Product getProduct() {

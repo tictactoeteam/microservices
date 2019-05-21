@@ -1,6 +1,5 @@
 package edu.saddleback.microservices.frontend.view;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -14,6 +13,9 @@ import javafx.stage.Stage;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
 
+/**
+ * Represents a static scene object that controls the loading of the .fxml scenes.
+ */
 public class SceneCoordinator {
 
     private static AppController controller;
@@ -40,7 +42,7 @@ public class SceneCoordinator {
     }
 
     /**
-     * Displays the app.fxml to the Window.
+     * Displays the app.fxml scene to the Window.
      *
      * @throws IOException
      */
@@ -66,7 +68,7 @@ public class SceneCoordinator {
     }
 
     /**
-     * Displays the login.fxml to the Window.
+     * Displays the login.fxml scene to the Window.
      *
      * @throws IOException
      */
@@ -80,7 +82,7 @@ public class SceneCoordinator {
     }
 
     /**
-     * Displays the login.fxml to the Window.
+     * Displays the login.fxml scene to the Window.
      *
      * @throws IOException
      */
@@ -103,6 +105,9 @@ public class SceneCoordinator {
 
     }
 
+    /**
+     * Displays the checkout.fxml scene to the Window.
+     */
     public void showCheckoutScene() {
 
         URL url = null;

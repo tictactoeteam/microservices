@@ -12,6 +12,9 @@ import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
 import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
+/**
+ * Controls all make order attempt logic, handles sending a request via Retrofit API and the responses as well.
+ */
 public class MakeOrderController implements Callback<OrderTransaction> {
 
     private String token;
@@ -20,6 +23,13 @@ public class MakeOrderController implements Callback<OrderTransaction> {
     private String chosenCoin;
     private OrderTransaction order;
 
+    /**
+     * Constructor
+     *
+     * @param token
+     * @param cart
+     * @param coin
+     */
     public MakeOrderController(String token, Cart cart, String coin) {
 
         this.token = token;
@@ -35,6 +45,9 @@ public class MakeOrderController implements Callback<OrderTransaction> {
 
     }
 
+    /**
+     * Sends the https request.
+     */
     public void start() {
 
         Call<OrderTransaction> call = AppController.getBackendService().makeOrder(token, newCart, chosenCoin);
@@ -42,6 +55,12 @@ public class MakeOrderController implements Callback<OrderTransaction> {
 
     }
 
+    /**
+     * Handles the response, saves the data, and notifies listeners.
+     *
+     * @param call
+     * @param response
+     */
     @Override
     public void onResponse(Call<OrderTransaction> call, Response<OrderTransaction> response) {
 
@@ -55,6 +74,12 @@ public class MakeOrderController implements Callback<OrderTransaction> {
 
     }
 
+    /**
+     * Handles the failure response and notifies listeners.
+     *
+     * @param call
+     * @param t
+     */
     @Override
     public void onFailure(Call<OrderTransaction> call, Throwable t) {
 
