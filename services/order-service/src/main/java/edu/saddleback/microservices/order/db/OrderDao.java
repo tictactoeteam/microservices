@@ -72,7 +72,7 @@ public class OrderDao {
 
     }
 
-    public void addOrder(Order order) throws SQLException {
+    public Order addOrder(Order order) throws SQLException {
         Connection connection = DbManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO orders" +
                 "(status, customer_id, cart, coin, address, price, timestamp)" +
@@ -90,6 +90,10 @@ public class OrderDao {
         if (affectedRows == 0) {
             throw new SQLException("Invalid Order!");
         }
+
+        String id =  statement.getGeneratedKeys().getString(1);
+
+        return getOrder(id);
 
     }
 }

@@ -17,7 +17,8 @@ public class Order {
         this("", "", Status.UNPAID, new ArrayList<>(), "", "", 0, new Date());
     }
 
-    public Order(String id, String customerId, Status status, ArrayList<CartObject> cart, String coin, String address, long price, Date timestamp) {
+    public Order(String id, String customerId, Status status, ArrayList<CartObject> cart,
+                 String coin, String address, long price, Date timestamp) {
 
         this.id = id;
         this.customerId = customerId;
