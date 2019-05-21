@@ -34,9 +34,9 @@ public class Main {
         Product gun = new Product(UUID.randomUUID(),"Gun", new BigDecimal(17.03),10,
                 "https://www.ammoland.com/wp-content/uploads/2014/05/Smart-Guns.jpg");
         Product banana = new Product(UUID.randomUUID(),"Banana", new BigDecimal(1.03),160,
-                "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA2NS8xNDkvb3JpZ2luYWwvYmFuYW5hcy5qcGc=\n");
+                "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA2NS8xNDkvb3JpZ2luYWwvYmFuYW5hcy5qcGc=");
         Product kinderEgg = new Product(UUID.randomUUID(),"Kinder Egg", new BigDecimal(441.03),15,
-                "https://i0.wp.com/metro.co.uk/wp-content/uploads/2017/10/pri_55481725.jpg?quality=90&strip=all&zoom=1&resize=644%2C402&ssl=1\n");
+                "https://i0.wp.com/metro.co.uk/wp-content/uploads/2017/10/pri_55481725.jpg?quality=90&strip=all&zoom=1&resize=644%2C402&ssl=1");
         Product magicCroissant = new Product(UUID.randomUUID(),"Magic Croissant", new BigDecimal(27.03),344,
                 "https://www.wowamazing.com/wp-content/uploads/2015/06/cutoms-confiscated-items-1.jpg");
         Product pizza = new Product(UUID.randomUUID(),"2x Large Pepperoni Pizza", new BigDecimal(80_000_000.00),411,
