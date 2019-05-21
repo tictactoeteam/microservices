@@ -44,14 +44,14 @@ public class ProductDao {
         product.setProductName(rs.getString("name"));
         product.setProductQuantity(rs.getInt("quantity"));
         product.setProductPrice(rs.getBigDecimal("price"));
-        product.setProductImage(rs.getString("imagepath"));
+        product.setProductImage(rs.getString("image_path"));
 
         return product;
     }
 
     public void insertProduct(Product product) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO products (id, name, quantity, price, imagepath)" +
+                "INSERT INTO products (id, name, quantity, price, image_path)" +
                         "VALUES (?,?,?,?,?)");
 
         statement.setString(1,product.getProductId().toString());

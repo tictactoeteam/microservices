@@ -14,7 +14,8 @@ public class ProductTable implements Migration {
                 "(id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(), " +
                 "name text UNIQUE NOT NULL, " +
                 "price numeric(12,2) NOT NULL, " +
-                "quantity int NOT NULL DEFAULT 0)").execute();
+                "quantity int NOT NULL DEFAULT 0, " +
+                "image_path text NOT NULL)").execute();
 
         connection.prepareStatement("CREATE INDEX idx_products_name ON products (name)").execute();
     }

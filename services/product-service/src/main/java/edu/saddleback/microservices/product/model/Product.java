@@ -8,14 +8,14 @@ public class Product {
     String name;
     BigDecimal price;
     int quantity;
-    String imagepath;
+    String image_path;
 
     public Product(UUID id, String name, BigDecimal price, int quantity, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.imagepath = image;
+        this.image_path = image;
     }
 
     public Product() {
@@ -55,10 +55,10 @@ public class Product {
     }
 
     public String getProductImage() {
-        return imagepath;
+        return image_path;
     }
 
     public void setProductImage(String image) {
-        this.imagepath = image;
+        this.image_path = image;
     }
 }
