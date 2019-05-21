@@ -48,6 +48,8 @@ public class RabbitController {
             channel.queueBind("order-shipped", "order", "shipped");
 
             channel.queueDeclare("product-created", true, false, false, null);
+            channel.queueDeclare("transaction-pending", true, false, false, null);
+            channel.queueDeclare("transaction-confirmed", true, false, false, null);
         } catch (IOException e) {
             e.printStackTrace();
         }

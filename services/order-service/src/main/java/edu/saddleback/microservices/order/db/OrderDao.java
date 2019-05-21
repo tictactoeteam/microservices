@@ -94,4 +94,20 @@ public class OrderDao {
         return getOrder(id);
 
     }
+
+    public void markPending(String address) throws SQLException {
+        Connection connection = DbManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status=PENDING WHERE address=?");
+
+        statement.setString(1, address);
+        statement.executeUpdate();
+    }
+
+    public void markConfirmed(String address) throws SQLException {
+        Connection connection = DbManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status=PAID WHERE address=?");
+
+        statement.setString(1, address);
+        statement.executeUpdate();
+    }
 }
