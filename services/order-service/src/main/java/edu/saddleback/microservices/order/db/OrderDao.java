@@ -32,11 +32,9 @@ public class OrderDao {
 
             if (i != cart.size() - 1) {
                 cartString += ", ";
-            } else {
-                cartString += "]::cart_item[]";
             }
         }
-
+        cartString += "]::cart_item[]";
         return cartString;
 
     }
