@@ -71,6 +71,16 @@ services:
     build:
       context: ./services/order-service/
       dockerfile: Dockerfile
+    environment:
+      DO_INIT: "true"
+      POSTGRES_URL: "jdbc:postgresql://postgres:5432/order_service"
+      POSTGRES_USER: "order_service"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_SU_URL: "jdbc:postgresql://postgres:5432/"
+      POSTGRES_SUPERUSER: "postgres"
+      POSTGRES_SU_PASSWORD: "postgres"
+    volumes:
+      - "./services/auth-service/cert.pem:/opt/cert.pem"
 
   product-service:
     image: registry.gitlab.com/typokign/microservices/product-service

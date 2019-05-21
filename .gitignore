@@ -3,3 +3,4 @@
 *.iml
 *.pem
 *.log
+.DS_Store
