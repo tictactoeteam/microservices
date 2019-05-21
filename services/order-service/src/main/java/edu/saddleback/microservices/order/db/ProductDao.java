@@ -16,7 +16,10 @@ public class ProductDao  {
                 "WHERE id IN ?");
 
         String[] ids = cart.stream().map((cartObject) -> cartObject.product).toArray(String[]::new);
-        System.out.println(ids);
+        for (String id : ids) {
+            System.out.println(id);
+        }
+        System.out.println(connection.createArrayOf("uuid", ids));
         statement.setArray(1, connection.createArrayOf("uuid", ids));
 
         ResultSet rs = statement.executeQuery();

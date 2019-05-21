@@ -37,8 +37,8 @@ public class Tables implements Migration {
                 "address text NOT NULL, " +
                 "price bigint NOT NULL, " +
                 "timestamp timestamptz DEFAULT now())").execute();
-        connection.prepareStatement("CREATE INDEX idx_orders_id ON orders(status)").execute();
-        connection.prepareStatement("CREATE INDEX idx_orders_id ON orders(timestamp)").execute();
+        connection.prepareStatement("CREATE INDEX idx_orders_status ON orders(status)").execute();
+        connection.prepareStatement("CREATE INDEX idx_orders_timestamp ON orders(timestamp)").execute();
     }
 
     @Override
