@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import edu.saddleback.microservices.order.db.Migration;
 
-public class UserTable implements Migration {
+public class Tables implements Migration {
     @Override
     public void up(Connection connection) throws SQLException {
         connection.prepareStatement("CREATE TABLE users " +

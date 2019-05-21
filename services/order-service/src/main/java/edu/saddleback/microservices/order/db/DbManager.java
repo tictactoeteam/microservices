@@ -8,12 +8,10 @@ import java.util.Properties;
 
 import edu.saddleback.microservices.order.db.migrations.Init;
 import edu.saddleback.microservices.order.db.migrations.PgCrypto;
-import edu.saddleback.microservices.order.db.migrations.UserTable;
+import edu.saddleback.microservices.order.db.migrations.Tables;
 
-
-//LOL
 public class DbManager {
-    private static final Migration[] migrations = { new UserTable() };
+    private static final Migration[] migrations = { new Tables() };
 
     private static String url = System.getenv("POSTGRES_URL");
     private static String user = System.getenv("POSTGRES_USER");

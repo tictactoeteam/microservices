@@ -15,13 +15,13 @@ public class Init implements Migration {
         connection.prepareStatement("CREATE ROLE order_perms").execute();
         connection.prepareStatement("CREATE USER " + username + " WITH PASSWORD '" + password + "'").execute();
         connection.prepareStatement("GRANT order_perms TO " + username).execute();
-        connection.prepareStatement("CREATE DATABASE order OWNER " + username).execute();
+        connection.prepareStatement("CREATE DATABASE order_service OWNER " + username).execute();
     }
 
     @Override
     public void down(Connection connection) throws SQLException {
         connection.prepareStatement("DROP ROLE order_perms").execute();
         connection.prepareStatement("DROP USER " + username).execute();
-        connection.prepareStatement("DROP DATABASE order");
+        connection.prepareStatement("DROP DATABASE order_service");
     }
 }

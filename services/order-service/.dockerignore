@@ -1,6 +1,6 @@
+.gradle/
+build/
 chart/
-dist/
-node_modules/
 .dockerignore
 .gitignore
 Dockerfile
