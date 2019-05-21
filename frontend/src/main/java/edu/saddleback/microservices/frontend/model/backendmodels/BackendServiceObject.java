@@ -9,7 +9,7 @@ import edu.saddleback.microservices.frontend.interfaces.BackendService;
 
 public class BackendServiceObject {
 
-    private final String baseUrl = "https://k8s.typokign.com/";
+    private final String baseUrl = "https://product-services.k8s.typokign.com/";
     private BackendService service;
 
     public BackendServiceObject() {

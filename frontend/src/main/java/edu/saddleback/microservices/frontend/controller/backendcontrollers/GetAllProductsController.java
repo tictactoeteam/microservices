@@ -40,6 +40,8 @@ public class GetAllProductsController implements Callback<List<Product>> {
             products = response.body();
             productsReceived.set(true);
 
+        } else {
+            productsReceived.set(false);
         }
 
     }
