@@ -74,7 +74,7 @@ public class OrderDao {
         Connection connection = DbManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
                 "(status, customer_id, cart, coin, address, price, timestamp) " +
-                "VALUES (?::order_status, ?, ?, ?, ?, ?, ?)");
+                "VALUES (?::order_status, ?::uuid, ?, ?, ?, ?, ?)");
 
         statement.setString(1, order.getStatus().toString());
         statement.setString(2, order.getCustomerId());
