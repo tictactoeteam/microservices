@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+
 import edu.saddleback.microservices.order.db.OrderDao;
 
 public class DepositController {
