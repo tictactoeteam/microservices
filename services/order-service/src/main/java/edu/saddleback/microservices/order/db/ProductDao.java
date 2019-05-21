@@ -12,7 +12,7 @@ public class ProductDao  {
     public static double getProductPrice(String id) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("SELECT price FROM product " +
+        PreparedStatement statement = connection.prepareStatement("SELECT price FROM products " +
                 "WHERE id = ?::uuid");
 
         statement.setString(1, id);
