@@ -10,6 +10,7 @@ import java.util.List;
 
 import edu.saddleback.microservices.order.util.CartObject;
 import edu.saddleback.microservices.order.util.Order;
+import edu.saddleback.microservices.order.util.Status;
 
 public class OrderDao {
     private OrderDao(){
@@ -25,66 +26,70 @@ public class OrderDao {
         return instance;
     }
 
+    private String convertCart(ArrayList<CartObject> cart) {
 
-    public Order addOrder(String customerId, List<CartObject> cart, String coin) {
+        String cartString = "array[";
+        for (int i = 0; i < cart.size(); ++i) {
+            cartString += "(" + cart.get(i).product + ", " + cart.get(i).quantity + ")";
+
+            if (i != cart.size() - 1) {
+                cartString += ", ";
+            } else {
+                cartString += "]::cart_item[]";
+            }
+        }
+
+        return cartString;
+
+    }
+
+    private Order extractOrder(ResultSet rs) throws SQLException {
+        Order order = new Order();
+
+        order.setId(rs.getString("id"));
+        order.setCustomerId(rs.getString("custommer_id"));
+        order.setStatus(Status.valueOf(rs.getString("status")));
+        order.setCart(new ArrayList<>());
+        order.setCoin(rs.getString("coin"));
+        order.setAddress(rs.getString("address"));
+        order.setPrice(rs.getLong("price"));
+        order.setTimestamp(rs.getDate("timestamp"));
+
+        return order;
+    }
+
+    public Order getOrder(String id) throws SQLException {
         Connection connection = DbManager.getConnection();
 
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders" +
+                "WHERE id = ?");
 
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO orders" +
-                    "(status, customer_id, cart, coin, address, price, timestamp)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)");
+        statement.setString(1, id);
 
-            statement.setString(1, "UNPAID");
-            statement.setString(2, customerId);
-            statement.setString(4, coin);
-            Date useful = new Date();
-            statement.setString(7, useful.toString());
+        ResultSet rs = statement.executeQuery();
 
-            String cartString = "array[";
-            for (int i = 0; i < cart.size(); ++i) {
-                cartString += "(" + cart.get(i).product + ", " + cart.get(i).quantity + ")";
+        return rs.next() ? extractOrder(rs) : null;
 
-                if (i != cart.size() - 1) {
-                    cartString += ", ";
-                } else {
-                    cartString += "]::cart_item[]";
-                }
-            }
+    }
 
-            statement.setString(3, cartString);
+    public void addOrder(Order order) throws SQLException {
+        Connection connection = DbManager.getConnection();
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO orders" +
+                "(status, customer_id, cart, coin, address, price, timestamp)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)");
 
+        statement.setString(1, order.getStatus().toString());
+        statement.setString(2, order.getCustomerId());
+        statement.setString(3, convertCart(order.getCart()));
+        statement.setString(4, order.getCoin());
+        statement.setString(5, order.getAddress());
+        statement.setLong(6, order.getPrice());
+        statement.setString(7, order.getTimestamp().toString());
 
-            ResultSet user = connection.prepareStatement("SELECT email FROM users WHERE id = " + customerId).executeQuery();
-            String email = user.getString("email");
-
-            statement.setString(5, email);
-
-
-            long total = 0;
-            for (CartObject cartObject : cart) {
-                ResultSet price = connection.prepareStatement("SELECT price_per_unit FROM product WHERE id = " +
-                        cartObject.product).executeQuery();
-                long priceActual = price.getLong("price_per_unit");
-                total += priceActual * cartObject.quantity;
-            }
-
-            statement.setLong(6, total);
-
-            statement.execute();
-
-
-            ResultSet thisIsDumb = connection.prepareStatement("SELECT id FROM orders WHERE " +
-                    "customer_id = " + customerId + " and timestamp = " +  useful.toString()).executeQuery();
-            String id = thisIsDumb.getString("id");
-
-            Order result = new Order(id, "UNPAID", cart, coin, email, total, useful.toString());
-
-            return result;
-
-        } catch (SQLException ex) {
-            System.out.println("Yo I think something brok");
-            return null;
+        int affectedRows = statement.executeUpdate();
+        if (affectedRows == 0) {
+            throw new SQLException("Invalid Order!");
         }
+
     }
 }

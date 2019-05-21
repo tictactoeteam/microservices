@@ -5,7 +5,6 @@ import spark.Spark;
 
 import edu.saddleback.microservices.order.controller.RouteController;
 import edu.saddleback.microservices.order.db.DbManager;
-import edu.saddleback.microservices.order.db.OrderDao;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -31,9 +30,9 @@ public class Main {
             res.type("application/json");
         });
 
-        Spark.get("/orders/:orderId", RouteController::getOrder, gson::toJson);
+        Spark.get("/ping/", (request, response) -> "order-service to your service");
+        Spark.get("/orders/:orderId/", RouteController::getOrder, gson::toJson);
         Spark.post("/orders/", RouteController::createOrder, gson::toJson);
-
 
     }
 }
