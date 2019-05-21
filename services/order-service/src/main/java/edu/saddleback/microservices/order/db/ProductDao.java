@@ -12,14 +12,19 @@ public class ProductDao  {
     public static long getProductPrice(ArrayList<CartObject> cart) throws SQLException {
         Connection connection = DbManager.getConnection();
 
-        PreparedStatement statement = connection.prepareStatement("SELECT SUM(price) FROM product" +
+        PreparedStatement statement = connection.prepareStatement("SELECT SUM(price) FROM product " +
                 "WHERE id IN ?");
 
         String[] ids = cart.stream().map((cartObject) -> cartObject.product).toArray(String[]::new);
+        System.out.println(ids);
         statement.setArray(1, connection.createArrayOf("uuid", ids));
 
         ResultSet rs = statement.executeQuery();
 
-        return rs.getLong(1);
+        long price = rs.getLong(1);
+
+        System.out.println(price);
+
+        return price;
     }
 }

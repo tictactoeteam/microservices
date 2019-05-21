@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import edu.saddleback.microservices.order.util.CartObject;
 import edu.saddleback.microservices.order.util.Order;
