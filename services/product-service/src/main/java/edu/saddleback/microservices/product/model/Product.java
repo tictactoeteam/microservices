@@ -8,16 +8,18 @@ public class Product {
     String name;
     BigDecimal price;
     int quantity;
+    String imagepath;
 
-    public Product(UUID id, String name, BigDecimal price, int quantity) {
+    public Product(UUID id, String name, BigDecimal price, int quantity, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.imagepath = image;
     }
 
     public Product() {
-        this(UUID.randomUUID(), "", BigDecimal.ZERO, 0);
+        this(UUID.randomUUID(), "", BigDecimal.ZERO, 0, "");
     }
 
 
@@ -52,4 +54,13 @@ public class Product {
     public BigDecimal getProductPrice() {
         return price;
     }
+
+    public String getProductImage() {
+        return imagepath;
+    }
+
+    public void setProductImage(String image) {
+        this.imagepath = image;
+    }
+
 }

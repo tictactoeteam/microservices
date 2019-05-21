@@ -41,5 +41,10 @@ public class Main {
         Spark.post("/product/", ProductController::convertDaoListToJson, gson::toJson);
         // Spark.post("/product/", ProductController::convertDaoListToJson, gson::toJson);
 
+        //FOR KAI TO GET THE OBJECT LIST
+        Spark.get("/product/", ProductController::convertDaoListToJson, gson::toJson);
+
+        //FOR KAI TO GET AN INDIVIDUAL PRODUCT
+        //Spark.get("/product", ProductController::getProductJson, gson::toJson);
     }
 }

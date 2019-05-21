@@ -44,7 +44,22 @@ public class ProductDao {
         product.setProductName(rs.getString("name"));
         product.setProductQuantity(rs.getInt("quantity"));
         product.setProductPrice(rs.getBigDecimal("price"));
+        product.setProductImage(rs.getString("imagepath"));
 
         return product;
+    }
+
+    public void insertProduct(Product product) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO users (id, name, quantity, price, imagepath)" +
+                        "VALUES (?,?,?,?,?)");
+
+        statement.setString(1,product.getProductId().toString());
+        statement.setString(2,product.getProductName());
+        statement.setInt(3,product.getProductQuantity());
+        statement.setBigDecimal(4,product.getProductPrice());
+        statement.setString(5, product.getProductImage());
+
+        statement.executeUpdate();
     }
 }
