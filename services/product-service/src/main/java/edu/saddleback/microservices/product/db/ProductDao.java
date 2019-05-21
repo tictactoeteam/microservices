@@ -1,13 +1,13 @@
 package edu.saddleback.microservices.product.db;
 
-import edu.saddleback.microservices.product.model.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import edu.saddleback.microservices.product.model.Product;
 
 public class ProductDao {
 

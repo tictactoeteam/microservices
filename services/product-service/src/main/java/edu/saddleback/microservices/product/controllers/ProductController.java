@@ -1,22 +1,27 @@
 package edu.saddleback.microservices.product.controllers;
 
-import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
-
-import com.google.gson.*;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
-import edu.saddleback.microservices.product.util.RabbitProvider;
-import edu.saddleback.microservices.product.db.ProductDao;
-import edu.saddleback.microservices.product.model.Product;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.DefaultConsumer;
+import com.rabbitmq.client.Envelope;
 import spark.Request;
 import spark.Response;
+
+import edu.saddleback.microservices.product.db.ProductDao;
+import edu.saddleback.microservices.product.model.Product;
+import edu.saddleback.microservices.product.util.RabbitProvider;
+import static edu.saddleback.microservices.product.util.RabbitProvider.getChannel;
+
 
 public class ProductController {
     //convert from DAO to JSON
@@ -113,8 +118,8 @@ public class ProductController {
                             //go through the json array here?
                             JsonArray cartArray = json.get("cart").getAsJsonArray();
 
-                            for(int i = 0; i<cartArray.size(); i++){
-                            String productName = cartArray.getAsString();
+                            for (int i = 0; i < cartArray.size(); i++) {
+                                String productName = cartArray.getAsString();
 
                             }
 

@@ -1,9 +1,10 @@
 package edu.saddleback.microservices.product.db.migrations;
 
-import edu.saddleback.microservices.product.db.Migration;
-
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import edu.saddleback.microservices.product.db.Migration;
+
 
 public class PgCrypto implements Migration {
     @Override

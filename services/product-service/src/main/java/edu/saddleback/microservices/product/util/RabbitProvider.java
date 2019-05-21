@@ -1,11 +1,12 @@
 package edu.saddleback.microservices.product.util;
 
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 public class RabbitProvider {
     private static String USERNAME = System.getenv("RABBIT_USERNAME");

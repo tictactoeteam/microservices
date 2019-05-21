@@ -2,12 +2,12 @@ package edu.saddleback.microservices.product;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import spark.Spark;
 
 import edu.saddleback.microservices.product.controllers.ProductController;
 import edu.saddleback.microservices.product.db.DbManager;
 import edu.saddleback.microservices.product.model.Product;
 
-import spark.Spark;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

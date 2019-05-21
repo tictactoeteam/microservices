@@ -1,19 +1,17 @@
 package edu.saddleback.microservices.product.db;
 
-import edu.saddleback.microservices.product.db.migrations.Init;
-import edu.saddleback.microservices.product.db.migrations.PgCrypto;
-import edu.saddleback.microservices.product.db.migrations.ProductTable;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import edu.saddleback.microservices.product.db.migrations.Init;
+import edu.saddleback.microservices.product.db.migrations.PgCrypto;
+import edu.saddleback.microservices.product.db.migrations.ProductTable;
+
 public class DbManager {
-    private static final Migration[] migrations = {
-        new ProductTable()
-    };
+    private static final Migration[] migrations = {new ProductTable()};
 
     private static String url = System.getenv("POSTGRES_URL");
     private static String user = System.getenv("POSTGRES_USER");
