@@ -74,7 +74,7 @@ public class OrderDao {
         Connection connection = DbManager.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO orders " +
                 "(status, customer_id, cart, coin, address, price, timestamp) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                "VALUES (?::order_status, ?, ?, ?, ?, ?, ?)");
 
         statement.setString(1, order.getStatus().toString());
         statement.setString(2, order.getCustomerId());
@@ -97,7 +97,7 @@ public class OrderDao {
 
     public void markPending(String address) throws SQLException {
         Connection connection = DbManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status=PENDING WHERE address=?");
+        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status='PENDING'::order_status WHERE address=?");
 
         statement.setString(1, address);
         statement.executeUpdate();
@@ -105,7 +105,7 @@ public class OrderDao {
 
     public void markConfirmed(String address) throws SQLException {
         Connection connection = DbManager.getConnection();
-        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status=PAID WHERE address=?");
+        PreparedStatement statement = connection.prepareStatement("UPDATE orders SET status='PAID'::order_status WHERE address=?");
 
         statement.setString(1, address);
         statement.executeUpdate();
