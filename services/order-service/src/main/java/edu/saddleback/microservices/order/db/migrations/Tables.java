@@ -25,8 +25,8 @@ public class Tables implements Migration {
         connection.prepareStatement("CREATE TYPE order_status AS ENUM ('UNPAID', 'PENDING', 'PAID')").execute();
 
         connection.prepareStatement("CREATE TYPE cart_item AS " +
-                "(product uuid NOT NULL REFERENCES products(id), " +
-                "quantity int NOT NULL)").execute();
+                "(product uuid, " +
+                "quantity int )").execute();
 
         connection.prepareStatement("CREATE TABLE orders (" +
                 "id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(), " +
