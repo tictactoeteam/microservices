@@ -47,11 +47,9 @@ public class Cart {
 
         BigDecimal sum = new BigDecimal(0);
         for (int i = 0; i < cartItems.size(); i++) {
-
-            sum.add(cartItems.get(i).getPrice());
+            sum = sum.add(cartItems.get(i).getPrice());
 
         }
-
         return sum.doubleValue();
 
     }

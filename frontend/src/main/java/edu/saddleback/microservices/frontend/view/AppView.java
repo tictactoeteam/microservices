@@ -68,6 +68,7 @@ public class AppView {
                 }
 
                 VBox productBoxVBox = new VBox();
+                productBoxVBox.setSpacing(10);
                 productBoxVBox.setAlignment(Pos.CENTER);
                 for (int i = 0; i < productBoxes.size(); i++) {
                     productBoxVBox.getChildren().add(productBoxes.get(i));

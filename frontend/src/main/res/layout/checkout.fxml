@@ -82,6 +82,11 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
+                        <Label text="Address: " textFill="#1b8035">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="335.0" prefWidth="200.0">
@@ -104,6 +109,11 @@
                         <Label fx:id="priceLabel" text="Label" textFill="#1b8035">
                            <font>
                               <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="addressLabel" text="Label" textFill="#1b8035">
+                           <font>
+                              <Font size="10.0" />
                            </font>
                         </Label>
                      </children>

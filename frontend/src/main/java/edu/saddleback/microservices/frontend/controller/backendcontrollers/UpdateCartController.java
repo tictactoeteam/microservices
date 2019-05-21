@@ -10,13 +10,14 @@ import retrofit2.Response;
 import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.Cart;
 import edu.saddleback.microservices.frontend.model.CartItem;
+import edu.saddleback.microservices.frontend.model.backendmodels.CartObj;
 import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
 /**
  * Controls all update cart attempt logic, handles sending a request via Retrofit API and the responses as well.
  */
-public class UpdateCartController implements Callback<List<HollowCartObj>> {
+public class UpdateCartController implements Callback<CartObj> {
 
     private String token;
     private List<CartItem> cartItems;
@@ -34,6 +35,7 @@ public class UpdateCartController implements Callback<List<HollowCartObj>> {
         cartReceived = new Observable<>();
         cartReceived.set(false);
         this.token = token;
+        newCart = new ArrayList<>();
 
         for (int i = 0; i < cart.getSize(); i++) {
 
@@ -49,7 +51,7 @@ public class UpdateCartController implements Callback<List<HollowCartObj>> {
      */
     public void start() {
 
-        Call<List<HollowCartObj>> call = AppController.getBackendService().updateCart(token, newCart);
+        Call<CartObj> call = AppController.getBackendService().updateCart(token, new CartObj(newCart));
         call.enqueue(this);
 
     }
@@ -62,26 +64,26 @@ public class UpdateCartController implements Callback<List<HollowCartObj>> {
      * @param response
      */
     @Override
-    public void onResponse(Call<List<HollowCartObj>> call, Response<List<HollowCartObj>> response) {
+    public void onResponse(Call<CartObj> call, Response<CartObj> response) {
 
         System.out.println("RECEIVED updateCart RESPONSE");
         System.out.println(response.toString());
         if (response.code() == 200) {
 
-            List<HollowCartObj> hollowCart = response.body();
+            CartObj hollowCart = response.body();
             ArrayList<CartItem> fullCart = new ArrayList<>();
             ArrayList<GetProductController> controllerList = new ArrayList<>();
-            for (int i = 0; i < hollowCart.size(); i++) {
+            for (int i = 0; i < hollowCart.cart.size(); i++) {
 
-                GetProductController controller = new GetProductController(hollowCart.get(i).id);
+                GetProductController controller = new GetProductController(hollowCart.cart.get(i).product);
                 controller.getProductRecievedBoolean().subscribe((onProductReceived) -> {
 
                     if (onProductReceived) {
 
                         fullCart.add(new CartItem(controller.getProduct(),
-                                hollowCart.get(controllerList.indexOf(controller)).quantity));
+                                hollowCart.cart.get(controllerList.indexOf(controller)).quantity));
 
-                        if (fullCart.size() == hollowCart.size()) {
+                        if (fullCart.size() == hollowCart.cart.size()) {
 
                             cartReceived.set(true);
 
@@ -106,7 +108,7 @@ public class UpdateCartController implements Callback<List<HollowCartObj>> {
      * @param t
      */
     @Override
-    public void onFailure(Call<List<HollowCartObj>> call, Throwable t) {
+    public void onFailure(Call<CartObj> call, Throwable t) {
 
         System.out.println("RECEIVED updateCart FAILURE");
         cartReceived.set(false);

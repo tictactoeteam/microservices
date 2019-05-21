@@ -1,5 +1,6 @@
 package edu.saddleback.microservices.frontend.controller.backendcontrollers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -9,6 +10,7 @@ import retrofit2.Response;
 import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.model.Cart;
 import edu.saddleback.microservices.frontend.model.backendmodels.HollowCartObj;
+import edu.saddleback.microservices.frontend.model.backendmodels.MakeOrderObj;
 import edu.saddleback.microservices.frontend.model.backendmodels.OrderTransaction;
 import edu.saddleback.microservices.frontend.observable.Observable;
 
@@ -33,6 +35,8 @@ public class MakeOrderController implements Callback<OrderTransaction> {
     public MakeOrderController(String token, Cart cart, String coin) {
 
         this.token = token;
+        newCart = new ArrayList<>();
+        ordersMade = new Observable<>();
 
         for (int i = 0; i < cart.getSize(); i++) {
 
@@ -50,7 +54,7 @@ public class MakeOrderController implements Callback<OrderTransaction> {
      */
     public void start() {
 
-        Call<OrderTransaction> call = AppController.getBackendService().makeOrder(token, newCart, chosenCoin);
+        Call<OrderTransaction> call = AppController.getBackendService().makeOrder(token, new MakeOrderObj(newCart, chosenCoin));
         call.enqueue(this);
 
     }

@@ -88,6 +88,6 @@ public class LoginController implements Callback<SuccessfulLoginToken> {
     }
 
     public String getToken() {
-        return token;
+        return "Bearer " + token;
     }
 }

@@ -11,7 +11,6 @@ import javafx.scene.control.ListView;
 
 import edu.saddleback.microservices.frontend.controller.AppController;
 import edu.saddleback.microservices.frontend.controller.backendcontrollers.DeleteCartController;
-import edu.saddleback.microservices.frontend.controller.backendcontrollers.UpdateCartController;
 
 /**
  * Controls the cart.fxml page, including showing your cart items with a checkout option.
@@ -19,7 +18,6 @@ import edu.saddleback.microservices.frontend.controller.backendcontrollers.Updat
 public class CartView {
 
     private AppController controller;
-    private static DecimalFormat decimalFormat;
 
     @FXML
     private Label usernameLabel;
@@ -29,8 +27,6 @@ public class CartView {
     private Label totalQuantityLabel;
     @FXML
     private Label totalCostLabel;
-    @FXML
-    private Label errorLabel;
     @FXML
     private Label checkoutErrorText;
     @FXML
@@ -43,7 +39,6 @@ public class CartView {
     public void initialize() {
 
         controller = App.getController();
-        decimalFormat = new DecimalFormat("#.##");
         usernameLabel.setText(controller.getLoggedInUsername());
         refreshPage();
         cryptoChoiceBox.getItems().addAll("Bitcoin (BTC)", "Litecoin (LTC)", "Zcash (ZEC)", "Lumens (XLM)");
@@ -60,74 +55,6 @@ public class CartView {
         } catch (Exception e) {
             System.err.println("oof");
         }
-
-    }
-
-    /**
-     * Removes one of a selected item, if possible, from the user's cart.
-     */
-    public void onRemoveItemClicked() {
-
-        if (cartList.getItems().size() > 1) {
-
-            int selectedIndex = (int) cartList.getSelectionModel().getSelectedIndices().get(0);
-            int selectedItemQuantity = controller.getCart().getCartItem(selectedIndex).getQuantity();
-
-            if (selectedItemQuantity > 1) {
-
-                controller.getCart().getCartItem(selectedIndex).setQuantity(selectedItemQuantity - 1);
-                //UPDATE SERVER CART
-                UpdateCartController cartConn = new UpdateCartController(controller.getToken(), controller.getCart());
-                cartConn.getCartReceivedBoolean().subscribe((onCartUpdated) -> {
-
-                    if (onCartUpdated) {
-
-                        System.out.println("REFRESHED CART RECEIVED");
-                        controller.setCart(cartConn.getCart());
-                        refreshPage();
-
-                    }
-
-                });
-
-                cartConn.start();
-                errorLabel.setVisible(false);
-
-            } else if (selectedItemQuantity == 0) {
-
-                controller.getCart().remove(selectedIndex);
-                //UPDATE SERVER CART
-                UpdateCartController cartCon = new UpdateCartController(controller.getToken(), controller.getCart());
-                cartCon.getCartReceivedBoolean().subscribe((onCartUpdated) -> {
-
-                    if (onCartUpdated) {
-
-                        System.out.println("REFRESHED CART RECEIVED");
-                        controller.setCart(cartCon.getCart());
-                        refreshPage();
-
-                    }
-
-                });
-
-                cartCon.start();
-                errorLabel.setVisible(false);
-
-            } else {
-
-                errorLabel.setText("*error*");
-                errorLabel.setVisible(true);
-
-            }
-
-
-        } else {
-
-            errorLabel.setText("*error*");
-            errorLabel.setVisible(true);
-
-        }
-
 
     }
 
@@ -194,10 +121,10 @@ public class CartView {
 
         //Populates Checkout values
         totalQuantityLabel.setText(Integer.toString(controller.getCart().getTotalQuantity()));
-        totalCostLabel.setText(decimalFormat.format(controller.getCart().getTotalCost()));
+        totalCostLabel.setText((String.valueOf(controller.getCart().getTotalCost())));
 
-        errorLabel.setVisible(false);
-        checkoutErrorText.setVisible(false);
+        //errorLabel.setVisible(false);
+        //checkoutErrorText.setVisible(false);
 
         System.out.println("REFRESHED");
 
