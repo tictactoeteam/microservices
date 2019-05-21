@@ -1,0 +1,9 @@
+gitlab-runner:
+  gitlabUrl: "https://gitlab.com/"
+  runnerRegistrationToken: "REG TOKEN HERE"
+  checkInterval: 3
+  rbac:
+    create: true
+  runners:
+    privileged: true
+
